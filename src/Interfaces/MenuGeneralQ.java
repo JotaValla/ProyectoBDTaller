@@ -1,12 +1,13 @@
 
 package Interfaces;
 
-public class MenuGeneral extends javax.swing.JFrame {
+public class MenuGeneralQ extends javax.swing.JFrame {
 
     Login login;
 
-    public MenuGeneral() {
+    public MenuGeneralQ() {
         initComponents();
+        this.setLocationRelativeTo(this);
     }
 
     @SuppressWarnings("unchecked")
@@ -22,7 +23,7 @@ public class MenuGeneral extends javax.swing.JFrame {
         jMenu1.setText("Archivo");
 
         jMISalir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0));
-        jMISalir.setText("Salir");
+        jMISalir.setText("Regresar");
         jMISalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMISalirActionPerformed(evt);
@@ -67,19 +68,20 @@ public class MenuGeneral extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenuGeneral.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuGeneralQ.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenuGeneral.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuGeneralQ.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenuGeneral.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuGeneralQ.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenuGeneral.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuGeneralQ.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuGeneral().setVisible(true);
+                new MenuGeneralQ().setVisible(true);
             }
         });
     }

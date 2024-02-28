@@ -39,7 +39,7 @@
                           <Component id="jPFPassword" pref="180" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <Component id="jCBTallerOp" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jCBTallerOp" alignment="0" pref="312" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="45" max="32767" attributes="0"/>
           </Group>

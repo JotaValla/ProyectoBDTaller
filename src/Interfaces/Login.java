@@ -13,14 +13,13 @@ import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
 
-    MenuGeneral menu;
-    //Instanciamos contador para restringir el acceso de ia's
+    MenuGeneralQ menuQ;
+    MenuGeneralG menuG; //Instanciamos contador para restringir el acceso de ia's
     int cont = 0;
 
     public Login() {
         initComponents();
         this.setLocationRelativeTo(this);
-        menu = new MenuGeneral();
     }
 
     @SuppressWarnings("unchecked")
@@ -106,9 +105,11 @@ public class Login extends javax.swing.JFrame {
                         CConexion objetoConexion = new CConexion();
                         conx = objetoConexion.getConexion();
                         this.setVisible(false);
-                        menu.setVisible(true);
+                        menuQ = new MenuGeneralQ();
+                        menuQ.setVisible(true);
                     } catch (SQLException ex) {
-                        System.out.println(ex);                    }
+                        System.out.println(ex);
+                    }
                 } else {
                     JOptionPane.showConfirmDialog(null, "Datos incorrectos, vuelva a intentar", "CONECTANDO ...", JOptionPane.WARNING_MESSAGE);
                 }
@@ -120,7 +121,8 @@ public class Login extends javax.swing.JFrame {
                     CConexion objetoConexion = new CConexion();
                     conx = objetoConexion.establecerConexionG();
                     this.setVisible(false);
-                    menu.setVisible(true);
+                    menuG = new MenuGeneralG();
+                    menuG.setVisible(true);
                 } else {
                     JOptionPane.showConfirmDialog(null, "Datos incorrectos, vuelva a intentar", "CONECTANDO ...", JOptionPane.WARNING_MESSAGE);
                 }
