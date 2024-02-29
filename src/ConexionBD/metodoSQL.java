@@ -1,0 +1,202 @@
+package ConexionBD;
+
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+public class metodoSQL {
+
+    public void mostrarClientes(JTable paramTablaClientes) {
+        CConexion objetoConexion = new CConexion();
+        DefaultTableModel modelo = new DefaultTableModel();
+        String sql = "";
+
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Apellido");
+        modelo.addColumn("Direccion");
+
+        paramTablaClientes.setModel(modelo);
+        sql = "select nombre_cliente, apellido_cliente, direccion_cliente from Cliente_Guayaquil";
+        String[] datos = new String[4];
+        Statement st;
+
+        try {
+            st = objetoConexion.establecerConexionG().createStatement();
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                datos[0] = rs.getString(1);
+                datos[1] = rs.getString(2);
+                datos[2] = rs.getString(3);
+                modelo.addRow(datos);
+            }
+            paramTablaClientes.setModel(modelo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se mostraron los registros");
+        }
+    }
+    
+    public void mostrarVehiculos (JTable paramTabVehiculo) {
+        CConexion objetoConexion = new CConexion();
+        DefaultTableModel modelo = new DefaultTableModel();
+        String sql = "";
+
+        modelo.addColumn("Matricula");
+        modelo.addColumn("Fecha");
+        modelo.addColumn("Modelo");
+
+        paramTabVehiculo.setModel(modelo);
+        sql = "select matricula, fecha_compra, modelo from Vehiculo_Guayaquil";
+        String[] datos = new String[4];
+        Statement st;
+
+        try {
+            st = objetoConexion.establecerConexionG().createStatement();
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                datos[0] = rs.getString(1);
+                datos[1] = rs.getDate(2).toString();
+                datos[2] = rs.getString(3);
+                modelo.addRow(datos);
+            }
+            paramTabVehiculo.setModel(modelo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se mostraron los registros");
+        }
+    }
+    
+    public void mostrarEmpleados (JTable paramTabEmp) {
+        CConexion objetoConexion = new CConexion();
+        DefaultTableModel modelo = new DefaultTableModel();
+        String sql = "";
+
+        modelo.addColumn("ID");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Cédula");
+        modelo.addColumn("Fecha de contrato");
+        modelo.addColumn("Salario");
+        modelo.addColumn("Dirección");
+
+        paramTabEmp.setModel(modelo);
+        sql = "select id_empleado, nom_empleado, cedula_emp, fecha_contrato, salario, dir_empleado from Empleado_Guayaquil;";
+        String[] datos = new String[8];
+        Statement st;
+
+        try {
+            st = objetoConexion.establecerConexionG().createStatement();
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                datos[0] = String.valueOf(rs.getInt(1));
+                datos[1] = rs.getString(2);
+                datos[2] = rs.getString(3);
+                datos[3] = rs.getDate(4).toString();
+                datos[4] = rs.getBigDecimal(5).toPlainString();
+                datos[5] = rs.getString(6);
+                modelo.addRow(datos);
+            }
+            paramTabEmp.setModel(modelo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se mostraron los registros");
+        }
+    }
+    
+    public void mostrarTelefonoEmp (JTable paramTelfEmp) {
+        CConexion objetoConexion = new CConexion();
+        DefaultTableModel modelo = new DefaultTableModel();
+        String sql = "";
+
+        modelo.addColumn("Id");
+        modelo.addColumn("Número");
+        modelo.addColumn("ID empleado");
+
+        paramTelfEmp.setModel(modelo);
+        sql = "select id_telefono, num_telefono, id_empleado from Telefono_Guayaquil";
+        String[] datos = new String[4];
+        Statement st;
+
+        try {
+            st = objetoConexion.establecerConexionG().createStatement();
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                datos[0] = String.valueOf(rs.getInt(1));
+                datos[1] = rs.getString(2);
+                datos[2] = String.valueOf(rs.getInt(3));
+                modelo.addRow(datos);
+            }
+            paramTelfEmp.setModel(modelo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se mostraron los registros");
+            System.out.println(e);
+        }
+    }
+    
+    public void mostrarReparaciones (JTable paramTabRepa) {
+        CConexion objetoConexion = new CConexion();
+        DefaultTableModel modelo = new DefaultTableModel();
+        String sql = "";
+
+        modelo.addColumn("ID");
+        modelo.addColumn("Tipo");
+        modelo.addColumn("Observaciones");
+        modelo.addColumn("Precio");
+        modelo.addColumn("Matrícula");
+
+        paramTabRepa.setModel(modelo);
+        sql = "select id_reparacion, tipo_reparacion, observaciones, precio_reparacion, matricula from Reparacion_Guayaquil;";
+        String[] datos = new String[7];
+        Statement st;
+
+        try {
+            st = objetoConexion.establecerConexionG().createStatement();
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                datos[0] = String.valueOf(rs.getInt(1));
+                datos[1] = rs.getString(2);
+                datos[2] = rs.getString(3);
+                datos[3] = rs.getBigDecimal(4).toPlainString();
+                datos[4] = rs.getString(5);
+                modelo.addRow(datos);
+            }
+            paramTabRepa.setModel(modelo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se mostraron los registros");
+        }
+    }
+    
+    public void mostrarPieza (JTable paramTabPieza) {
+        CConexion objetoConexion = new CConexion();
+        DefaultTableModel modelo = new DefaultTableModel();
+        String sql = "";
+
+        modelo.addColumn("Id");
+        modelo.addColumn("Descripción");
+        modelo.addColumn("ID reparación");
+
+        paramTabPieza.setModel(modelo);
+        sql = "select id_pieza, nom_pieza, id_reparacion from Pieza_Guayaquil;";
+        String[] datos = new String[4];
+        Statement st;
+
+        try {
+            st = objetoConexion.establecerConexionG().createStatement();
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                datos[0] = String.valueOf(rs.getInt(1));
+                datos[1] = rs.getString(2);
+                datos[2] = String.valueOf(rs.getInt(3));
+                modelo.addRow(datos);
+            }
+            paramTabPieza.setModel(modelo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se mostraron los registros");
+            System.out.println(e);
+        }
+    }
+}

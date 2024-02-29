@@ -1,16 +1,24 @@
-
 package Interfaces;
 
+import ConexionBD.metodoSQL;
 
 public class MenuGeneralG extends javax.swing.JFrame {
-
+    
     Login login;
+    metodoSQL metodos;
 
     public MenuGeneralG() {
         initComponents();
         setLocationRelativeTo(this);
+        metodos = new metodoSQL();
+        metodos.mostrarClientes(jTCliBus);
+        metodos.mostrarVehiculos(jTVehiculoBus);
+        metodos.mostrarEmpleados(jTEmpVis);
+        metodos.mostrarTelefonoEmp(JTTelfEmpVis);
+        metodos.mostrarReparaciones(jTReparaVis);
+        metodos.mostrarPieza(jTPiezaVis);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -222,7 +230,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
         txtIDRepBus = new javax.swing.JTextField();
         btnBuscRep = new javax.swing.JButton();
         jScrollPane28 = new javax.swing.JScrollPane();
-        jTReparaAgg1 = new javax.swing.JTable();
+        jTReparaVis = new javax.swing.JTable();
         jPanel36 = new javax.swing.JPanel();
         jLabel62 = new javax.swing.JLabel();
         txtPiezaAgg1 = new javax.swing.JTextField();
@@ -230,7 +238,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
         txtIDRePiezaAgg1 = new javax.swing.JTextField();
         btnActPieza = new javax.swing.JButton();
         jScrollPane29 = new javax.swing.JScrollPane();
-        JTTelfEmpAgg2 = new javax.swing.JTable();
+        jTPiezaVis = new javax.swing.JTable();
         jPanel31 = new javax.swing.JPanel();
         jPanel37 = new javax.swing.JPanel();
         jLabel65 = new javax.swing.JLabel();
@@ -1871,7 +1879,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTReparaAgg1.setModel(new javax.swing.table.DefaultTableModel(
+        jTReparaVis.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -1891,7 +1899,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane28.setViewportView(jTReparaAgg1);
+        jScrollPane28.setViewportView(jTReparaVis);
 
         jPanel36.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos de las piezas"));
 
@@ -1935,7 +1943,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        JTTelfEmpAgg2.setModel(new javax.swing.table.DefaultTableModel(
+        jTPiezaVis.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -1954,7 +1962,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane29.setViewportView(JTTelfEmpAgg2);
+        jScrollPane29.setViewportView(jTPiezaVis);
 
         javax.swing.GroupLayout jPanel30Layout = new javax.swing.GroupLayout(jPanel30);
         jPanel30.setLayout(jPanel30Layout);
@@ -2248,8 +2256,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
     private void btnAggClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAggClienteActionPerformed
 
     }//GEN-LAST:event_btnAggClienteActionPerformed
-
-
+    
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -2284,7 +2291,6 @@ public class MenuGeneralG extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable JTTelfEmpAgg;
     private javax.swing.JTable JTTelfEmpAgg1;
-    private javax.swing.JTable JTTelfEmpAgg2;
     private javax.swing.JTable JTTelfEmpAgg3;
     private javax.swing.JTable JTTelfEmpVis;
     private javax.swing.JTable JTTelfEmpVis1;
@@ -2463,10 +2469,11 @@ public class MenuGeneralG extends javax.swing.JFrame {
     private javax.swing.JTable jTEmpAgg;
     private javax.swing.JTable jTEmpVis;
     private javax.swing.JTable jTEmpVis1;
+    private javax.swing.JTable jTPiezaVis;
     private javax.swing.JTable jTRegistroG;
     private javax.swing.JTable jTReparaAgg;
-    private javax.swing.JTable jTReparaAgg1;
     private javax.swing.JTable jTReparaAgg2;
+    private javax.swing.JTable jTReparaVis;
     private javax.swing.JTable jTVehiculoAGG;
     private javax.swing.JTable jTVehiculoBus;
     private javax.swing.JTable jTVehiculoBus1;
