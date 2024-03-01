@@ -74,17 +74,17 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jTabbedPane2" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jTPClienteVehiculo" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jTabbedPane2" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jTPClienteVehiculo" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Container class="javax.swing.JTabbedPane" name="jTabbedPane2">
+            <Container class="javax.swing.JTabbedPane" name="jTPClienteVehiculo">
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
               <SubComponents>
@@ -165,8 +165,8 @@
                                           <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
                                       </Group>
                                       <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txtApelliCli" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txtNomCliente" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txtApelliCliAgg" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txtNomClienteAgg" alignment="0" max="32767" attributes="0"/>
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Group type="102" attributes="0">
@@ -193,11 +193,11 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="txtNomCliente" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtNomClienteAgg" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="txtApelliCli" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtApelliCliAgg" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -215,14 +215,14 @@
                             <Property name="text" type="java.lang.String" value="Ingrese el nombre del cliente:"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="txtNomCliente">
+                        <Component class="javax.swing.JTextField" name="txtNomClienteAgg">
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel2">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Ingrese el apellido del cliente:"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="txtApelliCli">
+                        <Component class="javax.swing.JTextField" name="txtApelliCliAgg">
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel3">
                           <Properties>
@@ -236,7 +236,7 @@
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                           <SubComponents>
-                            <Component class="javax.swing.JTextArea" name="jTADirCli">
+                            <Component class="javax.swing.JTextArea" name="jTADirCliAgg">
                               <Properties>
                                 <Property name="columns" type="int" value="20"/>
                                 <Property name="rows" type="int" value="5"/>

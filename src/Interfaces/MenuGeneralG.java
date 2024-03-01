@@ -1,9 +1,12 @@
 package Interfaces;
 
+import Clases.Cliente;
 import ConexionBD.metodoSQL;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 public class MenuGeneralG extends javax.swing.JFrame {
-    
+
     Login login;
     metodoSQL metodos;
 
@@ -17,24 +20,34 @@ public class MenuGeneralG extends javax.swing.JFrame {
         metodos.mostrarTelefonoEmp(JTTelfEmpVis);
         metodos.mostrarReparaciones(jTReparaVis);
         metodos.mostrarPieza(jTPiezaVis);
+        
+        jTPClienteVehiculo.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                // Reemplaza 'INDEX_DE_LA_PESTAÑA_DE_VISUALIZACION' con el índice de la pestaña donde se visualizan los clientes.
+                if (jTPClienteVehiculo.getSelectedIndex() == 1) {
+                    metodos.mostrarClientes(jTCliBus);
+                }
+            }
+        });
+        
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
+        jTPClienteVehiculo = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        txtNomCliente = new javax.swing.JTextField();
+        txtNomClienteAgg = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txtApelliCli = new javax.swing.JTextField();
+        txtApelliCliAgg = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTADirCli = new javax.swing.JTextArea();
+        jTADirCliAgg = new javax.swing.JTextArea();
         btnAggCliente = new javax.swing.JButton();
         jLabel19 = new javax.swing.JLabel();
         txtCeduCliAgg = new javax.swing.JTextField();
@@ -287,9 +300,9 @@ public class MenuGeneralG extends javax.swing.JFrame {
 
         jLabel3.setText("Ingrese la direccion del cliente:");
 
-        jTADirCli.setColumns(20);
-        jTADirCli.setRows(5);
-        jScrollPane1.setViewportView(jTADirCli);
+        jTADirCliAgg.setColumns(20);
+        jTADirCliAgg.setRows(5);
+        jScrollPane1.setViewportView(jTADirCliAgg);
 
         btnAggCliente.setText("Agregar cliente");
         btnAggCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -312,8 +325,8 @@ public class MenuGeneralG extends javax.swing.JFrame {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(64, 64, 64))
                     .addComponent(jScrollPane1)
-                    .addComponent(txtApelliCli)
-                    .addComponent(txtNomCliente)
+                    .addComponent(txtApelliCliAgg)
+                    .addComponent(txtNomClienteAgg)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel7Layout.createSequentialGroup()
@@ -334,11 +347,11 @@ public class MenuGeneralG extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtNomCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNomClienteAgg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtApelliCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtApelliCliAgg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -548,7 +561,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("Agregar", jPanel5);
+        jTPClienteVehiculo.addTab("Agregar", jPanel5);
 
         jTCliBus.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -787,7 +800,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
                 .addGap(127, 127, 127))
         );
 
-        jTabbedPane2.addTab("Visualizar y Actualizar", jPanel6);
+        jTPClienteVehiculo.addTab("Visualizar y Actualizar", jPanel6);
 
         jLabel17.setText("Ingrese el número de cédula del cliente a buscar:");
 
@@ -1012,17 +1025,17 @@ public class MenuGeneralG extends javax.swing.JFrame {
                 .addGap(120, 120, 120))
         );
 
-        jTabbedPane2.addTab("Eliminar", jPanel13);
+        jTPClienteVehiculo.addTab("Eliminar", jPanel13);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane2)
+            .addComponent(jTPClienteVehiculo)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane2)
+            .addComponent(jTPClienteVehiculo)
         );
 
         jTabbedPane1.addTab("Clientes y Vehículos", jPanel1);
@@ -2291,16 +2304,32 @@ public class MenuGeneralG extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModeloActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtModeloActionPerformed
 
     private void btnAggClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAggClienteActionPerformed
-
+        String cedula = txtCeduCliAgg.getText();
+        String nombre = txtNomClienteAgg.getText();
+        String apellido = txtApelliCliAgg.getText();
+        String direccion = jTADirCliAgg.getText();
+        Cliente cliente = new Cliente(cedula, nombre, apellido, direccion);
+        metodos.registrarCliente(cliente);
+        limpiarDatosClienteAgg();
+        
     }//GEN-LAST:event_btnAggClienteActionPerformed
+
+    public void limpiarDatosClienteAgg() {
+        txtCeduCliAgg.setText("");
+        txtNomClienteAgg.setText("");
+        txtApelliCliAgg.setText("");
+        jTADirCliAgg.setText("");
+    }
+
+    
     
     public static void main(String args[]) {
 
@@ -2505,7 +2534,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
-    private javax.swing.JTextArea jTADirCli;
+    private javax.swing.JTextArea jTADirCliAgg;
     private javax.swing.JTextArea jTADirEmpAgg;
     private javax.swing.JTextArea jTADirEmpAgg1;
     private javax.swing.JTextArea jTADirEmpAgg2;
@@ -2518,6 +2547,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
     private javax.swing.JTable jTEmpAgg;
     private javax.swing.JTable jTEmpVis;
     private javax.swing.JTable jTEmpVis1;
+    private javax.swing.JTabbedPane jTPClienteVehiculo;
     private javax.swing.JTable jTPiezaVis;
     private javax.swing.JTable jTRegistroG;
     private javax.swing.JTable jTReparaAgg;
@@ -2527,14 +2557,13 @@ public class MenuGeneralG extends javax.swing.JFrame {
     private javax.swing.JTable jTVehiculoBus;
     private javax.swing.JTable jTVehiculoBus1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTabbedPane jTabbedPane6;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextField txtApeCliBus;
     private javax.swing.JTextField txtApeCliBus1;
-    private javax.swing.JTextField txtApelliCli;
+    private javax.swing.JTextField txtApelliCliAgg;
     private javax.swing.JTextField txtCeduCliAgg;
     private javax.swing.JTextField txtCeduEmpAgg;
     private javax.swing.JTextField txtCeduEmpAgg1;
@@ -2563,7 +2592,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
     private javax.swing.JTextField txtNomApeCliAct6;
     private javax.swing.JTextField txtNomCliBus;
     private javax.swing.JTextField txtNomCliBus1;
-    private javax.swing.JTextField txtNomCliente;
+    private javax.swing.JTextField txtNomClienteAgg;
     private javax.swing.JTextField txtNomEmpAgg;
     private javax.swing.JTextField txtNomEmpAgg1;
     private javax.swing.JTextField txtNomEmpAgg2;

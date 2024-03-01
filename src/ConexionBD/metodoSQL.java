@@ -1,6 +1,9 @@
 package ConexionBD;
 
+import Clases.Cliente;
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -39,8 +42,8 @@ public class metodoSQL {
             JOptionPane.showMessageDialog(null, "No se mostraron los registros");
         }
     }
-    
-    public void mostrarVehiculos (JTable paramTabVehiculo) {
+
+    public void mostrarVehiculos(JTable paramTabVehiculo) {
         CConexion objetoConexion = new CConexion();
         DefaultTableModel modelo = new DefaultTableModel();
         String sql = "";
@@ -69,12 +72,11 @@ public class metodoSQL {
             JOptionPane.showMessageDialog(null, "No se mostraron los registros");
         }
     }
-    
-    public void mostrarEmpleados (JTable paramTabEmp) {
+
+    public void mostrarEmpleados(JTable paramTabEmp) {
         CConexion objetoConexion = new CConexion();
         DefaultTableModel modelo = new DefaultTableModel();
         String sql = "";
-
 
         modelo.addColumn("Cédula");
         modelo.addColumn("Nombre");
@@ -104,8 +106,8 @@ public class metodoSQL {
             JOptionPane.showMessageDialog(null, "No se mostraron los registros");
         }
     }
-    
-    public void mostrarTelefonoEmp (JTable paramTelfEmp) {
+
+    public void mostrarTelefonoEmp(JTable paramTelfEmp) {
         CConexion objetoConexion = new CConexion();
         DefaultTableModel modelo = new DefaultTableModel();
         String sql = "";
@@ -135,8 +137,8 @@ public class metodoSQL {
             System.out.println(e);
         }
     }
-    
-    public void mostrarReparaciones (JTable paramTabRepa) {
+
+    public void mostrarReparaciones(JTable paramTabRepa) {
         CConexion objetoConexion = new CConexion();
         DefaultTableModel modelo = new DefaultTableModel();
         String sql = "";
@@ -169,8 +171,8 @@ public class metodoSQL {
             JOptionPane.showMessageDialog(null, "No se mostraron los registros");
         }
     }
-    
-    public void mostrarPieza (JTable paramTabPieza) {
+
+    public void mostrarPieza(JTable paramTabPieza) {
         CConexion objetoConexion = new CConexion();
         DefaultTableModel modelo = new DefaultTableModel();
         String sql = "";
@@ -200,4 +202,27 @@ public class metodoSQL {
             System.out.println(e);
         }
     }
+
+    public void registrarCliente(Cliente cliente) {
+        CConexion objetoConexion = new CConexion();
+
+        // La consulta SQL para insertar un nuevo cliente
+        String sql = "INSERT INTO Cliente_Guayaquil (cedula_cliente, nombre_cliente, apellido_cliente, direccion_cliente, id_taller) VALUES (?, ?, ?, ?, ?)";
+
+        try {
+            CallableStatement cs = objetoConexion.establecerConexionG().prepareCall(sql);
+            // Establecer los valores de cada parámetro basado en las propiedades del objeto cliente
+            cs.setString(1, cliente.getCedula());
+            cs.setString(2, cliente.getNombre());
+            cs.setString(3, cliente.getApellido());
+            cs.setString(4, cliente.getDireccion());
+            cs.setInt(5, 2); // Asumiendo que el id_taller siempre será 2 para Cliente_Guayaquil
+            // Ejecutar la consulta
+            cs.execute();
+            JOptionPane.showMessageDialog(null, "Cliente registrado con éxito");
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al registrar el cliente: " + e.getMessage());
+        }
+    }
+
 }
