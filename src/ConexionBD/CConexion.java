@@ -10,7 +10,7 @@ public class CConexion {
     Connection conectar = null;
     String usuario = "sa";
     String contrasenia = "P@ssw0rd";
-    String bdG = "TALLERG8_GUAYAQUIL";
+    String bdG = "TALLERG8_GYE";
     String ip = "localhost";
     String puerto = "1433";
     String servernameG = "JOTA"; 

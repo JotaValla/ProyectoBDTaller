@@ -13,13 +13,14 @@ public class metodoSQL {
         DefaultTableModel modelo = new DefaultTableModel();
         String sql = "";
 
+        modelo.addColumn("Cédula");
         modelo.addColumn("Nombre");
         modelo.addColumn("Apellido");
         modelo.addColumn("Direccion");
 
         paramTablaClientes.setModel(modelo);
-        sql = "select nombre_cliente, apellido_cliente, direccion_cliente from Cliente_Guayaquil";
-        String[] datos = new String[4];
+        sql = "select cedula_cliente,nombre_cliente, apellido_cliente, direccion_cliente from Cliente_Guayaquil";
+        String[] datos = new String[5];
         Statement st;
 
         try {
@@ -30,6 +31,7 @@ public class metodoSQL {
                 datos[0] = rs.getString(1);
                 datos[1] = rs.getString(2);
                 datos[2] = rs.getString(3);
+                datos[3] = rs.getString(4);
                 modelo.addRow(datos);
             }
             paramTablaClientes.setModel(modelo);
@@ -73,15 +75,15 @@ public class metodoSQL {
         DefaultTableModel modelo = new DefaultTableModel();
         String sql = "";
 
-        modelo.addColumn("ID");
-        modelo.addColumn("Nombre");
+
         modelo.addColumn("Cédula");
+        modelo.addColumn("Nombre");
         modelo.addColumn("Fecha de contrato");
         modelo.addColumn("Salario");
         modelo.addColumn("Dirección");
 
         paramTabEmp.setModel(modelo);
-        sql = "select id_empleado, nom_empleado, cedula_emp, fecha_contrato, salario, dir_empleado from Empleado_Guayaquil;";
+        sql = "select cedula_emp, nom_empleado, fecha_contrato, salario, dir_empleado from Empleado_Guayaquil;";
         String[] datos = new String[8];
         Statement st;
 
@@ -90,12 +92,11 @@ public class metodoSQL {
             ResultSet rs = st.executeQuery(sql);
 
             while (rs.next()) {
-                datos[0] = String.valueOf(rs.getInt(1));
+                datos[0] = rs.getString(1);
                 datos[1] = rs.getString(2);
-                datos[2] = rs.getString(3);
-                datos[3] = rs.getDate(4).toString();
-                datos[4] = rs.getBigDecimal(5).toPlainString();
-                datos[5] = rs.getString(6);
+                datos[2] = rs.getDate(3).toString();
+                datos[3] = rs.getBigDecimal(4).toPlainString();
+                datos[4] = rs.getString(5);
                 modelo.addRow(datos);
             }
             paramTabEmp.setModel(modelo);
@@ -111,10 +112,10 @@ public class metodoSQL {
 
         modelo.addColumn("Id");
         modelo.addColumn("Número");
-        modelo.addColumn("ID empleado");
+        modelo.addColumn("Cédula");
 
         paramTelfEmp.setModel(modelo);
-        sql = "select id_telefono, num_telefono, id_empleado from Telefono_Guayaquil";
+        sql = "select id_telefono, num_telefono, cedula_empleado from Telefono_Guayaquil";
         String[] datos = new String[4];
         Statement st;
 
@@ -125,7 +126,7 @@ public class metodoSQL {
             while (rs.next()) {
                 datos[0] = String.valueOf(rs.getInt(1));
                 datos[1] = rs.getString(2);
-                datos[2] = String.valueOf(rs.getInt(3));
+                datos[2] = rs.getString(3);
                 modelo.addRow(datos);
             }
             paramTelfEmp.setModel(modelo);

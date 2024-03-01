@@ -69,12 +69,15 @@ public class MenuGeneralG extends javax.swing.JFrame {
         btnBuscarVehiculo = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        txtNomApeCliAct = new javax.swing.JTextField();
+        txtCedulaClieBus = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jScrollPane7 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         btnMostrarActCli = new javax.swing.JButton();
-        btnActualizarCli = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
+        txtNomCliBus = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        txtApeCliBus = new javax.swing.JTextField();
         jPanel12 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         txtNomApeCliAct2 = new javax.swing.JTextField();
@@ -536,17 +539,17 @@ public class MenuGeneralG extends javax.swing.JFrame {
 
         jTCliBus.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Nombre", "Apellido", "Direccion"
+                "Cédula", "Nombre", "Apellido", "Direccion"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -576,7 +579,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
         });
         jScrollPane6.setViewportView(jTVehiculoBus);
 
-        jLabel9.setText("Ingresa un nombre y apellido para buscar al cliente:");
+        jLabel9.setText("Ingrese el número de cédula del cliente a buscar:");
 
         btnBuscarCliEspc.setText("Buscar cliente");
 
@@ -586,7 +589,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
 
         jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos del cliente"));
 
-        jLabel11.setText("Cliente seleccionado:");
+        jLabel11.setText("Cedula:");
 
         jLabel12.setText("Direccion del cliente:");
 
@@ -596,7 +599,9 @@ public class MenuGeneralG extends javax.swing.JFrame {
 
         btnMostrarActCli.setText("Actualizar datos");
 
-        btnActualizarCli.setText("Actualizar");
+        jLabel13.setText("Nombres:");
+
+        jLabel14.setText("Apellidos:");
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -606,17 +611,24 @@ public class MenuGeneralG extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCedulaClieBus, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(txtNomCliBus, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane7))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNomApeCliAct, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane7)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnMostrarActCli, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
-                    .addComponent(btnActualizarCli, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtApeCliBus))
+                    .addComponent(btnMostrarActCli, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
@@ -625,13 +637,16 @@ public class MenuGeneralG extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(txtNomApeCliAct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnMostrarActCli))
+                    .addComponent(txtCedulaClieBus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13)
+                    .addComponent(txtNomCliBus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14)
+                    .addComponent(txtApeCliBus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel12)
-                    .addComponent(btnActualizarCli)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMostrarActCli))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -754,9 +769,9 @@ public class MenuGeneralG extends javax.swing.JFrame {
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(132, 132, 132))
+                    .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(127, 127, 127))
         );
 
         jTabbedPane2.addTab("Visualizar y Actualizar", jPanel6);
@@ -984,18 +999,18 @@ public class MenuGeneralG extends javax.swing.JFrame {
 
         jTEmpAgg.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nombre", "Cédula", "Fecha de contrato", "Salario", "Dirección"
+                "Cédula", "Nombre", "Fecha de contrato", "Salario", "Dirección"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1086,7 +1101,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "Id", "Número", "ID empleado"
+                "Id", "Número", "Cédula"
             }
         ) {
             Class[] types = new Class [] {
@@ -1174,18 +1189,18 @@ public class MenuGeneralG extends javax.swing.JFrame {
 
         jTEmpVis.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nombre", "Cédula", "Fecha de contrato", "Salario", "Dirección"
+                "Cédula", "Nombre", "Fecha de contrato", "Salario", "Dirección"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1202,7 +1217,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "Id", "Número", "ID empleado"
+                "Id", "Número", "Cédula"
             }
         ) {
             Class[] types = new Class [] {
@@ -1233,7 +1248,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
 
         btnBuscEmp.setText("Buscar empleado");
 
-        jLabel41.setText("Ingrese el ID del empleado a buscar:");
+        jLabel41.setText("Ingrese el número de cédula del empleado a buscar:");
 
         btnActEmp.setText("Actualizar datos del empleado");
 
@@ -1243,7 +1258,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
             jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel24Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel24Layout.createSequentialGroup()
                         .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1254,24 +1269,24 @@ public class MenuGeneralG extends javax.swing.JFrame {
                             .addComponent(txtNomEmpAgg1)
                             .addComponent(txtCeduEmpAgg1)
                             .addComponent(jScrollPane19, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel24Layout.createSequentialGroup()
-                        .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtIDEmpBusc)))
-                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel24Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtIDEmpBusc, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jDCFechaContratoEmpAgg1, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
+                    .addGroup(jPanel24Layout.createSequentialGroup()
                         .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel24Layout.createSequentialGroup()
                                 .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtSalarioAgg1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jDCFechaContratoEmpAgg1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel24Layout.createSequentialGroup()
-                        .addGap(94, 94, 94)
-                        .addComponent(btnBuscEmp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(6, 6, 6)))
+                            .addGroup(jPanel24Layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addComponent(btnBuscEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(20, 20, 20))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel24Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1312,7 +1327,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
 
         jLabel42.setText("Número de telefono:");
 
-        jLabel43.setText("ID del empleado seleccionado:");
+        jLabel43.setText("Cédula del empleado seleccionado");
 
         btnActTelfEmp.setText("Actualizar teléfono del empleado");
 
@@ -2298,7 +2313,6 @@ public class MenuGeneralG extends javax.swing.JFrame {
     private javax.swing.JButton btnActPieza;
     private javax.swing.JButton btnActPieza1;
     private javax.swing.JButton btnActTelfEmp;
-    private javax.swing.JButton btnActualizarCli;
     private javax.swing.JButton btnActualizarVehi;
     private javax.swing.JButton btnAggCliente;
     private javax.swing.JButton btnAggEmp;
@@ -2333,6 +2347,8 @@ public class MenuGeneralG extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -2483,10 +2499,12 @@ public class MenuGeneralG extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane6;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea5;
+    private javax.swing.JTextField txtApeCliBus;
     private javax.swing.JTextField txtApelliCli;
     private javax.swing.JTextField txtCeduEmpAgg;
     private javax.swing.JTextField txtCeduEmpAgg1;
     private javax.swing.JTextField txtCeduEmpAgg2;
+    private javax.swing.JTextField txtCedulaClieBus;
     private javax.swing.JTextField txtFiltNumMatricula;
     private javax.swing.JTextField txtFiltNumMatricula1;
     private javax.swing.JTextField txtFiltroNomCli;
@@ -2505,10 +2523,10 @@ public class MenuGeneralG extends javax.swing.JFrame {
     private javax.swing.JTextField txtMatriculaVehiSeleccionado;
     private javax.swing.JTextField txtModelo;
     private javax.swing.JTextField txtModeloVehículo;
-    private javax.swing.JTextField txtNomApeCliAct;
     private javax.swing.JTextField txtNomApeCliAct2;
     private javax.swing.JTextField txtNomApeCliAct5;
     private javax.swing.JTextField txtNomApeCliAct6;
+    private javax.swing.JTextField txtNomCliBus;
     private javax.swing.JTextField txtNomCliente;
     private javax.swing.JTextField txtNomEmpAgg;
     private javax.swing.JTextField txtNomEmpAgg1;
