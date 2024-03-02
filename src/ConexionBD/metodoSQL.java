@@ -2,6 +2,7 @@ package ConexionBD;
 
 import Clases.Cliente;
 import Clases.Empleado;
+import Clases.Pieza;
 import Clases.Reparacion;
 import Clases.Vehiculo;
 import java.math.BigDecimal;
@@ -63,6 +64,42 @@ public class metodoSQL {
 
         // Modificar la consulta SQL para buscar por id_cliente
         sql = "select cedula_cliente,nombre_cliente, apellido_cliente, direccion_cliente from Vista_Cliente_Guayaquil WHERE cedula_cliente = ?";
+
+        String[] datos = new String[4];
+        PreparedStatement ps;
+
+        try {
+            ps = objetoConexion.establecerConexionG().prepareStatement(sql);
+            ps.setString(1, ceduCliente);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                datos[0] = rs.getString(1);
+                datos[1] = rs.getString(2);
+                datos[2] = rs.getString(3);
+                datos[3] = rs.getString(4);
+                modelo.addRow(datos);
+            }
+            paramTablaClientes.setModel(modelo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se mostraron los registros");
+        }
+    }
+
+    public void mostrarClientesPorNroCedula1(JTable paramTablaClientes, String ceduCliente) {
+        CConexion objetoConexion = new CConexion();
+        DefaultTableModel modelo = new DefaultTableModel();
+        String sql = "";
+
+        modelo.addColumn("Cédula");
+        modelo.addColumn("Nombres");
+        modelo.addColumn("Apellidos");
+        modelo.addColumn("Dirección");
+
+        paramTablaClientes.setModel(modelo);
+
+        // Modificar la consulta SQL para buscar por cedula_cliente en Vista_Datos_Clientes
+        sql = "SELECT cedula_cliente, nombre_cliente, apellido_cliente, direccion_cliente FROM [26.237.113.83].TALLERG8_V2_QUITO.dbo.Vista_Datos_Clientes WHERE cedula_cliente = ?";
 
         String[] datos = new String[4];
         PreparedStatement ps;
@@ -286,6 +323,45 @@ public class metodoSQL {
         }
     }
 
+    public void mostrarReparacionesPorId(JTable paramTabRepa, int idReparacion) {
+        CConexion objetoConexion = new CConexion();
+        DefaultTableModel modelo = new DefaultTableModel();
+        String sql = "";
+
+        modelo.addColumn("ID");
+        modelo.addColumn("Tipo");
+        modelo.addColumn("Observaciones");
+        modelo.addColumn("Precio");
+        modelo.addColumn("Matrícula");
+
+        paramTabRepa.setModel(modelo);
+
+        // Modificamos la consulta para buscar por un ID de reparación específico
+        sql = "SELECT id_reparacion, tipo_reparacion, observaciones, precio_reparacion, matricula FROM Vista_Reparacion_Guayaquil WHERE id_reparacion = ?;";
+
+        String[] datos = new String[5]; // Ajustamos el tamaño del array de datos según las columnas que usamos
+        PreparedStatement ps;
+
+        try {
+            ps = objetoConexion.establecerConexionG().prepareStatement(sql);
+            ps.setInt(1, idReparacion); // Establecemos el ID de reparación como el primer parámetro de la consulta
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                datos[0] = String.valueOf(rs.getInt("id_reparacion"));
+                datos[1] = rs.getString("tipo_reparacion");
+                datos[2] = rs.getString("observaciones");
+                datos[3] = rs.getBigDecimal("precio_reparacion").toPlainString();
+                datos[4] = rs.getString("matricula");
+                modelo.addRow(datos);
+            }
+            paramTabRepa.setModel(modelo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se mostraron los registros");
+            e.printStackTrace(); // Esto ayudará a identificar el error más específicamente
+        }
+    }
+
     public void mostrarPieza(JTable paramTabPieza) {
         CConexion objetoConexion = new CConexion();
         DefaultTableModel modelo = new DefaultTableModel();
@@ -303,6 +379,36 @@ public class metodoSQL {
         try {
             st = objetoConexion.establecerConexionG().createStatement();
             ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                datos[0] = String.valueOf(rs.getInt(1));
+                datos[1] = rs.getString(2);
+                datos[2] = String.valueOf(rs.getInt(3));
+                modelo.addRow(datos);
+            }
+            paramTabPieza.setModel(modelo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se mostraron los registros");
+            System.out.println(e);
+        }
+    }
+
+    public void mostrarPiezaPorId(JTable paramTabPieza, int idReparacion) {
+        CConexion objetoConexion = new CConexion();
+        DefaultTableModel modelo = new DefaultTableModel();
+
+        modelo.addColumn("Id");
+        modelo.addColumn("Descripción");
+        modelo.addColumn("ID reparación");
+
+        paramTabPieza.setModel(modelo);
+        String sql = "select id_pieza, nom_pieza, id_reparacion from Vista_Pieza_Guayaquil where id_reparacion = ?;";
+        String[] datos = new String[3]; // Ajusta el tamaño del arreglo a los datos que realmente usas
+
+        try {
+            PreparedStatement ps = objetoConexion.establecerConexionG().prepareStatement(sql);
+            ps.setInt(1, idReparacion);
+            ResultSet rs = ps.executeQuery(); // Corregido
 
             while (rs.next()) {
                 datos[0] = String.valueOf(rs.getInt(1));
@@ -363,6 +469,43 @@ public class metodoSQL {
             // Ejecutar la consulta
             cs.execute();
             JOptionPane.showMessageDialog(null, "Cliente registrado con éxito, ahora registra su vehiculo.");
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al registrar el cliente: " + e.getMessage());
+        }
+    }
+
+    public void registrarCliente1(Cliente cliente) {
+        CConexion objetoConexion = new CConexion();
+
+        // La consulta SQL para verificar si el cliente ya existe en Vista_Datos_Clientes
+        String sqlVerificarCliente = "SELECT COUNT(*) FROM [26.237.113.83].TALLERG8_V2_QUITO.dbo.Vista_Datos_Clientes WHERE cedula_cliente = ?";
+
+        // La consulta SQL para insertar un nuevo cliente
+        String sqlInsertarCliente = "INSERT INTO Vista_Cliente_Guayaquil (cedula_cliente, nombre_cliente, apellido_cliente, direccion_cliente, id_taller) VALUES (?, ?, ?, ?, ?)";
+
+        try {
+            // Verificar si el cliente ya existe en Vista_Datos_Clientes
+            CallableStatement csVerificar = objetoConexion.establecerConexionG().prepareCall(sqlVerificarCliente);
+            csVerificar.setString(1, cliente.getCedula());
+
+            ResultSet rs = csVerificar.executeQuery();
+            rs.next();
+            int count = rs.getInt(1);
+
+            if (count > 0) {
+                // El cliente ya existe, mostrar advertencia
+                JOptionPane.showMessageDialog(null, "Este cliente ya está registrado.");
+            } else {
+                // El cliente no existe, proceder con la inserción
+                CallableStatement csInsertar = objetoConexion.establecerConexionG().prepareCall(sqlInsertarCliente);
+                csInsertar.setString(1, cliente.getCedula());
+                csInsertar.setString(2, cliente.getNombre());
+                csInsertar.setString(3, cliente.getApellido());
+                csInsertar.setString(4, cliente.getDireccion());
+                csInsertar.setInt(5, 2); // Asumiendo que el id_taller siempre será 2 para Cliente_Guayaquil
+                csInsertar.execute();
+                JOptionPane.showMessageDialog(null, "Cliente registrado con éxito, ahora registra su vehículo.");
+            }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al registrar el cliente: " + e.getMessage());
         }
@@ -450,12 +593,11 @@ public class metodoSQL {
 
     public void agregarReparacion(Reparacion reparacion) {
         CConexion objetoConexion = new CConexion();
-        String sql = "INSERT INTO Vista_Reparacion_Guayaquil (id_reparacion, tipo_reparacion, observaciones, precio_reparacion, matricula, id_taller) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Vista_Reparacion_Guayaquil (id_reparacion, tipo_reparacion, observaciones, precio_reparacion, matricula, id_taller) VALUES (?, ?, ?, ?, ?, ?)";
 
         try {
-            int idReparacion = generarIdReparacion(); // Método auxiliar para generar el ID
             PreparedStatement ps = objetoConexion.establecerConexionG().prepareStatement(sql);
-            ps.setInt(1, idReparacion);
+            ps.setInt(1, reparacion.getIdReparacion());
             ps.setString(2, reparacion.getTipoReparacion());
             ps.setString(3, reparacion.getObservaciones());
             ps.setBigDecimal(4, reparacion.getPrecioReparacion());
@@ -468,22 +610,21 @@ public class metodoSQL {
         }
     }
 
-    private int generarIdReparacion() {
+    public int generarIdReparacion() {
         long timePart = System.currentTimeMillis();
         int randomPart = (int) (Math.random() * 100);
         return (int) ((timePart + randomPart) % Integer.MAX_VALUE);
     }
 
-    public void agregarPieza(String nomPieza, int idReparacion) {
+    public void agregarPieza(Pieza pieza) {
         CConexion objetoConexion = new CConexion();
         String sql = "INSERT INTO Vista_Pieza_Guayaquil (id_pieza, nom_pieza, id_reparacion) VALUES (?, ?, ?)";
 
         try {
-            int idPieza = generarIdUnico(); // Suponiendo que existe un método para generar ID
             PreparedStatement ps = objetoConexion.establecerConexionG().prepareStatement(sql);
-            ps.setInt(1, idPieza);
-            ps.setString(2, nomPieza);
-            ps.setInt(3, idReparacion);
+            ps.setInt(1, pieza.getID());
+            ps.setString(2, pieza.getNombrePieza());
+            ps.setInt(3, pieza.getIdReparacion());
             ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Pieza agregada con éxito");
         } catch (SQLException e) {

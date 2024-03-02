@@ -2,8 +2,11 @@ package Interfaces;
 
 import Clases.Cliente;
 import Clases.Empleado;
+import Clases.Pieza;
+import Clases.Reparacion;
 import Clases.Vehiculo;
 import ConexionBD.metodoSQL;
+import java.math.BigDecimal;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.event.ChangeEvent;
@@ -17,6 +20,8 @@ public class MenuGeneralG extends javax.swing.JFrame {
     Empleado empToVinc, empAggSelect;
     Vehiculo vehiAggSelect;
     String idTelfToDel;
+    Reparacion repToVinc, repAggSelect;
+    int idRepara, idPieza;
 
     public MenuGeneralG() {
         initComponents();
@@ -33,8 +38,11 @@ public class MenuGeneralG extends javax.swing.JFrame {
         metodos.mostrarVehiculos(jTVehiculoElim);
         metodos.mostrarEmpleados(jTEmpVis1);
         metodos.mostrarTelefonoEmp(JTTelfEmpVis1);
+        metodos.mostrarReparaciones(jTReparaAgg2);
+        metodos.mostrarPieza(JTTelfEmpAgg3);
         //Se oculta para vincular despues si se desa
         btnRegisNuevoVehi.setVisible(false);
+        btnAddNuewPieza.setVisible(false);
 
         //Para que no de errores
         jTCliAgg.setEnabled(false);
@@ -245,7 +253,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jTabbedPane6 = new javax.swing.JTabbedPane();
         jPanel29 = new javax.swing.JPanel();
-        jPanel33 = new javax.swing.JPanel();
+        jPRepara = new javax.swing.JPanel();
         jLabel52 = new javax.swing.JLabel();
         txtTipoRepaAgg = new javax.swing.JTextField();
         jLabel53 = new javax.swing.JLabel();
@@ -256,12 +264,14 @@ public class MenuGeneralG extends javax.swing.JFrame {
         jTAObserReparaAgg = new javax.swing.JTextArea();
         btnAggRepara = new javax.swing.JButton();
         txtNumMatrReparaAgg = new javax.swing.JTextField();
+        btnAddPiezaToExistRep = new javax.swing.JButton();
         jPanel34 = new javax.swing.JPanel();
         jLabel57 = new javax.swing.JLabel();
         txtPiezaAgg = new javax.swing.JTextField();
         jLabel58 = new javax.swing.JLabel();
         txtIDRePiezaAgg = new javax.swing.JTextField();
         btnAggPieza = new javax.swing.JButton();
+        btnAddNuewPieza = new javax.swing.JButton();
         jScrollPane25 = new javax.swing.JScrollPane();
         jTReparaAgg = new javax.swing.JTable();
         jScrollPane26 = new javax.swing.JScrollPane();
@@ -281,6 +291,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
         jLabel64 = new javax.swing.JLabel();
         txtIDRepBus = new javax.swing.JTextField();
         btnBuscRep = new javax.swing.JButton();
+        btnLimpiarDatos = new javax.swing.JButton();
         jScrollPane28 = new javax.swing.JScrollPane();
         jTReparaVis = new javax.swing.JTable();
         jPanel36 = new javax.swing.JPanel();
@@ -288,7 +299,6 @@ public class MenuGeneralG extends javax.swing.JFrame {
         txtPiezaAgg1 = new javax.swing.JTextField();
         jLabel63 = new javax.swing.JLabel();
         txtIDRePiezaAgg1 = new javax.swing.JTextField();
-        btnActPieza = new javax.swing.JButton();
         jScrollPane29 = new javax.swing.JScrollPane();
         jTPiezaVis = new javax.swing.JTable();
         jPanel31 = new javax.swing.JPanel();
@@ -1899,7 +1909,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Empleados", jPanel2);
 
-        jPanel33.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos de la reparacion"));
+        jPRepara.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos de la reparacion"));
 
         jLabel52.setText("Ingrese el tipo de reparacion que se realizo:");
 
@@ -1914,56 +1924,74 @@ public class MenuGeneralG extends javax.swing.JFrame {
         jScrollPane24.setViewportView(jTAObserReparaAgg);
 
         btnAggRepara.setText("Agregar reparación");
+        btnAggRepara.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAggReparaActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel33Layout = new javax.swing.GroupLayout(jPanel33);
-        jPanel33.setLayout(jPanel33Layout);
-        jPanel33Layout.setHorizontalGroup(
-            jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel33Layout.createSequentialGroup()
+        btnAddPiezaToExistRep.setText("Agregar nueva pieza a una reparacion");
+        btnAddPiezaToExistRep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddPiezaToExistRepActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPReparaLayout = new javax.swing.GroupLayout(jPRepara);
+        jPRepara.setLayout(jPReparaLayout);
+        jPReparaLayout.setHorizontalGroup(
+            jPReparaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPReparaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel33Layout.createSequentialGroup()
-                        .addComponent(jLabel52, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(txtTipoRepaAgg, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel33Layout.createSequentialGroup()
-                        .addComponent(jLabel56, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPReparaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnAggRepara, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPReparaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPReparaLayout.createSequentialGroup()
+                            .addComponent(jLabel52, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(20, 20, 20)
+                            .addComponent(txtTipoRepaAgg, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPReparaLayout.createSequentialGroup()
+                            .addComponent(jLabel56, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jScrollPane24))))
+                .addGroup(jPReparaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPReparaLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane24)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel53, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel55, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel33Layout.createSequentialGroup()
-                        .addComponent(txtPrecioRepaAgg, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(txtNumMatrReparaAgg))
+                        .addGroup(jPReparaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel53, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel55, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPReparaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPReparaLayout.createSequentialGroup()
+                                .addComponent(txtPrecioRepaAgg, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(txtNumMatrReparaAgg)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPReparaLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAddPiezaToExistRep, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(181, 181, 181)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel33Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAggRepara, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(284, 284, 284))
         );
-        jPanel33Layout.setVerticalGroup(
-            jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel33Layout.createSequentialGroup()
+        jPReparaLayout.setVerticalGroup(
+            jPReparaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPReparaLayout.createSequentialGroup()
                 .addGap(11, 11, 11)
-                .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPReparaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel52)
                     .addComponent(txtTipoRepaAgg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel53)
                     .addComponent(txtPrecioRepaAgg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPReparaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPReparaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel55)
                         .addComponent(txtNumMatrReparaAgg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel56))
                     .addComponent(jScrollPane24, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btnAggRepara)
+                .addGroup(jPReparaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAggRepara)
+                    .addComponent(btnAddPiezaToExistRep))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1974,6 +2002,18 @@ public class MenuGeneralG extends javax.swing.JFrame {
         jLabel58.setText("ID de la reparación seleccionada:");
 
         btnAggPieza.setText("Agregar pieza a la reparación");
+        btnAggPieza.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAggPiezaActionPerformed(evt);
+            }
+        });
+
+        btnAddNuewPieza.setText("Agregar nueva pieza a la reparación");
+        btnAddNuewPieza.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddNuewPiezaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel34Layout = new javax.swing.GroupLayout(jPanel34);
         jPanel34.setLayout(jPanel34Layout);
@@ -1990,7 +2030,9 @@ public class MenuGeneralG extends javax.swing.JFrame {
                             .addComponent(txtPiezaAgg)))
                     .addGroup(jPanel34Layout.createSequentialGroup()
                         .addGap(42, 42, 42)
-                        .addComponent(btnAggPieza, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnAggPieza, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+                            .addComponent(btnAddNuewPieza, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         jPanel34Layout.setVerticalGroup(
@@ -2006,7 +2048,9 @@ public class MenuGeneralG extends javax.swing.JFrame {
                 .addComponent(txtPiezaAgg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnAggPieza)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAddNuewPieza)
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         jTReparaAgg.setModel(new javax.swing.table.DefaultTableModel(
@@ -2027,6 +2071,11 @@ public class MenuGeneralG extends javax.swing.JFrame {
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+        });
+        jTReparaAgg.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTReparaAggMouseClicked(evt);
             }
         });
         jScrollPane25.setViewportView(jTReparaAgg);
@@ -2059,7 +2108,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
             .addGroup(jPanel29Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel33, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPRepara, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane25))
                 .addGap(31, 31, 31)
                 .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -2072,7 +2121,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel29Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel33, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPRepara, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel34, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -2087,7 +2136,11 @@ public class MenuGeneralG extends javax.swing.JFrame {
 
         jLabel54.setText("Tipo de reparación que se realizó:");
 
+        txtTipoRepaAgg1.setEditable(false);
+
         jLabel59.setText("Precio de la reparacion:");
+
+        txtPrecioRepaAgg1.setEditable(false);
 
         jLabel60.setText("Número de matrícula del vehículo:");
 
@@ -2098,49 +2151,67 @@ public class MenuGeneralG extends javax.swing.JFrame {
         jScrollPane27.setViewportView(jTAObserReparaAgg1);
 
         btnAggRepara1.setText("Actualizar reparación");
+        btnAggRepara1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAggRepara1ActionPerformed(evt);
+            }
+        });
+
+        txtNumMatrReparaAgg1.setEditable(false);
 
         jLabel64.setText("Ingrese el ID de la reparación que desea buscar:");
 
         btnBuscRep.setText("Buscar reparación");
+        btnBuscRep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscRepActionPerformed(evt);
+            }
+        });
+
+        btnLimpiarDatos.setText("Limpiar datos");
+        btnLimpiarDatos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarDatosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel35Layout = new javax.swing.GroupLayout(jPanel35);
         jPanel35.setLayout(jPanel35Layout);
         jPanel35Layout.setHorizontalGroup(
             jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel35Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAggRepara1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(283, 283, 283))
             .addGroup(jPanel35Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel35Layout.createSequentialGroup()
-                        .addComponent(jLabel64, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtIDRepBus))
-                    .addGroup(jPanel35Layout.createSequentialGroup()
-                        .addComponent(jLabel54, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(txtTipoRepaAgg1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel35Layout.createSequentialGroup()
-                        .addComponent(jLabel61, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane27)))
+                .addGroup(jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnAggRepara1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel35Layout.createSequentialGroup()
+                            .addComponent(jLabel64, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtIDRepBus))
+                        .addGroup(jPanel35Layout.createSequentialGroup()
+                            .addComponent(jLabel54, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(20, 20, 20)
+                            .addComponent(txtTipoRepaAgg1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel35Layout.createSequentialGroup()
+                            .addComponent(jLabel61, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jScrollPane27))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel35Layout.createSequentialGroup()
-                        .addGroup(jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel59, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel60, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnBuscRep, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel35Layout.createSequentialGroup()
+                        .addGroup(jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnLimpiarDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel59, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel60, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel35Layout.createSequentialGroup()
                                 .addComponent(txtPrecioRepaAgg1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(txtNumMatrReparaAgg1)))
-                    .addGroup(jPanel35Layout.createSequentialGroup()
-                        .addComponent(btnBuscRep, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(txtNumMatrReparaAgg1))))
                 .addContainerGap())
         );
         jPanel35Layout.setVerticalGroup(
@@ -2165,7 +2236,9 @@ public class MenuGeneralG extends javax.swing.JFrame {
                         .addComponent(jLabel61))
                     .addComponent(jScrollPane27, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnAggRepara1)
+                .addGroup(jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAggRepara1)
+                    .addComponent(btnLimpiarDatos))
                 .addContainerGap())
         );
 
@@ -2189,6 +2262,11 @@ public class MenuGeneralG extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        jTReparaVis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTReparaVisMouseClicked(evt);
+            }
+        });
         jScrollPane28.setViewportView(jTReparaVis);
 
         jPanel36.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos de las piezas"));
@@ -2197,24 +2275,17 @@ public class MenuGeneralG extends javax.swing.JFrame {
 
         jLabel63.setText("ID de la reparación seleccionada:");
 
-        btnActPieza.setText("Actualizar la pieza de la reparación");
-
         javax.swing.GroupLayout jPanel36Layout = new javax.swing.GroupLayout(jPanel36);
         jPanel36.setLayout(jPanel36Layout);
         jPanel36Layout.setHorizontalGroup(
             jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel36Layout.createSequentialGroup()
-                .addGroup(jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel36Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel63, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtIDRePiezaAgg1, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
-                            .addComponent(jLabel62, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPiezaAgg1)))
-                    .addGroup(jPanel36Layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(btnActPieza, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addGroup(jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel63, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtIDRePiezaAgg1, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
+                    .addComponent(jLabel62, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPiezaAgg1))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         jPanel36Layout.setVerticalGroup(
@@ -2228,9 +2299,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
                 .addComponent(jLabel62)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtPiezaAgg1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnActPieza)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTPiezaVis.setModel(new javax.swing.table.DefaultTableModel(
@@ -2250,6 +2319,11 @@ public class MenuGeneralG extends javax.swing.JFrame {
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+        });
+        jTPiezaVis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTPiezaVisMouseClicked(evt);
             }
         });
         jScrollPane29.setViewportView(jTPiezaVis);
@@ -2300,10 +2374,20 @@ public class MenuGeneralG extends javax.swing.JFrame {
         jScrollPane30.setViewportView(jTAObserReparaAgg2);
 
         btnElimRepara.setText("Eliminar reparación");
+        btnElimRepara.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnElimReparaActionPerformed(evt);
+            }
+        });
 
         jLabel69.setText("Ingrese el ID de la reparación que desea eliminar:");
 
         btnBuscDelRepara.setText("Buscar reparación");
+        btnBuscDelRepara.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscDelReparaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel37Layout = new javax.swing.GroupLayout(jPanel37);
         jPanel37.setLayout(jPanel37Layout);
@@ -2378,6 +2462,11 @@ public class MenuGeneralG extends javax.swing.JFrame {
         jLabel71.setText("ID de la reparación seleccionada:");
 
         btnActPieza1.setText("Eliminar pieza de la reparación");
+        btnActPieza1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActPieza1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel38Layout = new javax.swing.GroupLayout(jPanel38);
         jPanel38.setLayout(jPanel38Layout);
@@ -2432,6 +2521,11 @@ public class MenuGeneralG extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        JTTelfEmpAgg3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JTTelfEmpAgg3MouseClicked(evt);
+            }
+        });
         jScrollPane31.setViewportView(JTTelfEmpAgg3);
 
         jTReparaAgg2.setModel(new javax.swing.table.DefaultTableModel(
@@ -2452,6 +2546,11 @@ public class MenuGeneralG extends javax.swing.JFrame {
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+        });
+        jTReparaAgg2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTReparaAgg2MouseClicked(evt);
             }
         });
         jScrollPane32.setViewportView(jTReparaAgg2);
@@ -2902,6 +3001,179 @@ public class MenuGeneralG extends javax.swing.JFrame {
         limpiarDatosEmpElim();
     }//GEN-LAST:event_btnLimpDatosEmp1ActionPerformed
 
+    private void btnAggReparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAggReparaActionPerformed
+        String tipoReparacion = txtTipoRepaAgg.getText();
+        String observaciones = jTAObserReparaAgg.getText();
+        String matricula = txtNumMatrReparaAgg.getText();
+        int idReparacion = metodos.generarIdReparacion();
+        BigDecimal precio = BigDecimal.valueOf(Double.parseDouble(txtPrecioRepaAgg.getText()));
+        Reparacion reparacion = new Reparacion(idReparacion, tipoReparacion, observaciones, precio, matricula);
+        metodos.agregarReparacion(reparacion);
+        // Mostrar un cuadro de diálogo de confirmación antes de eliminar
+        int confirmacion = JOptionPane.showConfirmDialog(null, "¿Deseas agregar una pieza a la reparacion?", "Agregar pieza", JOptionPane.YES_NO_OPTION);
+
+        // Verificar si el usuario seleccionó "Sí" (YES_OPTION)
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            repToVinc = metodos.obtenerReparacionPorId(idReparacion);
+            metodos.mostrarReparaciones(jTReparaAgg);
+            jTReparaAgg.setEnabled(true);
+            txtIDRePiezaAgg.setText(String.valueOf(idReparacion));
+            limpiarDatosRepAgg();
+            jPRepara.setVisible(false);
+        } else {
+            metodos.mostrarReparaciones(jTReparaAgg);
+            limpiarDatosRepAgg();
+        }
+
+    }//GEN-LAST:event_btnAggReparaActionPerformed
+
+    private void jTReparaAggMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTReparaAggMouseClicked
+        int filaSeleccionada = jTReparaAgg.getSelectedRow();
+        if (filaSeleccionada >= 0) {
+            String idtoRepara = jTReparaAgg.getValueAt(filaSeleccionada, 0).toString();
+            idRepara = Integer.parseInt(idtoRepara);
+            metodoSQL metodos = new metodoSQL();
+            repAggSelect = metodos.obtenerReparacionPorId(idRepara);
+            txtIDRePiezaAgg.setText(String.valueOf(repAggSelect.getIdReparacion()));
+        }
+    }//GEN-LAST:event_jTReparaAggMouseClicked
+
+    private void btnAggPiezaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAggPiezaActionPerformed
+        int idPieza = metodos.generarIdReparacion();
+        String nomPieza = txtPiezaAgg.getText();
+        int idReparacion = repToVinc.getIdReparacion();
+        Pieza pieza = new Pieza(idPieza, idReparacion, nomPieza);
+        metodos.agregarPieza(pieza);
+        metodos.mostrarPieza(JTTelfEmpAgg1);
+        txtIDRePiezaAgg.setText("");
+        txtPiezaAgg.setText("");
+        jPRepara.setVisible(true);
+        limpiarDatosRepAgg();
+    }//GEN-LAST:event_btnAggPiezaActionPerformed
+
+    private void btnAddPiezaToExistRepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPiezaToExistRepActionPerformed
+        jPRepara.setVisible(false);
+        btnAggPieza.setVisible(false);
+        btnAddNuewPieza.setVisible(true);
+        metodos.mostrarReparaciones(jTReparaAgg);
+    }//GEN-LAST:event_btnAddPiezaToExistRepActionPerformed
+
+    private void btnAddNuewPiezaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNuewPiezaActionPerformed
+        int idPieza = metodos.generarIdReparacion();
+        String nomPieza = txtPiezaAgg.getText();
+        Pieza pieza = new Pieza(idPieza, idRepara, nomPieza);
+        metodos.agregarPieza(pieza);
+        metodos.mostrarPieza(JTTelfEmpAgg1);
+        txtIDRePiezaAgg.setText("");
+        txtPiezaAgg.setText("");
+        jPRepara.setVisible(true);
+        btnAggPieza.setVisible(true);
+        btnAddNuewPieza.setVisible(false);
+        limpiarDatosRepAgg();
+    }//GEN-LAST:event_btnAddNuewPiezaActionPerformed
+
+    private void jTReparaVisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTReparaVisMouseClicked
+        int filaSeleccionada = jTReparaVis.getSelectedRow();
+        if (filaSeleccionada >= 0) {
+            String idtoRepara = jTReparaVis.getValueAt(filaSeleccionada, 0).toString();
+            idRepara = Integer.parseInt(idtoRepara);
+            metodoSQL metodos = new metodoSQL();
+            repAggSelect = metodos.obtenerReparacionPorId(idRepara);
+            txtIDRePiezaAgg1.setText(String.valueOf(repAggSelect.getIdReparacion()));
+            txtTipoRepaAgg1.setText(repAggSelect.getTipoReparacion());
+            txtPrecioRepaAgg1.setText(repAggSelect.getPrecioReparacion().toString());
+            jTAObserReparaAgg1.setText(repAggSelect.getObservaciones());
+            txtNumMatrReparaAgg1.setText(repAggSelect.getMatricula());
+            txtIDRepBus.setText(String.valueOf(idRepara));
+        }
+    }//GEN-LAST:event_jTReparaVisMouseClicked
+
+    private void btnBuscRepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscRepActionPerformed
+        metodos.mostrarReparacionesPorId(jTReparaVis, Integer.parseInt(txtIDRepBus.getText()));
+        metodos.mostrarPiezaPorId(jTPiezaVis, Integer.parseInt(txtIDRepBus.getText()));
+    }//GEN-LAST:event_btnBuscRepActionPerformed
+
+    private void btnLimpiarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarDatosActionPerformed
+        metodos.mostrarReparaciones(jTReparaVis);
+        metodos.mostrarPieza(jTPiezaVis);
+        limpiarDatosRepBus();
+    }//GEN-LAST:event_btnLimpiarDatosActionPerformed
+
+    private void jTPiezaVisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTPiezaVisMouseClicked
+        int filaSeleccionada = jTPiezaVis.getSelectedRow();
+        if (filaSeleccionada >= 0) {
+            String descPieza = jTPiezaVis.getValueAt(filaSeleccionada, 1).toString();
+            txtPiezaAgg1.setText(descPieza);
+        }
+    }//GEN-LAST:event_jTPiezaVisMouseClicked
+
+    private void btnAggRepara1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAggRepara1ActionPerformed
+        metodos.actualizarObservacionesReparacion(Integer.parseInt(txtIDRepBus.getText()), jTAObserReparaAgg1.getText());
+        metodos.mostrarReparaciones(jTReparaVis);
+        metodos.mostrarPieza(jTPiezaVis);
+        limpiarDatosRepBus();
+    }//GEN-LAST:event_btnAggRepara1ActionPerformed
+
+    private void jTReparaAgg2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTReparaAgg2MouseClicked
+        int filaSeleccionada = jTReparaAgg2.getSelectedRow();
+        if (filaSeleccionada >= 0) {
+            String idtoRepara = jTReparaAgg2.getValueAt(filaSeleccionada, 0).toString();
+            idRepara = Integer.parseInt(idtoRepara);
+            metodoSQL metodos = new metodoSQL();
+            repAggSelect = metodos.obtenerReparacionPorId(idRepara);
+            txtIDRePiezaAgg2.setText(String.valueOf(repAggSelect.getIdReparacion()));
+            txtTipoRepaAgg2.setText(repAggSelect.getTipoReparacion());
+            txtPrecioRepaAgg2.setText(repAggSelect.getPrecioReparacion().toString());
+            jTAObserReparaAgg2.setText(repAggSelect.getObservaciones());
+            txtNumMatrReparaAgg2.setText(repAggSelect.getMatricula());
+            txtIDRepBus1.setText(String.valueOf(idRepara));
+        }
+    }//GEN-LAST:event_jTReparaAgg2MouseClicked
+
+    private void btnBuscDelReparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscDelReparaActionPerformed
+        metodos.mostrarReparacionesPorId(jTReparaAgg2, Integer.parseInt(txtIDRepBus1.getText()));
+        metodos.mostrarPiezaPorId(JTTelfEmpAgg3, Integer.parseInt(txtIDRepBus1.getText()));
+    }//GEN-LAST:event_btnBuscDelReparaActionPerformed
+
+    private void btnElimReparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElimReparaActionPerformed
+        // Mostrar un cuadro de diálogo de confirmación antes de eliminar
+        int confirmacion = JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar la reparacion, se eliminara toda las piezas?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+
+        // Verificar si el usuario seleccionó "Sí" (YES_OPTION)
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            // Si el usuario confirma, proceder a eliminar el cliente
+            metodos.eliminarReparacion(idRepara);
+            metodos.mostrarReparaciones(jTReparaAgg2);
+        } else {
+            // Si el usuario no confirma, no hacer nada (o realizar alguna otra acción deseada)
+            JOptionPane.showMessageDialog(null, "Eliminación cancelada.");
+        }
+    }//GEN-LAST:event_btnElimReparaActionPerformed
+
+    private void JTTelfEmpAgg3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTTelfEmpAgg3MouseClicked
+        int filaSeleccionada = JTTelfEmpAgg3.getSelectedRow();
+        if (filaSeleccionada >= 0) {
+            String descPieza = JTTelfEmpAgg3.getValueAt(filaSeleccionada, 1).toString();
+            txtPiezaAgg2.setText(descPieza);
+            idPieza = Integer.parseInt(JTTelfEmpAgg3.getValueAt(filaSeleccionada, 0).toString());
+        }
+    }//GEN-LAST:event_JTTelfEmpAgg3MouseClicked
+
+    private void btnActPieza1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActPieza1ActionPerformed
+        // Mostrar un cuadro de diálogo de confirmación antes de eliminar
+        int confirmacion = JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar la pieza de la reparacion?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+
+        // Verificar si el usuario seleccionó "Sí" (YES_OPTION)
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            // Si el usuario confirma, proceder a eliminar el cliente
+            metodos.eliminarPieza(idPieza);
+            metodos.mostrarPieza(JTTelfEmpAgg3);
+        } else {
+            // Si el usuario no confirma, no hacer nada (o realizar alguna otra acción deseada)
+            JOptionPane.showMessageDialog(null, "Eliminación cancelada.");
+        }
+    }//GEN-LAST:event_btnActPieza1ActionPerformed
+
     public void limpiarDatosClienteAgg() {
         txtCeduCliAgg.setText("");
         txtNomClienteAgg.setText("");
@@ -2970,6 +3242,22 @@ public class MenuGeneralG extends javax.swing.JFrame {
         jDCFechaContratoEmpAgg2.setDate(null);
     }
 
+    public void limpiarDatosRepAgg() {
+        txtTipoRepaAgg.setText("");
+        jTAObserReparaAgg.setText("");
+        txtNumMatrReparaAgg.setText("");
+        txtPrecioRepaAgg.setText("");
+        txtIDRePiezaAgg.setText("");
+    }
+
+    public void limpiarDatosRepBus() {
+        txtIDRepBus.setText("");
+        txtTipoRepaAgg1.setText("");
+        txtPrecioRepaAgg1.setText("");
+        txtNumMatrReparaAgg1.setText("");
+        jTAObserReparaAgg1.setText("");
+    }
+
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -3008,10 +3296,11 @@ public class MenuGeneralG extends javax.swing.JFrame {
     private javax.swing.JTable JTTelfEmpVis;
     private javax.swing.JTable JTTelfEmpVis1;
     private javax.swing.JButton btnActEmp;
-    private javax.swing.JButton btnActPieza;
     private javax.swing.JButton btnActPieza1;
     private javax.swing.JButton btnActualizarDatosCli;
     private javax.swing.JButton btnAddNuevoTelfEmp;
+    private javax.swing.JButton btnAddNuewPieza;
+    private javax.swing.JButton btnAddPiezaToExistRep;
     private javax.swing.JButton btnAddTelfEmp;
     private javax.swing.JButton btnAggCliente;
     private javax.swing.JButton btnAggEmp;
@@ -3037,6 +3326,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
     private javax.swing.JButton btnLimpDatos;
     private javax.swing.JButton btnLimpDatosEmp;
     private javax.swing.JButton btnLimpDatosEmp1;
+    private javax.swing.JButton btnLimpiarDatos;
     private javax.swing.JButton btnRegisNuevoVehi;
     private javax.swing.JButton btnVincNuevoVehiculo;
     private com.toedter.calendar.JDateChooser jDCFechaCompraBus;
@@ -3118,6 +3408,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPCliAggDatos;
     private javax.swing.JPanel jPDatosEmpAgg;
+    private javax.swing.JPanel jPRepara;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -3137,7 +3428,6 @@ public class MenuGeneralG extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel30;
     private javax.swing.JPanel jPanel31;
-    private javax.swing.JPanel jPanel33;
     private javax.swing.JPanel jPanel34;
     private javax.swing.JPanel jPanel35;
     private javax.swing.JPanel jPanel36;
