@@ -51,7 +51,7 @@ public class CConexionG extends CConexionPadre {
     }
 
     @Override
-    Connection establecerConexion() {
+    public Connection establecerConexion() {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             // Asegúrate de reemplazar INSTANCIA_GUAYAQUIL con el nombre de tu instancia

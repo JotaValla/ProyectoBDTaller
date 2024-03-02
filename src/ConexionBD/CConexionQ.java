@@ -24,7 +24,7 @@ public class CConexionQ extends CConexionPadre {
     String servernameG = "JOTA";
 
     @Override
-    Connection establecerConexion() {
+    public Connection establecerConexion() {
         try {
             // Cargar el controlador JDBC
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");

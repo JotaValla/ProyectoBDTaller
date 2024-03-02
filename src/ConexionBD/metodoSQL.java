@@ -28,7 +28,7 @@ public class metodoSQL {
         modelo.addColumn("Direccion");
 
         paramTablaClientes.setModel(modelo);
-        sql = "select cedula_cliente,nombre_cliente, apellido_cliente, direccion_cliente from Vista_Cliente_"+localizacion;
+        sql = "select cedula_cliente,nombre_cliente, apellido_cliente, direccion_cliente from Vista_Cliente_" + localizacion;
         String[] datos = new String[5];
         Statement st;
 
@@ -49,6 +49,36 @@ public class metodoSQL {
         }
     }
 
+    public void mostrarClientesTotales(JTable paramTablaClientes, CConexionPadre objetoConexion) {
+        DefaultTableModel modelo = new DefaultTableModel();
+        String sql = "";
+
+        modelo.addColumn("Cédula");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Apellido");
+
+        paramTablaClientes.setModel(modelo);
+        sql = "SELECT cedula_cliente, nombre_cliente, apellido_cliente FROM Vista_Datos_Clientes";
+        String[] datos = new String[3];
+        Statement st;
+
+        try {
+            st = objetoConexion.establecerConexion().createStatement();
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                datos[0] = rs.getString(1);
+                datos[1] = rs.getString(2);
+                datos[2] = rs.getString(3);
+                modelo.addRow(datos);
+            }
+            paramTablaClientes.setModel(modelo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se mostraron los registros");
+            System.out.println(e);
+        }
+    }
+
     public void mostrarClientesPorNroCedula(JTable paramTablaClientes, String ceduCliente, CConexionPadre objetoConexion, String localizacion) {
         DefaultTableModel modelo = new DefaultTableModel();
         String sql = "";
@@ -61,7 +91,7 @@ public class metodoSQL {
         paramTablaClientes.setModel(modelo);
 
         // Modificar la consulta SQL para buscar por id_cliente
-        sql = "select cedula_cliente,nombre_cliente, apellido_cliente, direccion_cliente from Vista_Cliente_"+localizacion+" WHERE cedula_cliente = ?";
+        sql = "select cedula_cliente,nombre_cliente, apellido_cliente, direccion_cliente from Vista_Cliente_" + localizacion + " WHERE cedula_cliente = ?";
 
         String[] datos = new String[4];
         PreparedStatement ps;
@@ -96,7 +126,7 @@ public class metodoSQL {
         paramTablaClientes.setModel(modelo);
 
         // Modificar la consulta SQL para buscar por cedula_cliente en Vista_Datos_Clientes
-        sql = "SELECT cedula_cliente, nombre_cliente, apellido_cliente, direccion_cliente FROM [26.237.113.83].TALLERG8_V2_QUITO.dbo.Vista_Datos_Clientes WHERE cedula_cliente = ?";
+        sql = "SELECT cedula_cliente, nombre_cliente, apellido_cliente, direccion_cliente FROM Vista_Datos_Clientes WHERE cedula_cliente = ?";
 
         String[] datos = new String[4];
         PreparedStatement ps;
@@ -128,7 +158,7 @@ public class metodoSQL {
         modelo.addColumn("Modelo");
 
         paramTabVehiculo.setModel(modelo);
-        sql = "select matricula, fecha_compra, modelo from Vista_Vehiculo_"+localizacion;
+        sql = "select matricula, fecha_compra, modelo from Vista_Vehiculo_" + localizacion;
         String[] datos = new String[4];
         Statement st;
 
@@ -159,7 +189,7 @@ public class metodoSQL {
         paramTablaClientes.setModel(modelo);
 
         // Modificar la consulta SQL para buscar por id_cliente
-        sql = "select matricula , fecha_compra, modelo from Vista_Vehiculo_"+localizacion+" WHERE matricula = ?";
+        sql = "select matricula , fecha_compra, modelo from Vista_Vehiculo_" + localizacion + " WHERE matricula = ?";
 
         String[] datos = new String[4];
         PreparedStatement ps;
@@ -192,7 +222,7 @@ public class metodoSQL {
         modelo.addColumn("Dirección");
 
         paramTabEmp.setModel(modelo);
-        sql = "SELECT cedula_emp, nom_empleado, fecha_contrato, salario, dir_empleado FROM Vista_Empleado_"+localizacion;
+        sql = "SELECT cedula_emp, nom_empleado, fecha_contrato, salario, dir_empleado FROM Vista_Empleado_" + localizacion;
         String[] datos = new String[8];
         Statement st;
 
@@ -227,7 +257,7 @@ public class metodoSQL {
         parmTabEmp.setModel(modelo);
 
         // Modificar la consulta SQL para buscar por id_cliente
-        sql = "select cedula_emp, nom_empleado, fecha_contrato, salario, dir_empleado from Vista_Empleado_"+localizacion+" WHERE cedula_emp = ?";
+        sql = "select cedula_emp, nom_empleado, fecha_contrato, salario, dir_empleado from Vista_Empleado_" + localizacion + " WHERE cedula_emp = ?";
 
         String[] datos = new String[5];
         PreparedStatement ps;
@@ -260,7 +290,7 @@ public class metodoSQL {
         modelo.addColumn("Cédula");
 
         paramTelfEmp.setModel(modelo);
-        sql = "select id_telefono, num_telefono, cedula_empleado from Vista_Telefono_"+localizacion;
+        sql = "select id_telefono, num_telefono, cedula_empleado from Vista_Telefono_" + localizacion;
         String[] datos = new String[4];
         Statement st;
 
@@ -292,7 +322,7 @@ public class metodoSQL {
         modelo.addColumn("Matrícula");
 
         paramTabRepa.setModel(modelo);
-        sql = "select id_reparacion, tipo_reparacion, observaciones, precio_reparacion, matricula from Vista_Reparacion_"+localizacion;
+        sql = "select id_reparacion, tipo_reparacion, observaciones, precio_reparacion, matricula from Vista_Reparacion_" + localizacion;
         String[] datos = new String[7];
         Statement st;
 
@@ -327,7 +357,7 @@ public class metodoSQL {
         paramTabRepa.setModel(modelo);
 
         // Modificamos la consulta para buscar por un ID de reparación específico
-        sql = "SELECT id_reparacion, tipo_reparacion, observaciones, precio_reparacion, matricula FROM Vista_Reparacion_"+localizacion+" WHERE id_reparacion = ?;";
+        sql = "SELECT id_reparacion, tipo_reparacion, observaciones, precio_reparacion, matricula FROM Vista_Reparacion_" + localizacion + " WHERE id_reparacion = ?;";
 
         String[] datos = new String[5]; // Ajustamos el tamaño del array de datos según las columnas que usamos
         PreparedStatement ps;
@@ -361,7 +391,7 @@ public class metodoSQL {
         modelo.addColumn("ID reparación");
 
         paramTabPieza.setModel(modelo);
-        sql = "select id_pieza, nom_pieza, id_reparacion from Vista_Pieza_"+localizacion;
+        sql = "select id_pieza, nom_pieza, id_reparacion from Vista_Pieza_" + localizacion;
         String[] datos = new String[4];
         Statement st;
 
@@ -390,7 +420,7 @@ public class metodoSQL {
         modelo.addColumn("ID reparación");
 
         paramTabPieza.setModel(modelo);
-        String sql = "select id_pieza, nom_pieza, id_reparacion from Vista_Pieza_"+localizacion+" where id_reparacion = ?;";
+        String sql = "select id_pieza, nom_pieza, id_reparacion from Vista_Pieza_" + localizacion + " where id_reparacion = ?;";
         String[] datos = new String[3]; // Ajusta el tamaño del arreglo a los datos que realmente usas
 
         try {
@@ -419,7 +449,7 @@ public class metodoSQL {
         modelo.addColumn("Matrícula");
 
         paramTabPieza.setModel(modelo);
-        sql = "select cedula_cliente, matricula from Vista_Registro_"+localizacion;
+        sql = "select cedula_cliente, matricula from Vista_Registro_" + localizacion;
         String[] datos = new String[4];
         Statement st;
 
@@ -439,10 +469,10 @@ public class metodoSQL {
         }
     }
 
-    public void registrarCliente(Cliente cliente, CConexionPadre objetoConexion, String localizacion) {
+    public void registrarCliente(Cliente cliente, CConexionPadre objetoConexion, String localizacion, int taller) {
 
         // La consulta SQL para insertar un nuevo cliente
-        String sql = "INSERT INTO Vista_Cliente_"+localizacion+" (cedula_cliente, nombre_cliente, apellido_cliente, direccion_cliente, id_taller) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Vista_Cliente_" + localizacion + " (cedula_cliente, nombre_cliente, apellido_cliente, direccion_cliente, id_taller) VALUES (?, ?, ?, ?, ?)";
 
         try {
             CallableStatement cs = objetoConexion.establecerConexion().prepareCall(sql);
@@ -451,7 +481,7 @@ public class metodoSQL {
             cs.setString(2, cliente.getNombre());
             cs.setString(3, cliente.getApellido());
             cs.setString(4, cliente.getDireccion());
-            cs.setInt(5, 2); // Asumiendo que el id_taller siempre será 2 para Cliente_Guayaquil
+            cs.setInt(5, taller); // Asumiendo que el id_taller siempre será 2 para Cliente_Guayaquil
             // Ejecutar la consulta
             cs.execute();
             JOptionPane.showMessageDialog(null, "Cliente registrado con éxito, ahora registra su vehiculo.");
@@ -460,13 +490,13 @@ public class metodoSQL {
         }
     }
 
-    public void registrarCliente1(Cliente cliente, CConexionPadre objetoConexion, String localizacion) {
+    public void registrarCliente1(Cliente cliente, CConexionPadre objetoConexion, String localizacion, int taller) {
 
         // La consulta SQL para verificar si el cliente ya existe en Vista_Datos_Clientes
-        String sqlVerificarCliente = "SELECT COUNT(*) FROM [26.237.113.83].TALLERG8_V2_QUITO.dbo.Vista_Datos_Clientes WHERE cedula_cliente = ?";
+        String sqlVerificarCliente = "SELECT COUNT(*) FROM Vista_Datos_Clientes WHERE cedula_cliente = ?";
 
         // La consulta SQL para insertar un nuevo cliente
-        String sqlInsertarCliente = "INSERT INTO Vista_Cliente_"+localizacion+" (cedula_cliente, nombre_cliente, apellido_cliente, direccion_cliente, id_taller) VALUES (?, ?, ?, ?, ?)";
+        String sqlInsertarCliente = "INSERT INTO Vista_Cliente_" + localizacion + " (cedula_cliente, nombre_cliente, apellido_cliente, direccion_cliente, id_taller) VALUES (?, ?, ?, ?, ?)";
 
         try {
             // Verificar si el cliente ya existe en Vista_Datos_Clientes
@@ -487,7 +517,7 @@ public class metodoSQL {
                 csInsertar.setString(2, cliente.getNombre());
                 csInsertar.setString(3, cliente.getApellido());
                 csInsertar.setString(4, cliente.getDireccion());
-                csInsertar.setInt(5, 2); // Asumiendo que el id_taller siempre será 2 para Cliente_Guayaquil
+                csInsertar.setInt(5, taller); // Asumiendo que el id_taller siempre será 2 para Cliente_Guayaquil
                 csInsertar.execute();
                 JOptionPane.showMessageDialog(null, "Cliente registrado con éxito, ahora registra su vehículo.");
             }
@@ -496,10 +526,10 @@ public class metodoSQL {
         }
     }
 
-    public void registrarVehiculo(Vehiculo vehiculo, CConexionPadre objetoConexion, String localizacion) {
+    public void registrarVehiculo(Vehiculo vehiculo, CConexionPadre objetoConexion, String localizacion, int taller) {
 
         // La consulta SQL para insertar un nuevo cliente
-        String sql = "Insert into Vista_Vehiculo_"+localizacion+" (matricula, fecha_compra, modelo, id_taller) VALUES (?, ?, ?, ?)";
+        String sql = "Insert into Vista_Vehiculo_" + localizacion + " (matricula, fecha_compra, modelo, id_taller) VALUES (?, ?, ?, ?)";
 
         try {
             CallableStatement cs = objetoConexion.establecerConexion().prepareCall(sql);
@@ -511,7 +541,7 @@ public class metodoSQL {
 
             cs.setDate(2, fechaCompraSql);
             cs.setString(3, vehiculo.getModelo());
-            cs.setInt(4, 2); // Asumiendo que el id_taller siempre será 2 para Cliente_Guayaquil
+            cs.setInt(4, taller); // Asumiendo que el id_taller siempre será 2 para Cliente_Guayaquil
             // Ejecutar la consulta
             cs.execute();
             JOptionPane.showMessageDialog(null, "Vehiculo registrado con éxito");
@@ -520,8 +550,8 @@ public class metodoSQL {
         }
     }
 
-    public void registrarEmpleado(Empleado empleado, CConexionPadre objetoConexion, String localizacion) {
-        String sql = "INSERT INTO Vista_Empleado_"+localizacion+" (cedula_emp, nom_empleado, fecha_contrato, salario, dir_empleado, id_taller) VALUES (?, ?, ?, ?, ?, ?)";
+    public void registrarEmpleado(Empleado empleado, CConexionPadre objetoConexion, String localizacion, int taller) {
+        String sql = "INSERT INTO Vista_Empleado_" + localizacion + " (cedula_emp, nom_empleado, fecha_contrato, salario, dir_empleado, id_taller) VALUES (?, ?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement ps = objetoConexion.establecerConexion().prepareStatement(sql);
@@ -530,7 +560,7 @@ public class metodoSQL {
             ps.setDate(3, new java.sql.Date(empleado.getFechaContrato().getTime()));
             ps.setBigDecimal(4, BigDecimal.valueOf(empleado.getSalario()));
             ps.setString(5, empleado.getDireccion());
-            ps.setInt(6, 2);
+            ps.setInt(6, taller);
             ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Empleado registrado con éxito, ingrese su número de teléfono.");
         } catch (SQLException e) {
@@ -539,7 +569,7 @@ public class metodoSQL {
     }
 
     public void registrarEnRegistro(String cedulaCliente, String matriculaVehiculo, CConexionPadre objetoConexion, String localizacion) {
-        String sql = "INSERT INTO Vista_Registro_"+localizacion+" (cedula_cliente, matricula) VALUES (?, ?)";
+        String sql = "INSERT INTO Vista_Registro_" + localizacion + " (cedula_cliente, matricula) VALUES (?, ?)";
 
         try {
             PreparedStatement ps = objetoConexion.establecerConexion().prepareStatement(sql);
@@ -553,7 +583,7 @@ public class metodoSQL {
     }
 
     public void agregarTelefonoEmpleado(String numTelefono, String cedulaEmpleado, CConexionPadre objetoConexion, String localizacion) {
-        String sql = "INSERT INTO Vista_Telefono_"+localizacion+" (id_telefono, num_telefono, cedula_empleado) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO Vista_Telefono_" + localizacion + " (id_telefono, num_telefono, cedula_empleado) VALUES (?, ?, ?)";
 
         try {
             // Generar un ID único para id_telefono
@@ -572,8 +602,8 @@ public class metodoSQL {
         }
     }
 
-    public void agregarReparacion(Reparacion reparacion, CConexionPadre objetoConexion, String localizacion) {
-        String sql = "INSERT INTO Vista_Reparacion_"+localizacion+" (id_reparacion, tipo_reparacion, observaciones, precio_reparacion, matricula, id_taller) VALUES (?, ?, ?, ?, ?, ?)";
+    public void agregarReparacion(Reparacion reparacion, CConexionPadre objetoConexion, String localizacion, int taller) {
+        String sql = "INSERT INTO Vista_Reparacion_" + localizacion + " (id_reparacion, tipo_reparacion, observaciones, precio_reparacion, matricula, id_taller) VALUES (?, ?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement ps = objetoConexion.establecerConexion().prepareStatement(sql);
@@ -582,7 +612,7 @@ public class metodoSQL {
             ps.setString(3, reparacion.getObservaciones());
             ps.setBigDecimal(4, reparacion.getPrecioReparacion());
             ps.setString(5, reparacion.getMatricula());
-            ps.setInt(6, 2);
+            ps.setInt(6, taller);
             ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Reparación agregada con éxito");
         } catch (SQLException e) {
@@ -597,7 +627,7 @@ public class metodoSQL {
     }
 
     public void agregarPieza(Pieza pieza, CConexionPadre objetoConexion, String localizacion) {
-        String sql = "INSERT INTO Vista_Pieza_"+localizacion+" (id_pieza, nom_pieza, id_reparacion) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO Vista_Pieza_" + localizacion + " (id_pieza, nom_pieza, id_reparacion) VALUES (?, ?, ?)";
 
         try {
             PreparedStatement ps = objetoConexion.establecerConexion().prepareStatement(sql);
@@ -611,16 +641,10 @@ public class metodoSQL {
         }
     }
 
-    private int generarIdUnico() {
-        long timePart = System.currentTimeMillis();
-        int randomPart = (int) (Math.random() * 100);
-        return (int) ((timePart + randomPart) % Integer.MAX_VALUE);
-    }
-
     public Cliente setearDatosCliente(String cedula, CConexionPadre objetoConexion, String localizacion) {
         Cliente cliente = new Cliente();
 
-        String sqlCliente = "SELECT * FROM Vista_Cliente_"+localizacion+" WHERE cedula_cliente = ?";
+        String sqlCliente = "SELECT * FROM Vista_Cliente_" + localizacion + " WHERE cedula_cliente = ?";
 
         try {
             PreparedStatement psCliente = objetoConexion.establecerConexion().prepareStatement(sqlCliente);
@@ -644,7 +668,7 @@ public class metodoSQL {
     public Vehiculo setearDatosVehiculo(String matricula, CConexionPadre objetoConexion, String localizacion) {
         Vehiculo vehi = new Vehiculo();
 
-        String sqlCliente = "SELECT * FROM Vista_Vehiculo_"+localizacion+" WHERE matricula = ?";
+        String sqlCliente = "SELECT * FROM Vista_Vehiculo_" + localizacion + " WHERE matricula = ?";
 
         try {
             PreparedStatement psCliente = objetoConexion.establecerConexion().prepareStatement(sqlCliente);
@@ -665,7 +689,7 @@ public class metodoSQL {
     }
 
     public Empleado obtenerEmpleadoPorCedula(String cedulaEmp, CConexionPadre objetoConexion, String localizacion) {
-        String sql = "SELECT * FROM Vista_Empleado_"+localizacion+" WHERE cedula_emp = ?";
+        String sql = "SELECT * FROM Vista_Empleado_" + localizacion + " WHERE cedula_emp = ?";
         Empleado empleado = null;
 
         try {
@@ -688,7 +712,7 @@ public class metodoSQL {
     }
 
     public Reparacion obtenerReparacionPorId(int idReparacion, CConexionPadre objetoConexion, String localizacion) {
-        String sql = "SELECT * FROM Vista_Reparacion_"+localizacion+" WHERE id_reparacion = ?";
+        String sql = "SELECT * FROM Vista_Reparacion_" + localizacion + " WHERE id_reparacion = ?";
         Reparacion reparacion = null;
 
         try {
@@ -718,7 +742,7 @@ public class metodoSQL {
         modelo.addColumn("Cédula");
 
         paramTablaTelefonos.setModel(modelo);
-        sql = "select id_telefono, num_telefono, cedula_empleado from Vista_Telefono_"+localizacion+" WHERE cedula_empleado = ?";
+        sql = "select id_telefono, num_telefono, cedula_empleado from Vista_Telefono_" + localizacion + " WHERE cedula_empleado = ?";
         String[] datos = new String[3]; // Ajustado a la cantidad de columnas que realmente usas
         PreparedStatement ps;
 
@@ -742,7 +766,7 @@ public class metodoSQL {
 
     public void actualizarDireccionCliente(String cedulaCliente, String nuevaDir, CConexionPadre objetoConexion, String localizacion) {
         // La consulta SQL para actualizar la dirección de un cliente existente
-        String sql = "UPDATE Vista_Cliente_"+localizacion+" SET direccion_cliente = ? WHERE cedula_cliente = ?";
+        String sql = "UPDATE Vista_Cliente_" + localizacion + " SET direccion_cliente = ? WHERE cedula_cliente = ?";
 
         try {
             CallableStatement cs = objetoConexion.establecerConexion().prepareCall(sql);
@@ -763,7 +787,7 @@ public class metodoSQL {
     }
 
     public void actualizarDireccionEmpleado(String cedulaEmp, String nuevaDireccion, CConexionPadre objetoConexion, String localizacion) {
-        String sql = "UPDATE Vista_Empleado_"+localizacion+" SET dir_empleado = ? WHERE cedula_emp = ?";
+        String sql = "UPDATE Vista_Empleado_" + localizacion + " SET dir_empleado = ? WHERE cedula_emp = ?";
 
         try {
             PreparedStatement ps = objetoConexion.establecerConexion().prepareStatement(sql);
@@ -781,7 +805,7 @@ public class metodoSQL {
     }
 
     public void actualizarObservacionesReparacion(int idReparacion, String nuevasObservaciones, CConexionPadre objetoConexion, String localizacion) {
-        String sql = "UPDATE Vista_Reparacion_"+localizacion+" SET observaciones = ? WHERE id_reparacion = ?";
+        String sql = "UPDATE Vista_Reparacion_" + localizacion + " SET observaciones = ? WHERE id_reparacion = ?";
 
         try {
             PreparedStatement ps = objetoConexion.establecerConexion().prepareStatement(sql);
@@ -799,7 +823,7 @@ public class metodoSQL {
     }
 
     public void actualizarNomPieza(int idPieza, String nuevoNomPieza, CConexionPadre objetoConexion, String localizacion) {
-        String sql = "UPDATE Vista_Pieza_"+localizacion+" SET nom_pieza = ? WHERE id_pieza = ?";
+        String sql = "UPDATE Vista_Pieza_" + localizacion + " SET nom_pieza = ? WHERE id_pieza = ?";
 
         try {
             PreparedStatement ps = objetoConexion.establecerConexion().prepareStatement(sql);
@@ -818,7 +842,7 @@ public class metodoSQL {
 
     public void eliminarCliente(String cedulaCliente, CConexionPadre objetoConexion, String localizacion) {
         // La consulta SQL para eliminar un cliente específico por su cédula
-        String sql = "DELETE FROM Vista_Cliente_"+localizacion+" WHERE cedula_cliente = ?";
+        String sql = "DELETE FROM Vista_Cliente_" + localizacion + " WHERE cedula_cliente = ?";
 
         try {
             // Preparar la consulta SQL para ejecución
@@ -843,7 +867,7 @@ public class metodoSQL {
 
     public void eliminarVehiculo(String matricula, CConexionPadre objetoConexion, String localizacion) {
         // La consulta SQL para eliminar un cliente específico por su cédula
-        String sql = "DELETE FROM Vista_Vehiculo_"+localizacion+" WHERE matricula = ?";
+        String sql = "DELETE FROM Vista_Vehiculo_" + localizacion + " WHERE matricula = ?";
 
         try {
             // Preparar la consulta SQL para ejecución
@@ -867,7 +891,7 @@ public class metodoSQL {
     }
 
     public void eliminarEmpleado(String cedulaEmp, CConexionPadre objetoConexion, String localizacion) {
-        String sql = "DELETE FROM Vista_Empleado_"+localizacion+" WHERE cedula_emp = ?";
+        String sql = "DELETE FROM Vista_Empleado_" + localizacion + " WHERE cedula_emp = ?";
 
         try {
             PreparedStatement ps = objetoConexion.establecerConexion().prepareStatement(sql);
@@ -884,7 +908,7 @@ public class metodoSQL {
     }
 
     public void eliminarTelefonoEmpleado(int idTelefono, String numTelefono, CConexionPadre objetoConexion, String localizacion) {
-        String sql = "DELETE FROM Telefono_"+localizacion+" WHERE id_telefono = ? AND num_telefono = ?";
+        String sql = "DELETE FROM Telefono_" + localizacion + " WHERE id_telefono = ? AND num_telefono = ?";
 
         try {
             PreparedStatement ps = objetoConexion.establecerConexion().prepareStatement(sql);
@@ -902,7 +926,7 @@ public class metodoSQL {
     }
 
     public void eliminarReparacion(int idReparacion, CConexionPadre objetoConexion, String localizacion) {
-        String sql = "DELETE FROM Vista_Reparacion_"+localizacion+" WHERE id_reparacion = ?";
+        String sql = "DELETE FROM Vista_Reparacion_" + localizacion + " WHERE id_reparacion = ?";
 
         try {
             PreparedStatement ps = objetoConexion.establecerConexion().prepareStatement(sql);
@@ -919,7 +943,7 @@ public class metodoSQL {
     }
 
     public void eliminarPieza(int idPieza, CConexionPadre objetoConexion, String localizacion) {
-        String sql = "DELETE FROM Vista_Pieza_"+localizacion+" WHERE id_pieza = ?";
+        String sql = "DELETE FROM Vista_Pieza_" + localizacion + " WHERE id_pieza = ?";
 
         try {
             PreparedStatement ps = objetoConexion.establecerConexion().prepareStatement(sql);

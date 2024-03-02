@@ -6,6 +6,6 @@ import java.sql.Connection;
 
 public abstract class CConexionPadre {
     
-    abstract Connection establecerConexion();
+    public abstract Connection establecerConexion();
     
 }

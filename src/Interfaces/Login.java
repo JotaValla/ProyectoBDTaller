@@ -1,6 +1,8 @@
 package Interfaces;
 
 import ConexionBD.CConexionG;
+import ConexionBD.CConexionPadre;
+import ConexionBD.CConexionQ;
 import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,6 +22,7 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         this.setLocationRelativeTo(this);
+        this.setTitle("LOGIN DEL SISTEMA");
     }
 
     @SuppressWarnings("unchecked")
@@ -100,16 +103,12 @@ public class Login extends javax.swing.JFrame {
             case 0:
                 if (this.txtUser.getText().equals("adminQ")
                         && Arrays.equals(this.jPFPassword.getPassword(), new char[]{'1', '2', '3', '4'})) {
-                    try {
-                        javax.swing.JOptionPane.showMessageDialog(this, "INGRESO CORRECTO A EL SISTEMA", "LOGIN", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-                        CConexionG objetoConexion = new CConexionG();
-                        conx = objetoConexion.getConexion();
-                        this.setVisible(false);
-                        menuQ = new MenuGeneralQ();
-                        menuQ.setVisible(true);
-                    } catch (SQLException ex) {
-                        System.out.println(ex);
-                    }
+                    javax.swing.JOptionPane.showMessageDialog(this, "INGRESO CORRECTO A EL SISTEMA", "LOGIN", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                    CConexionPadre objetoConexion = new CConexionQ();
+                    conx = objetoConexion.establecerConexion();
+                    this.setVisible(false);
+                    menuQ = new MenuGeneralQ();
+                    menuQ.setVisible(true);
                 } else {
                     JOptionPane.showConfirmDialog(null, "Datos incorrectos, vuelva a intentar", "CONECTANDO ...", JOptionPane.WARNING_MESSAGE);
                 }
@@ -118,8 +117,8 @@ public class Login extends javax.swing.JFrame {
                 if (this.txtUser.getText().equals("adminG")
                         && Arrays.equals(this.jPFPassword.getPassword(), new char[]{'1', '2', '3', '4'})) {
                     javax.swing.JOptionPane.showMessageDialog(this, "INGRESO CORRECTO A EL SISTEMA", "LOGIN", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-                    CConexionG objetoConexion = new CConexionG();
-//                    conx = objetoConexion.establecerConexionG();
+                    CConexionPadre objetoConexion = new CConexionG();
+                    conx = objetoConexion.establecerConexion();
                     this.setVisible(false);
                     menuG = new MenuGeneralG();
                     menuG.setVisible(true);

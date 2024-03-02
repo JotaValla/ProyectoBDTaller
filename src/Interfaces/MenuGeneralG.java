@@ -24,12 +24,14 @@ public class MenuGeneralG extends javax.swing.JFrame {
     String idTelfToDel;
     Reparacion repToVinc, repAggSelect;
     int idRepara, idPieza;
+    int taller=2;
     CConexionPadre conexionG;
     String localizacionTaller = "Guayaquil";
 
     public MenuGeneralG() {
         initComponents();
         setLocationRelativeTo(this);
+        this.setTitle("ADMINISTRACION TALLER DE GUAYAQUIL");
         conexionG = new CConexionG();
         clienteToVinc = new Cliente();
         metodos = new metodoSQL();
@@ -316,7 +318,6 @@ public class MenuGeneralG extends javax.swing.JFrame {
         jLabel68 = new javax.swing.JLabel();
         jScrollPane30 = new javax.swing.JScrollPane();
         jTAObserReparaAgg2 = new javax.swing.JTextArea();
-        btnElimRepara = new javax.swing.JButton();
         txtNumMatrReparaAgg2 = new javax.swing.JTextField();
         jLabel69 = new javax.swing.JLabel();
         txtIDRepBus1 = new javax.swing.JTextField();
@@ -2119,7 +2120,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
                 .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane26, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jPanel34, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         jPanel29Layout.setVerticalGroup(
             jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2378,13 +2379,6 @@ public class MenuGeneralG extends javax.swing.JFrame {
         jTAObserReparaAgg2.setRows(5);
         jScrollPane30.setViewportView(jTAObserReparaAgg2);
 
-        btnElimRepara.setText("Eliminar reparación");
-        btnElimRepara.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnElimReparaActionPerformed(evt);
-            }
-        });
-
         jLabel69.setText("Ingrese el ID de la reparación que desea eliminar:");
 
         btnBuscDelRepara.setText("Buscar reparación");
@@ -2398,10 +2392,6 @@ public class MenuGeneralG extends javax.swing.JFrame {
         jPanel37.setLayout(jPanel37Layout);
         jPanel37Layout.setHorizontalGroup(
             jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel37Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnElimRepara, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(283, 283, 283))
             .addGroup(jPanel37Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -2422,7 +2412,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
                     .addGroup(jPanel37Layout.createSequentialGroup()
                         .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel66, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel67, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel67, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel37Layout.createSequentialGroup()
@@ -2455,9 +2445,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
                         .addComponent(txtNumMatrReparaAgg2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel68))
                     .addComponent(jScrollPane30, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnElimRepara)
-                .addContainerGap())
+                .addGap(42, 42, 42))
         );
 
         jPanel38.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos de las piezas"));
@@ -2644,7 +2632,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
         String matricula = txtNumMatriculaAgg.getText();
         Date fechaCompra = jDCFechaCompraVehiAgg.getDate();
         Vehiculo vehiculo = new Vehiculo(matricula, modelo, fechaCompra);
-        metodos.registrarVehiculo(vehiculo, conexionG, localizacionTaller);
+        metodos.registrarVehiculo(vehiculo, conexionG, localizacionTaller, taller);
         metodos.mostrarVehiculos(jTTelfAdd, conexionG, localizacionTaller);
         metodos.registrarEnRegistro(clienteToVinc.getCedula(), matricula, conexionG, localizacionTaller);
         metodos.mostrarRegistro(jTRegistroG, conexionG, localizacionTaller);
@@ -2669,7 +2657,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
         String apellido = txtApelliCliAgg.getText();
         String direccion = jTADirCliAgg.getText();
         Cliente cliente = new Cliente(cedula, nombre, apellido, direccion);
-        metodos.registrarCliente(cliente, conexionG, localizacionTaller);
+        metodos.registrarCliente(cliente, conexionG, localizacionTaller, taller);
         clienteToVinc = metodos.setearDatosCliente(cedula, conexionG, localizacionTaller);
         metodos.mostrarClientes(jTCliAgg, conexionG, localizacionTaller);
         jTCliAgg.setEnabled(true);
@@ -2716,7 +2704,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
         String matricula = txtNumMatriculaAgg.getText();
         Date fechaCompra = jDCFechaCompraVehiAgg.getDate();
         Vehiculo vehiculo = new Vehiculo(matricula, modelo, fechaCompra);
-        metodos.registrarVehiculo(vehiculo, conexionG, localizacionTaller);
+        metodos.registrarVehiculo(vehiculo, conexionG, localizacionTaller, taller);
         metodos.mostrarVehiculos(jTTelfAdd, conexionG, localizacionTaller);
         metodos.registrarEnRegistro(cliAggSelect.getCedula(), matricula, conexionG, localizacionTaller);
         metodos.mostrarRegistro(jTRegistroG, conexionG, localizacionTaller);
@@ -2846,7 +2834,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
         String direccion = jTADirEmpAgg.getText();
         Date fechaContrato = jDCFechaContratoEmpAgg.getDate();
         Empleado empleado = new Empleado(cedula, nombre, direccion, salario, fechaContrato);
-        metodos.registrarEmpleado(empleado, conexionG, localizacionTaller);
+        metodos.registrarEmpleado(empleado, conexionG, localizacionTaller, taller);
         empToVinc = metodos.obtenerEmpleadoPorCedula(cedula, conexionG, localizacionTaller);
         metodos.mostrarEmpleados(jTEmpAgg, conexionG, localizacionTaller);
         jTEmpAgg.setEnabled(true);
@@ -3013,7 +3001,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
         int idReparacion = metodos.generarIdReparacion();
         BigDecimal precio = BigDecimal.valueOf(Double.parseDouble(txtPrecioRepaAgg.getText()));
         Reparacion reparacion = new Reparacion(idReparacion, tipoReparacion, observaciones, precio, matricula);
-        metodos.agregarReparacion(reparacion, conexionG, localizacionTaller);
+        metodos.agregarReparacion(reparacion, conexionG, localizacionTaller, taller);
         // Mostrar un cuadro de diálogo de confirmación antes de eliminar
         int confirmacion = JOptionPane.showConfirmDialog(null, "¿Deseas agregar una pieza a la reparacion?", "Agregar pieza", JOptionPane.YES_NO_OPTION);
 
@@ -3139,21 +3127,6 @@ public class MenuGeneralG extends javax.swing.JFrame {
         metodos.mostrarReparacionesPorId(jTReparaAgg2, Integer.parseInt(txtIDRepBus1.getText()), conexionG, localizacionTaller);
         metodos.mostrarPiezaPorId(JTTelfEmpAgg3, Integer.parseInt(txtIDRepBus1.getText()), conexionG, localizacionTaller);
     }//GEN-LAST:event_btnBuscDelReparaActionPerformed
-
-    private void btnElimReparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElimReparaActionPerformed
-        // Mostrar un cuadro de diálogo de confirmación antes de eliminar
-        int confirmacion = JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar la reparacion, se eliminara toda las piezas?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
-
-        // Verificar si el usuario seleccionó "Sí" (YES_OPTION)
-        if (confirmacion == JOptionPane.YES_OPTION) {
-            // Si el usuario confirma, proceder a eliminar el cliente
-            metodos.eliminarReparacion(idRepara, conexionG, localizacionTaller);
-            metodos.mostrarReparaciones(jTReparaAgg2, conexionG, localizacionTaller);
-        } else {
-            // Si el usuario no confirma, no hacer nada (o realizar alguna otra acción deseada)
-            JOptionPane.showMessageDialog(null, "Eliminación cancelada.");
-        }
-    }//GEN-LAST:event_btnElimReparaActionPerformed
 
     private void JTTelfEmpAgg3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTTelfEmpAgg3MouseClicked
         int filaSeleccionada = JTTelfEmpAgg3.getSelectedRow();
@@ -3286,6 +3259,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MenuGeneralG.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -3323,7 +3297,6 @@ public class MenuGeneralG extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscarVehiculoDel;
     private javax.swing.JButton btnCancelarCliAdd;
     private javax.swing.JButton btnElimEmp;
-    private javax.swing.JButton btnElimRepara;
     private javax.swing.JButton btnElimTelfEmp;
     private javax.swing.JButton btnElimVehiculo;
     private javax.swing.JButton btnEliminarCli;

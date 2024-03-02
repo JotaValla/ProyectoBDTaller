@@ -24,12 +24,14 @@ public class MenuGeneralQ extends javax.swing.JFrame {
     String idTelfToDel;
     Reparacion repToVinc, repAggSelect;
     int idRepara, idPieza;
+    int taller=1;
     CConexionPadre conexionQ;
     String localizacion = "Quito";
 
     public MenuGeneralQ() {
         initComponents();
         setLocationRelativeTo(this);
+        this.setTitle("ADMINISTRACION TALLER DE QUITO");
         conexionQ = new CConexionQ();
         clienteToVinc = new Cliente();
         metodos = new metodoSQL();
@@ -172,6 +174,10 @@ public class MenuGeneralQ extends javax.swing.JFrame {
         jLabel72 = new javax.swing.JLabel();
         txtApeCliElim = new javax.swing.JTextField();
         btnEliminarCli = new javax.swing.JButton();
+        jPanel7 = new javax.swing.JPanel();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        jTCliTotal = new javax.swing.JTable();
+        btnMosCliTot = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jTPEmpleado = new javax.swing.JTabbedPane();
         jPanel18 = new javax.swing.JPanel();
@@ -316,7 +322,6 @@ public class MenuGeneralQ extends javax.swing.JFrame {
         jLabel68 = new javax.swing.JLabel();
         jScrollPane30 = new javax.swing.JScrollPane();
         jTAObserReparaAgg2 = new javax.swing.JTextArea();
-        btnElimRepara = new javax.swing.JButton();
         txtNumMatrReparaAgg2 = new javax.swing.JTextField();
         jLabel69 = new javax.swing.JLabel();
         txtIDRepBus1 = new javax.swing.JTextField();
@@ -478,6 +483,11 @@ public class MenuGeneralQ extends javax.swing.JFrame {
         lblcliente.setText("Cliente:");
 
         txtCeduVehiToAdd.setEditable(false);
+        txtCeduVehiToAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCeduVehiToAddActionPerformed(evt);
+            }
+        });
 
         btnRegisNuevoVehi.setText("Registrar nuevo vehículo");
         btnRegisNuevoVehi.addActionListener(new java.awt.event.ActionListener() {
@@ -1165,6 +1175,64 @@ public class MenuGeneralQ extends javax.swing.JFrame {
         );
 
         jTPClienteVehiculo.addTab("Eliminar", jPanel13);
+
+        jTCliTotal.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Cédula", "Nombre", "Apellido"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jTCliTotal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTCliTotalMouseClicked(evt);
+            }
+        });
+        jScrollPane11.setViewportView(jTCliTotal);
+
+        btnMosCliTot.setText("Mostrar Clientes de ambas sedes");
+        btnMosCliTot.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMosCliTotActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnMosCliTot, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(703, Short.MAX_VALUE))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
+                .addGap(279, 279, 279))
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(178, 178, 178)
+                .addComponent(btnMosCliTot)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTPClienteVehiculo.addTab("Clientes Totales", jPanel7);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -2119,7 +2187,7 @@ public class MenuGeneralQ extends javax.swing.JFrame {
                 .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane26, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jPanel34, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         jPanel29Layout.setVerticalGroup(
             jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2378,13 +2446,6 @@ public class MenuGeneralQ extends javax.swing.JFrame {
         jTAObserReparaAgg2.setRows(5);
         jScrollPane30.setViewportView(jTAObserReparaAgg2);
 
-        btnElimRepara.setText("Eliminar reparación");
-        btnElimRepara.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnElimReparaActionPerformed(evt);
-            }
-        });
-
         jLabel69.setText("Ingrese el ID de la reparación que desea eliminar:");
 
         btnBuscDelRepara.setText("Buscar reparación");
@@ -2398,10 +2459,6 @@ public class MenuGeneralQ extends javax.swing.JFrame {
         jPanel37.setLayout(jPanel37Layout);
         jPanel37Layout.setHorizontalGroup(
             jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel37Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnElimRepara, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(283, 283, 283))
             .addGroup(jPanel37Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -2422,7 +2479,7 @@ public class MenuGeneralQ extends javax.swing.JFrame {
                     .addGroup(jPanel37Layout.createSequentialGroup()
                         .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel66, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel67, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel67, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel37Layout.createSequentialGroup()
@@ -2455,9 +2512,7 @@ public class MenuGeneralQ extends javax.swing.JFrame {
                         .addComponent(txtNumMatrReparaAgg2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel68))
                     .addComponent(jScrollPane30, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnElimRepara)
-                .addContainerGap())
+                .addGap(42, 42, 42))
         );
 
         jPanel38.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos de las piezas"));
@@ -2644,7 +2699,7 @@ public class MenuGeneralQ extends javax.swing.JFrame {
         String matricula = txtNumMatriculaAgg.getText();
         Date fechaCompra = jDCFechaCompraVehiAgg.getDate();
         Vehiculo vehiculo = new Vehiculo(matricula, modelo, fechaCompra);
-        metodos.registrarVehiculo(vehiculo, conexionQ, localizacion);
+        metodos.registrarVehiculo(vehiculo, conexionQ, localizacion, taller);
         metodos.mostrarVehiculos(jTTelfAdd, conexionQ, localizacion);
         metodos.registrarEnRegistro(clienteToVinc.getCedula(), matricula, conexionQ, localizacion);
         metodos.mostrarRegistro(jTRegistroG, conexionQ, localizacion);
@@ -2669,7 +2724,7 @@ public class MenuGeneralQ extends javax.swing.JFrame {
         String apellido = txtApelliCliAgg.getText();
         String direccion = jTADirCliAgg.getText();
         Cliente cliente = new Cliente(cedula, nombre, apellido, direccion);
-        metodos.registrarCliente(cliente, conexionQ, localizacion);
+        metodos.registrarCliente1(cliente, conexionQ, localizacion, taller);
         clienteToVinc = metodos.setearDatosCliente(cedula, conexionQ, localizacion);
         metodos.mostrarClientes(jTCliAgg, conexionQ, localizacion);
         jTCliAgg.setEnabled(true);
@@ -2716,7 +2771,7 @@ public class MenuGeneralQ extends javax.swing.JFrame {
         String matricula = txtNumMatriculaAgg.getText();
         Date fechaCompra = jDCFechaCompraVehiAgg.getDate();
         Vehiculo vehiculo = new Vehiculo(matricula, modelo, fechaCompra);
-        metodos.registrarVehiculo(vehiculo, conexionQ, localizacion);
+        metodos.registrarVehiculo(vehiculo, conexionQ, localizacion, taller);
         metodos.mostrarVehiculos(jTTelfAdd, conexionQ, localizacion);
         metodos.registrarEnRegistro(cliAggSelect.getCedula(), matricula, conexionQ, localizacion);
         metodos.mostrarRegistro(jTRegistroG, conexionQ, localizacion);
@@ -2846,7 +2901,7 @@ public class MenuGeneralQ extends javax.swing.JFrame {
         String direccion = jTADirEmpAgg.getText();
         Date fechaContrato = jDCFechaContratoEmpAgg.getDate();
         Empleado empleado = new Empleado(cedula, nombre, direccion, salario, fechaContrato);
-        metodos.registrarEmpleado(empleado, conexionQ, localizacion);
+        metodos.registrarEmpleado(empleado, conexionQ, localizacion, taller);
         empToVinc = metodos.obtenerEmpleadoPorCedula(cedula, conexionQ, localizacion);
         metodos.mostrarEmpleados(jTEmpAgg, conexionQ, localizacion);
         jTEmpAgg.setEnabled(true);
@@ -3013,7 +3068,7 @@ public class MenuGeneralQ extends javax.swing.JFrame {
         int idReparacion = metodos.generarIdReparacion();
         BigDecimal precio = BigDecimal.valueOf(Double.parseDouble(txtPrecioRepaAgg.getText()));
         Reparacion reparacion = new Reparacion(idReparacion, tipoReparacion, observaciones, precio, matricula);
-        metodos.agregarReparacion(reparacion, conexionQ, localizacion);
+        metodos.agregarReparacion(reparacion, conexionQ, localizacion, taller);
         // Mostrar un cuadro de diálogo de confirmación antes de eliminar
         int confirmacion = JOptionPane.showConfirmDialog(null, "¿Deseas agregar una pieza a la reparacion?", "Agregar pieza", JOptionPane.YES_NO_OPTION);
 
@@ -3140,21 +3195,6 @@ public class MenuGeneralQ extends javax.swing.JFrame {
         metodos.mostrarPiezaPorId(JTTelfEmpAgg3, Integer.parseInt(txtIDRepBus1.getText()),conexionQ, localizacion);
     }//GEN-LAST:event_btnBuscDelReparaActionPerformed
 
-    private void btnElimReparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElimReparaActionPerformed
-        // Mostrar un cuadro de diálogo de confirmación antes de eliminar
-        int confirmacion = JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar la reparacion, se eliminara toda las piezas?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
-
-        // Verificar si el usuario seleccionó "Sí" (YES_OPTION)
-        if (confirmacion == JOptionPane.YES_OPTION) {
-            // Si el usuario confirma, proceder a eliminar el cliente
-            metodos.eliminarReparacion(idRepara, conexionQ, localizacion);
-            metodos.mostrarReparaciones(jTReparaAgg2, conexionQ, localizacion);
-        } else {
-            // Si el usuario no confirma, no hacer nada (o realizar alguna otra acción deseada)
-            JOptionPane.showMessageDialog(null, "Eliminación cancelada.");
-        }
-    }//GEN-LAST:event_btnElimReparaActionPerformed
-
     private void JTTelfEmpAgg3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTTelfEmpAgg3MouseClicked
         int filaSeleccionada = JTTelfEmpAgg3.getSelectedRow();
         if (filaSeleccionada >= 0) {
@@ -3178,6 +3218,18 @@ public class MenuGeneralQ extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Eliminación cancelada.");
         }
     }//GEN-LAST:event_btnActPieza1ActionPerformed
+
+    private void jTCliTotalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTCliTotalMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTCliTotalMouseClicked
+
+    private void btnMosCliTotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMosCliTotActionPerformed
+        metodos.mostrarClientesTotales(jTCliTotal, conexionQ);
+    }//GEN-LAST:event_btnMosCliTotActionPerformed
+
+    private void txtCeduVehiToAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCeduVehiToAddActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCeduVehiToAddActionPerformed
 
     public void limpiarDatosClienteAgg() {
         txtCeduCliAgg.setText("");
@@ -3289,6 +3341,10 @@ public class MenuGeneralQ extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -3326,7 +3382,6 @@ public class MenuGeneralQ extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscarVehiculoDel;
     private javax.swing.JButton btnCancelarCliAdd;
     private javax.swing.JButton btnElimEmp;
-    private javax.swing.JButton btnElimRepara;
     private javax.swing.JButton btnElimTelfEmp;
     private javax.swing.JButton btnElimVehiculo;
     private javax.swing.JButton btnEliminarCli;
@@ -3335,6 +3390,7 @@ public class MenuGeneralQ extends javax.swing.JFrame {
     private javax.swing.JButton btnLimpDatosEmp;
     private javax.swing.JButton btnLimpDatosEmp1;
     private javax.swing.JButton btnLimpiarDatos;
+    private javax.swing.JButton btnMosCliTot;
     private javax.swing.JButton btnRegisNuevoVehi;
     private javax.swing.JButton btnVincNuevoVehiculo;
     private com.toedter.calendar.JDateChooser jDCFechaCompraBus;
@@ -3444,9 +3500,11 @@ public class MenuGeneralQ extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane15;
     private javax.swing.JScrollPane jScrollPane16;
@@ -3484,6 +3542,7 @@ public class MenuGeneralQ extends javax.swing.JFrame {
     private javax.swing.JTable jTCliAgg;
     private javax.swing.JTable jTCliBus;
     private javax.swing.JTable jTCliElim;
+    private javax.swing.JTable jTCliTotal;
     private javax.swing.JTable jTEmpAgg;
     private javax.swing.JTable jTEmpVis;
     private javax.swing.JTable jTEmpVis1;
