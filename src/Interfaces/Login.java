@@ -1,6 +1,6 @@
 package Interfaces;
 
-import ConexionBD.CConexion;
+import ConexionBD.CConexionG;
 import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -102,7 +102,7 @@ public class Login extends javax.swing.JFrame {
                         && Arrays.equals(this.jPFPassword.getPassword(), new char[]{'1', '2', '3', '4'})) {
                     try {
                         javax.swing.JOptionPane.showMessageDialog(this, "INGRESO CORRECTO A EL SISTEMA", "LOGIN", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-                        CConexion objetoConexion = new CConexion();
+                        CConexionG objetoConexion = new CConexionG();
                         conx = objetoConexion.getConexion();
                         this.setVisible(false);
                         menuQ = new MenuGeneralQ();
@@ -118,8 +118,8 @@ public class Login extends javax.swing.JFrame {
                 if (this.txtUser.getText().equals("adminG")
                         && Arrays.equals(this.jPFPassword.getPassword(), new char[]{'1', '2', '3', '4'})) {
                     javax.swing.JOptionPane.showMessageDialog(this, "INGRESO CORRECTO A EL SISTEMA", "LOGIN", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-                    CConexion objetoConexion = new CConexion();
-                    conx = objetoConexion.establecerConexionG();
+                    CConexionG objetoConexion = new CConexionG();
+//                    conx = objetoConexion.establecerConexionG();
                     this.setVisible(false);
                     menuG = new MenuGeneralG();
                     menuG.setVisible(true);

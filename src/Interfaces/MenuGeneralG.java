@@ -5,6 +5,8 @@ import Clases.Empleado;
 import Clases.Pieza;
 import Clases.Reparacion;
 import Clases.Vehiculo;
+import ConexionBD.CConexionG;
+import ConexionBD.CConexionPadre;
 import ConexionBD.metodoSQL;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -22,19 +24,22 @@ public class MenuGeneralG extends javax.swing.JFrame {
     String idTelfToDel;
     Reparacion repToVinc, repAggSelect;
     int idRepara, idPieza;
+    CConexionPadre conexionG;
+    String localizacionTaller = "Guayaquil";
 
     public MenuGeneralG() {
         initComponents();
         setLocationRelativeTo(this);
+        conexionG = new CConexionG();
         clienteToVinc = new Cliente();
         metodos = new metodoSQL();
-        metodos.mostrarClientes(jTCliBus);
+        metodos.mostrarClientes(jTCliBus, conexionG, localizacionTaller);
         metodos.mostrarVehiculos(jTVehiculoBus);
         metodos.mostrarEmpleados(jTEmpVis);
         metodos.mostrarTelefonoEmp(JTTelfEmpVis);
         metodos.mostrarReparaciones(jTReparaVis);
         metodos.mostrarPieza(jTPiezaVis);
-        metodos.mostrarClientes(jTCliElim);
+        metodos.mostrarClientes(jTCliElim, conexionG, localizacionTaller);
         metodos.mostrarVehiculos(jTVehiculoElim);
         metodos.mostrarEmpleados(jTEmpVis1);
         metodos.mostrarTelefonoEmp(JTTelfEmpVis1);
@@ -52,7 +57,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
             public void stateChanged(ChangeEvent e) {
                 // Reemplaza 'INDEX_DE_LA_PESTAÑA_DE_VISUALIZACION' con el índice de la pestaña donde se visualizan los clientes.
                 if (jTPClienteVehiculo.getSelectedIndex() == 1) {
-                    metodos.mostrarClientes(jTCliBus);
+                    metodos.mostrarClientes(jTCliBus, conexionG, localizacionTaller);
                     metodos.mostrarVehiculos(jTVehiculoBus);
                 }
             }
@@ -893,7 +898,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtFiltroCeduCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnBuscarCliEspc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnBuscarCliEspc))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2666,7 +2671,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
         Cliente cliente = new Cliente(cedula, nombre, apellido, direccion);
         metodos.registrarCliente(cliente);
         clienteToVinc = metodos.setearDatosCliente(cedula);
-        metodos.mostrarClientes(jTCliAgg);
+        metodos.mostrarClientes(jTCliAgg, conexionG, localizacionTaller);
         jTCliAgg.setEnabled(true);
         txtCeduVehiToAdd.setText(cedula);
         limpiarDatosClienteAgg();
@@ -2700,7 +2705,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
         jPCliAggDatos.setVisible(false);
         btnAggVehiculo.setVisible(false);
         btnRegisNuevoVehi.setVisible(true);
-        metodos.mostrarClientes(jTCliAgg);
+        metodos.mostrarClientes(jTCliAgg, conexionG, localizacionTaller);
         metodos.mostrarRegistro(jTRegistroG);
         jTCliAgg.setEnabled(true);
         btnAggVehiculo.setVisible(true);
@@ -2721,7 +2726,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegisNuevoVehiActionPerformed
 
     private void btnBuscarCliEspcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCliEspcActionPerformed
-        metodos.mostrarClientesPorNroCedula(jTCliBus, txtFiltroCeduCli.getText());
+        metodos.mostrarClientesPorNroCedula(jTCliBus, txtFiltroCeduCli.getText(), conexionG);
     }//GEN-LAST:event_btnBuscarCliEspcActionPerformed
 
     private void jTCliBusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTCliBusMouseClicked
@@ -2761,12 +2766,12 @@ public class MenuGeneralG extends javax.swing.JFrame {
         txtNomCliBus.setText("");
         txtApeCliBus.setText("");
         jTADirCliBus.setText("");
-        metodos.mostrarClientes(jTCliBus);
+        metodos.mostrarClientes(jTCliBus, conexionG, localizacionTaller);
         metodos.mostrarVehiculos(jTVehiculoBus);
     }//GEN-LAST:event_btnLimpDatosActionPerformed
 
     private void btnBuscarCliDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCliDelActionPerformed
-        metodos.mostrarClientesPorNroCedula(jTCliElim, txtFiltroNomCliDel.getText());
+        metodos.mostrarClientesPorNroCedula(jTCliElim, txtFiltroNomCliDel.getText(), conexionG);
     }//GEN-LAST:event_btnBuscarCliDelActionPerformed
 
     private void jTCliElimMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTCliElimMouseClicked
@@ -2790,7 +2795,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
         if (confirmacion == JOptionPane.YES_OPTION) {
             // Si el usuario confirma, proceder a eliminar el cliente
             metodos.eliminarCliente(cliAggSelect.getCedula());
-            metodos.mostrarClientes(jTCliElim);
+            metodos.mostrarClientes(jTCliElim, conexionG, localizacionTaller);
             limpiarDatosClienteElim();
         } else {
             // Si el usuario no confirma, no hacer nada (o realizar alguna otra acción deseada)

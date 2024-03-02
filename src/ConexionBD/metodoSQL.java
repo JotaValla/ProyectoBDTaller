@@ -18,8 +18,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class metodoSQL {
 
-    public void mostrarClientes(JTable paramTablaClientes) {
-        CConexion objetoConexion = new CConexion();
+    public void mostrarClientes(JTable paramTablaClientes, CConexionPadre objetoConexion, String localizacion) {
         DefaultTableModel modelo = new DefaultTableModel();
         String sql = "";
 
@@ -29,12 +28,12 @@ public class metodoSQL {
         modelo.addColumn("Direccion");
 
         paramTablaClientes.setModel(modelo);
-        sql = "select cedula_cliente,nombre_cliente, apellido_cliente, direccion_cliente from Vista_Cliente_Guayaquil";
+        sql = "select cedula_cliente,nombre_cliente, apellido_cliente, direccion_cliente from Vista_Cliente_"+localizacion;
         String[] datos = new String[5];
         Statement st;
 
         try {
-            st = objetoConexion.establecerConexionG().createStatement();
+            st = objetoConexion.establecerConexion().createStatement();
             ResultSet rs = st.executeQuery(sql);
 
             while (rs.next()) {
@@ -50,8 +49,7 @@ public class metodoSQL {
         }
     }
 
-    public void mostrarClientesPorNroCedula(JTable paramTablaClientes, String ceduCliente) {
-        CConexion objetoConexion = new CConexion();
+    public void mostrarClientesPorNroCedula(JTable paramTablaClientes, String ceduCliente, CConexionPadre objetoConexion) {
         DefaultTableModel modelo = new DefaultTableModel();
         String sql = "";
 
@@ -69,7 +67,7 @@ public class metodoSQL {
         PreparedStatement ps;
 
         try {
-            ps = objetoConexion.establecerConexionG().prepareStatement(sql);
+            ps = objetoConexion.establecerConexion().prepareStatement(sql);
             ps.setString(1, ceduCliente);
             ResultSet rs = ps.executeQuery();
 
@@ -87,7 +85,7 @@ public class metodoSQL {
     }
 
     public void mostrarClientesPorNroCedula1(JTable paramTablaClientes, String ceduCliente) {
-        CConexion objetoConexion = new CConexion();
+        CConexionG objetoConexion = new CConexionG();
         DefaultTableModel modelo = new DefaultTableModel();
         String sql = "";
 
@@ -105,7 +103,7 @@ public class metodoSQL {
         PreparedStatement ps;
 
         try {
-            ps = objetoConexion.establecerConexionG().prepareStatement(sql);
+            ps = objetoConexion.establecerConexion().prepareStatement(sql);
             ps.setString(1, ceduCliente);
             ResultSet rs = ps.executeQuery();
 
@@ -123,7 +121,7 @@ public class metodoSQL {
     }
 
     public void mostrarVehiculos(JTable paramTabVehiculo) {
-        CConexion objetoConexion = new CConexion();
+        CConexionG objetoConexion = new CConexionG();
         DefaultTableModel modelo = new DefaultTableModel();
         String sql = "";
 
@@ -137,7 +135,7 @@ public class metodoSQL {
         Statement st;
 
         try {
-            st = objetoConexion.establecerConexionG().createStatement();
+            st = objetoConexion.establecerConexion().createStatement();
             ResultSet rs = st.executeQuery(sql);
 
             while (rs.next()) {
@@ -153,7 +151,7 @@ public class metodoSQL {
     }
 
     public void mostrarVehiculoPorMatricula(JTable paramTablaClientes, String matricula) {
-        CConexion objetoConexion = new CConexion();
+        CConexionG objetoConexion = new CConexionG();
         DefaultTableModel modelo = new DefaultTableModel();
         String sql = "";
 
@@ -170,7 +168,7 @@ public class metodoSQL {
         PreparedStatement ps;
 
         try {
-            ps = objetoConexion.establecerConexionG().prepareStatement(sql);
+            ps = objetoConexion.establecerConexion().prepareStatement(sql);
             ps.setString(1, matricula);
             ResultSet rs = ps.executeQuery();
 
@@ -187,7 +185,7 @@ public class metodoSQL {
     }
 
     public void mostrarEmpleados(JTable paramTabEmp) {
-        CConexion objetoConexion = new CConexion();
+        CConexionG objetoConexion = new CConexionG();
         DefaultTableModel modelo = new DefaultTableModel();
         String sql = "";
 
@@ -203,7 +201,7 @@ public class metodoSQL {
         Statement st;
 
         try {
-            st = objetoConexion.establecerConexionG().createStatement();
+            st = objetoConexion.establecerConexion().createStatement();
             ResultSet rs = st.executeQuery(sql);
 
             while (rs.next()) {
@@ -221,7 +219,7 @@ public class metodoSQL {
     }
 
     public void mostrarEmpleadoPorNroCedula(JTable parmTabEmp, String ceduEmp) {
-        CConexion objetoConexion = new CConexion();
+        CConexionG objetoConexion = new CConexionG();
         DefaultTableModel modelo = new DefaultTableModel();
         String sql = "";
 
@@ -240,7 +238,7 @@ public class metodoSQL {
         PreparedStatement ps;
 
         try {
-            ps = objetoConexion.establecerConexionG().prepareStatement(sql);
+            ps = objetoConexion.establecerConexion().prepareStatement(sql);
             ps.setString(1, ceduEmp);
             ResultSet rs = ps.executeQuery();
 
@@ -259,7 +257,7 @@ public class metodoSQL {
     }
 
     public void mostrarTelefonoEmp(JTable paramTelfEmp) {
-        CConexion objetoConexion = new CConexion();
+        CConexionG objetoConexion = new CConexionG();
         DefaultTableModel modelo = new DefaultTableModel();
         String sql = "";
 
@@ -273,7 +271,7 @@ public class metodoSQL {
         Statement st;
 
         try {
-            st = objetoConexion.establecerConexionG().createStatement();
+            st = objetoConexion.establecerConexion().createStatement();
             ResultSet rs = st.executeQuery(sql);
 
             while (rs.next()) {
@@ -290,7 +288,7 @@ public class metodoSQL {
     }
 
     public void mostrarReparaciones(JTable paramTabRepa) {
-        CConexion objetoConexion = new CConexion();
+        CConexionG objetoConexion = new CConexionG();
         DefaultTableModel modelo = new DefaultTableModel();
         String sql = "";
 
@@ -306,7 +304,7 @@ public class metodoSQL {
         Statement st;
 
         try {
-            st = objetoConexion.establecerConexionG().createStatement();
+            st = objetoConexion.establecerConexion().createStatement();
             ResultSet rs = st.executeQuery(sql);
 
             while (rs.next()) {
@@ -324,7 +322,7 @@ public class metodoSQL {
     }
 
     public void mostrarReparacionesPorId(JTable paramTabRepa, int idReparacion) {
-        CConexion objetoConexion = new CConexion();
+        CConexionG objetoConexion = new CConexionG();
         DefaultTableModel modelo = new DefaultTableModel();
         String sql = "";
 
@@ -343,7 +341,7 @@ public class metodoSQL {
         PreparedStatement ps;
 
         try {
-            ps = objetoConexion.establecerConexionG().prepareStatement(sql);
+            ps = objetoConexion.establecerConexion().prepareStatement(sql);
             ps.setInt(1, idReparacion); // Establecemos el ID de reparación como el primer parámetro de la consulta
             ResultSet rs = ps.executeQuery();
 
@@ -363,7 +361,7 @@ public class metodoSQL {
     }
 
     public void mostrarPieza(JTable paramTabPieza) {
-        CConexion objetoConexion = new CConexion();
+        CConexionG objetoConexion = new CConexionG();
         DefaultTableModel modelo = new DefaultTableModel();
         String sql = "";
 
@@ -377,7 +375,7 @@ public class metodoSQL {
         Statement st;
 
         try {
-            st = objetoConexion.establecerConexionG().createStatement();
+            st = objetoConexion.establecerConexion().createStatement();
             ResultSet rs = st.executeQuery(sql);
 
             while (rs.next()) {
@@ -394,7 +392,7 @@ public class metodoSQL {
     }
 
     public void mostrarPiezaPorId(JTable paramTabPieza, int idReparacion) {
-        CConexion objetoConexion = new CConexion();
+        CConexionG objetoConexion = new CConexionG();
         DefaultTableModel modelo = new DefaultTableModel();
 
         modelo.addColumn("Id");
@@ -406,7 +404,7 @@ public class metodoSQL {
         String[] datos = new String[3]; // Ajusta el tamaño del arreglo a los datos que realmente usas
 
         try {
-            PreparedStatement ps = objetoConexion.establecerConexionG().prepareStatement(sql);
+            PreparedStatement ps = objetoConexion.establecerConexion().prepareStatement(sql);
             ps.setInt(1, idReparacion);
             ResultSet rs = ps.executeQuery(); // Corregido
 
@@ -424,7 +422,7 @@ public class metodoSQL {
     }
 
     public void mostrarRegistro(JTable paramTabPieza) {
-        CConexion objetoConexion = new CConexion();
+        CConexionG objetoConexion = new CConexionG();
         DefaultTableModel modelo = new DefaultTableModel();
         String sql = "";
 
@@ -437,7 +435,7 @@ public class metodoSQL {
         Statement st;
 
         try {
-            st = objetoConexion.establecerConexionG().createStatement();
+            st = objetoConexion.establecerConexion().createStatement();
             ResultSet rs = st.executeQuery(sql);
 
             while (rs.next()) {
@@ -453,13 +451,13 @@ public class metodoSQL {
     }
 
     public void registrarCliente(Cliente cliente) {
-        CConexion objetoConexion = new CConexion();
+        CConexionG objetoConexion = new CConexionG();
 
         // La consulta SQL para insertar un nuevo cliente
         String sql = "INSERT INTO Vista_Cliente_Guayaquil (cedula_cliente, nombre_cliente, apellido_cliente, direccion_cliente, id_taller) VALUES (?, ?, ?, ?, ?)";
 
         try {
-            CallableStatement cs = objetoConexion.establecerConexionG().prepareCall(sql);
+            CallableStatement cs = objetoConexion.establecerConexion().prepareCall(sql);
             // Establecer los valores de cada parámetro basado en las propiedades del objeto cliente
             cs.setString(1, cliente.getCedula());
             cs.setString(2, cliente.getNombre());
@@ -475,7 +473,7 @@ public class metodoSQL {
     }
 
     public void registrarCliente1(Cliente cliente) {
-        CConexion objetoConexion = new CConexion();
+        CConexionG objetoConexion = new CConexionG();
 
         // La consulta SQL para verificar si el cliente ya existe en Vista_Datos_Clientes
         String sqlVerificarCliente = "SELECT COUNT(*) FROM [26.237.113.83].TALLERG8_V2_QUITO.dbo.Vista_Datos_Clientes WHERE cedula_cliente = ?";
@@ -485,7 +483,7 @@ public class metodoSQL {
 
         try {
             // Verificar si el cliente ya existe en Vista_Datos_Clientes
-            CallableStatement csVerificar = objetoConexion.establecerConexionG().prepareCall(sqlVerificarCliente);
+            CallableStatement csVerificar = objetoConexion.establecerConexion().prepareCall(sqlVerificarCliente);
             csVerificar.setString(1, cliente.getCedula());
 
             ResultSet rs = csVerificar.executeQuery();
@@ -497,7 +495,7 @@ public class metodoSQL {
                 JOptionPane.showMessageDialog(null, "Este cliente ya está registrado.");
             } else {
                 // El cliente no existe, proceder con la inserción
-                CallableStatement csInsertar = objetoConexion.establecerConexionG().prepareCall(sqlInsertarCliente);
+                CallableStatement csInsertar = objetoConexion.establecerConexion().prepareCall(sqlInsertarCliente);
                 csInsertar.setString(1, cliente.getCedula());
                 csInsertar.setString(2, cliente.getNombre());
                 csInsertar.setString(3, cliente.getApellido());
@@ -512,13 +510,13 @@ public class metodoSQL {
     }
 
     public void registrarVehiculo(Vehiculo vehiculo) {
-        CConexion objetoConexion = new CConexion();
+        CConexionG objetoConexion = new CConexionG();
 
         // La consulta SQL para insertar un nuevo cliente
         String sql = "Insert into Vista_Vehiculo_Guayaquil(matricula, fecha_compra, modelo, id_taller) VALUES (?, ?, ?, ?)";
 
         try {
-            CallableStatement cs = objetoConexion.establecerConexionG().prepareCall(sql);
+            CallableStatement cs = objetoConexion.establecerConexion().prepareCall(sql);
             // Establecer los valores de cada parámetro basado en las propiedades del objeto cliente
             cs.setString(1, vehiculo.getMatricula());
 
@@ -537,11 +535,11 @@ public class metodoSQL {
     }
 
     public void registrarEmpleado(Empleado empleado) {
-        CConexion objetoConexion = new CConexion();
+        CConexionG objetoConexion = new CConexionG();
         String sql = "INSERT INTO Vista_Empleado_Guayaquil (cedula_emp, nom_empleado, fecha_contrato, salario, dir_empleado, id_taller) VALUES (?, ?, ?, ?, ?, ?)";
 
         try {
-            PreparedStatement ps = objetoConexion.establecerConexionG().prepareStatement(sql);
+            PreparedStatement ps = objetoConexion.establecerConexion().prepareStatement(sql);
             ps.setString(1, empleado.getCedula());
             ps.setString(2, empleado.getNombre());
             ps.setDate(3, new java.sql.Date(empleado.getFechaContrato().getTime()));
@@ -556,11 +554,11 @@ public class metodoSQL {
     }
 
     public void registrarEnRegistro(String cedulaCliente, String matriculaVehiculo) {
-        CConexion objetoConexion = new CConexion();
+        CConexionG objetoConexion = new CConexionG();
         String sql = "INSERT INTO Vista_Registro_Guayaquil (cedula_cliente, matricula) VALUES (?, ?)";
 
         try {
-            PreparedStatement ps = objetoConexion.establecerConexionG().prepareStatement(sql);
+            PreparedStatement ps = objetoConexion.establecerConexion().prepareStatement(sql);
             ps.setString(1, cedulaCliente);
             ps.setString(2, matriculaVehiculo);
             ps.executeUpdate();
@@ -571,7 +569,7 @@ public class metodoSQL {
     }
 
     public void agregarTelefonoEmpleado(String numTelefono, String cedulaEmpleado) {
-        CConexion objetoConexion = new CConexion();
+        CConexionG objetoConexion = new CConexionG();
         String sql = "INSERT INTO Vista_Telefono_Guayaquil (id_telefono, num_telefono, cedula_empleado) VALUES (?, ?, ?)";
 
         try {
@@ -580,7 +578,7 @@ public class metodoSQL {
             int randomPart = (int) (Math.random() * 100);
             int idTelefono = (int) ((timePart + randomPart) % Integer.MAX_VALUE);
 
-            PreparedStatement ps = objetoConexion.establecerConexionG().prepareStatement(sql);
+            PreparedStatement ps = objetoConexion.establecerConexion().prepareStatement(sql);
             ps.setInt(1, idTelefono);
             ps.setString(2, numTelefono);
             ps.setString(3, cedulaEmpleado);
@@ -592,11 +590,11 @@ public class metodoSQL {
     }
 
     public void agregarReparacion(Reparacion reparacion) {
-        CConexion objetoConexion = new CConexion();
+        CConexionG objetoConexion = new CConexionG();
         String sql = "INSERT INTO Vista_Reparacion_Guayaquil (id_reparacion, tipo_reparacion, observaciones, precio_reparacion, matricula, id_taller) VALUES (?, ?, ?, ?, ?, ?)";
 
         try {
-            PreparedStatement ps = objetoConexion.establecerConexionG().prepareStatement(sql);
+            PreparedStatement ps = objetoConexion.establecerConexion().prepareStatement(sql);
             ps.setInt(1, reparacion.getIdReparacion());
             ps.setString(2, reparacion.getTipoReparacion());
             ps.setString(3, reparacion.getObservaciones());
@@ -617,11 +615,11 @@ public class metodoSQL {
     }
 
     public void agregarPieza(Pieza pieza) {
-        CConexion objetoConexion = new CConexion();
+        CConexionG objetoConexion = new CConexionG();
         String sql = "INSERT INTO Vista_Pieza_Guayaquil (id_pieza, nom_pieza, id_reparacion) VALUES (?, ?, ?)";
 
         try {
-            PreparedStatement ps = objetoConexion.establecerConexionG().prepareStatement(sql);
+            PreparedStatement ps = objetoConexion.establecerConexion().prepareStatement(sql);
             ps.setInt(1, pieza.getID());
             ps.setString(2, pieza.getNombrePieza());
             ps.setInt(3, pieza.getIdReparacion());
@@ -639,13 +637,13 @@ public class metodoSQL {
     }
 
     public Cliente setearDatosCliente(String cedula) {
-        CConexion objetoConexion = new CConexion();
+        CConexionG objetoConexion = new CConexionG();
         Cliente cliente = new Cliente();
 
         String sqlCliente = "SELECT * FROM Vista_Cliente_Guayaquil WHERE cedula_cliente = ?";
 
         try {
-            PreparedStatement psCliente = objetoConexion.establecerConexionG().prepareStatement(sqlCliente);
+            PreparedStatement psCliente = objetoConexion.establecerConexion().prepareStatement(sqlCliente);
             psCliente.setString(1, cedula);
             ResultSet rsCliente = psCliente.executeQuery();
             cliente.setCedula(cedula);
@@ -664,13 +662,13 @@ public class metodoSQL {
     }
 
     public Vehiculo setearDatosVehiculo(String matricula) {
-        CConexion objetoConexion = new CConexion();
+        CConexionG objetoConexion = new CConexionG();
         Vehiculo vehi = new Vehiculo();
 
         String sqlCliente = "SELECT * FROM Vista_Vehiculo_Guayaquil WHERE matricula = ?";
 
         try {
-            PreparedStatement psCliente = objetoConexion.establecerConexionG().prepareStatement(sqlCliente);
+            PreparedStatement psCliente = objetoConexion.establecerConexion().prepareStatement(sqlCliente);
             psCliente.setString(1, matricula);
             ResultSet rsCliente = psCliente.executeQuery();
             vehi.setMatricula(matricula);
@@ -688,12 +686,12 @@ public class metodoSQL {
     }
 
     public Empleado obtenerEmpleadoPorCedula(String cedulaEmp) {
-        CConexion objetoConexion = new CConexion();
+        CConexionG objetoConexion = new CConexionG();
         String sql = "SELECT * FROM Vista_Empleado_Guayaquil WHERE cedula_emp = ?";
         Empleado empleado = null;
 
         try {
-            PreparedStatement ps = objetoConexion.establecerConexionG().prepareStatement(sql);
+            PreparedStatement ps = objetoConexion.establecerConexion().prepareStatement(sql);
             ps.setString(1, cedulaEmp);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -712,12 +710,12 @@ public class metodoSQL {
     }
 
     public Reparacion obtenerReparacionPorId(int idReparacion) {
-        CConexion objetoConexion = new CConexion();
+        CConexionG objetoConexion = new CConexionG();
         String sql = "SELECT * FROM Vista_Reparacion_Guayaquil WHERE id_reparacion = ?";
         Reparacion reparacion = null;
 
         try {
-            PreparedStatement ps = objetoConexion.establecerConexionG().prepareStatement(sql);
+            PreparedStatement ps = objetoConexion.establecerConexion().prepareStatement(sql);
             ps.setInt(1, idReparacion);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -735,7 +733,7 @@ public class metodoSQL {
     }
 
     public void mostrarTelefonosEmpleado(JTable paramTablaTelefonos, String cedulaEmpleado) {
-        CConexion objetoConexion = new CConexion();
+        CConexionG objetoConexion = new CConexionG();
         DefaultTableModel modelo = new DefaultTableModel();
         String sql = "";
 
@@ -749,7 +747,7 @@ public class metodoSQL {
         PreparedStatement ps;
 
         try {
-            ps = objetoConexion.establecerConexionG().prepareStatement(sql);
+            ps = objetoConexion.establecerConexion().prepareStatement(sql);
             ps.setString(1, cedulaEmpleado);
             ResultSet rs = ps.executeQuery(); // Corregido
 
@@ -767,13 +765,13 @@ public class metodoSQL {
     }
 
     public void actualizarDireccionCliente(String cedulaCliente, String nuevaDir) {
-        CConexion objetoConexion = new CConexion();
+        CConexionG objetoConexion = new CConexionG();
 
         // La consulta SQL para actualizar la dirección de un cliente existente
         String sql = "UPDATE Vista_Cliente_Guayaquil SET direccion_cliente = ? WHERE cedula_cliente = ?";
 
         try {
-            CallableStatement cs = objetoConexion.establecerConexionG().prepareCall(sql);
+            CallableStatement cs = objetoConexion.establecerConexion().prepareCall(sql);
             // Establecer el valor del parámetro para la dirección y la cédula del cliente
             cs.setString(1, nuevaDir); // Nueva dirección
             cs.setString(2, cedulaCliente); // Cédula para identificar al cliente
@@ -791,11 +789,11 @@ public class metodoSQL {
     }
 
     public void actualizarDireccionEmpleado(String cedulaEmp, String nuevaDireccion) {
-        CConexion objetoConexion = new CConexion();
+        CConexionG objetoConexion = new CConexionG();
         String sql = "UPDATE Vista_Empleado_Guayaquil SET dir_empleado = ? WHERE cedula_emp = ?";
 
         try {
-            PreparedStatement ps = objetoConexion.establecerConexionG().prepareStatement(sql);
+            PreparedStatement ps = objetoConexion.establecerConexion().prepareStatement(sql);
             ps.setString(1, nuevaDireccion);
             ps.setString(2, cedulaEmp);
             int affectedRows = ps.executeUpdate();
@@ -810,11 +808,11 @@ public class metodoSQL {
     }
 
     public void actualizarObservacionesReparacion(int idReparacion, String nuevasObservaciones) {
-        CConexion objetoConexion = new CConexion();
+        CConexionG objetoConexion = new CConexionG();
         String sql = "UPDATE Vista_Reparacion_Guayaquil SET observaciones = ? WHERE id_reparacion = ?";
 
         try {
-            PreparedStatement ps = objetoConexion.establecerConexionG().prepareStatement(sql);
+            PreparedStatement ps = objetoConexion.establecerConexion().prepareStatement(sql);
             ps.setString(1, nuevasObservaciones);
             ps.setInt(2, idReparacion);
             int affectedRows = ps.executeUpdate();
@@ -829,11 +827,11 @@ public class metodoSQL {
     }
 
     public void actualizarNomPieza(int idPieza, String nuevoNomPieza) {
-        CConexion objetoConexion = new CConexion();
+        CConexionG objetoConexion = new CConexionG();
         String sql = "UPDATE Vista_Pieza_Guayaquil SET nom_pieza = ? WHERE id_pieza = ?";
 
         try {
-            PreparedStatement ps = objetoConexion.establecerConexionG().prepareStatement(sql);
+            PreparedStatement ps = objetoConexion.establecerConexion().prepareStatement(sql);
             ps.setString(1, nuevoNomPieza);
             ps.setInt(2, idPieza);
             int affectedRows = ps.executeUpdate();
@@ -848,14 +846,14 @@ public class metodoSQL {
     }
 
     public void eliminarCliente(String cedulaCliente) {
-        CConexion objetoConexion = new CConexion();
+        CConexionG objetoConexion = new CConexionG();
 
         // La consulta SQL para eliminar un cliente específico por su cédula
         String sql = "DELETE FROM Vista_Cliente_Guayaquil WHERE cedula_cliente = ?";
 
         try {
             // Preparar la consulta SQL para ejecución
-            PreparedStatement ps = objetoConexion.establecerConexionG().prepareStatement(sql);
+            PreparedStatement ps = objetoConexion.establecerConexion().prepareStatement(sql);
 
             // Establecer los valores de los parámetros en la consulta preparada
             ps.setString(1, cedulaCliente);
@@ -875,14 +873,14 @@ public class metodoSQL {
     }
 
     public void eliminarVehiculo(String matricula) {
-        CConexion objetoConexion = new CConexion();
+        CConexionG objetoConexion = new CConexionG();
 
         // La consulta SQL para eliminar un cliente específico por su cédula
         String sql = "DELETE FROM Vista_Vehiculo_Guayaquil WHERE matricula = ?";
 
         try {
             // Preparar la consulta SQL para ejecución
-            PreparedStatement ps = objetoConexion.establecerConexionG().prepareStatement(sql);
+            PreparedStatement ps = objetoConexion.establecerConexion().prepareStatement(sql);
 
             // Establecer los valores de los parámetros en la consulta preparada
             ps.setString(1, matricula);
@@ -902,11 +900,11 @@ public class metodoSQL {
     }
 
     public void eliminarEmpleado(String cedulaEmp) {
-        CConexion objetoConexion = new CConexion();
+        CConexionG objetoConexion = new CConexionG();
         String sql = "DELETE FROM Vista_Empleado_Guayaquil WHERE cedula_emp = ?";
 
         try {
-            PreparedStatement ps = objetoConexion.establecerConexionG().prepareStatement(sql);
+            PreparedStatement ps = objetoConexion.establecerConexion().prepareStatement(sql);
             ps.setString(1, cedulaEmp);
             int affectedRows = ps.executeUpdate();
             if (affectedRows > 0) {
@@ -920,11 +918,11 @@ public class metodoSQL {
     }
 
     public void eliminarTelefonoEmpleado(int idTelefono, String numTelefono) {
-        CConexion objetoConexion = new CConexion();
+        CConexionG objetoConexion = new CConexionG();
         String sql = "DELETE FROM Telefono_Guayaquil WHERE id_telefono = ? AND num_telefono = ?";
 
         try {
-            PreparedStatement ps = objetoConexion.establecerConexionG().prepareStatement(sql);
+            PreparedStatement ps = objetoConexion.establecerConexion().prepareStatement(sql);
             ps.setInt(1, idTelefono);
             ps.setString(2, numTelefono);
             int affectedRows = ps.executeUpdate();
@@ -939,11 +937,11 @@ public class metodoSQL {
     }
 
     public void eliminarReparacion(int idReparacion) {
-        CConexion objetoConexion = new CConexion();
+        CConexionG objetoConexion = new CConexionG();
         String sql = "DELETE FROM Vista_Reparacion_Guayaquil WHERE id_reparacion = ?";
 
         try {
-            PreparedStatement ps = objetoConexion.establecerConexionG().prepareStatement(sql);
+            PreparedStatement ps = objetoConexion.establecerConexion().prepareStatement(sql);
             ps.setInt(1, idReparacion);
             int affectedRows = ps.executeUpdate();
             if (affectedRows > 0) {
@@ -957,11 +955,11 @@ public class metodoSQL {
     }
 
     public void eliminarPieza(int idPieza) {
-        CConexion objetoConexion = new CConexion();
+        CConexionG objetoConexion = new CConexionG();
         String sql = "DELETE FROM Vista_Pieza_Guayaquil WHERE id_pieza = ?";
 
         try {
-            PreparedStatement ps = objetoConexion.establecerConexionG().prepareStatement(sql);
+            PreparedStatement ps = objetoConexion.establecerConexion().prepareStatement(sql);
             ps.setInt(1, idPieza);
             int affectedRows = ps.executeUpdate();
             if (affectedRows > 0) {
