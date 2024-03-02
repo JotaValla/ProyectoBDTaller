@@ -183,6 +183,44 @@ public class metodoSQL {
         }
     }
 
+    public void mostrarEmpleadoPorNroCedula(JTable parmTabEmp, String ceduEmp) {
+        CConexion objetoConexion = new CConexion();
+        DefaultTableModel modelo = new DefaultTableModel();
+        String sql = "";
+
+        modelo.addColumn("Cédula");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Fecha de contrato");
+        modelo.addColumn("Salario");
+        modelo.addColumn("Dirección");
+
+        parmTabEmp.setModel(modelo);
+
+        // Modificar la consulta SQL para buscar por id_cliente
+        sql = "select cedula_emp, nom_empleado, fecha_contrato, salario, dir_empleado from Vista_Empleado_Guayaquil WHERE cedula_emp = ?";
+
+        String[] datos = new String[5];
+        PreparedStatement ps;
+
+        try {
+            ps = objetoConexion.establecerConexionG().prepareStatement(sql);
+            ps.setString(1, ceduEmp);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                datos[0] = rs.getString(1);
+                datos[1] = rs.getString(2);
+                datos[2] = rs.getDate(3).toString();
+                datos[3] = rs.getBigDecimal(4).toPlainString();
+                datos[4] = rs.getString(5);
+                modelo.addRow(datos);
+            }
+            parmTabEmp.setModel(modelo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se mostraron los registros");
+        }
+    }
+
     public void mostrarTelefonoEmp(JTable paramTelfEmp) {
         CConexion objetoConexion = new CConexion();
         DefaultTableModel modelo = new DefaultTableModel();
@@ -558,25 +596,32 @@ public class metodoSQL {
     public void mostrarTelefonosEmpleado(JTable paramTablaTelefonos, String cedulaEmpleado) {
         CConexion objetoConexion = new CConexion();
         DefaultTableModel modelo = new DefaultTableModel();
-        String sql = "SELECT id_telefono, num_telefono FROM Vista_Telefono_Guayaquil WHERE cedula_empleado = ?";
-        modelo.addColumn("ID Teléfono");
-        modelo.addColumn("Número de Teléfono");
+        String sql = "";
+
+        modelo.addColumn("Id");
+        modelo.addColumn("Número");
+        modelo.addColumn("Cédula");
 
         paramTablaTelefonos.setModel(modelo);
-        String[] datos = new String[2];
+        sql = "select id_telefono, num_telefono, cedula_empleado from Vista_Telefono_Guayaquil WHERE cedula_empleado = ?";
+        String[] datos = new String[3]; // Ajustado a la cantidad de columnas que realmente usas
+        PreparedStatement ps;
 
         try {
-            PreparedStatement ps = objetoConexion.establecerConexionG().prepareStatement(sql);
+            ps = objetoConexion.establecerConexionG().prepareStatement(sql);
             ps.setString(1, cedulaEmpleado);
-            ResultSet rs = ps.executeQuery();
+            ResultSet rs = ps.executeQuery(); // Corregido
+
             while (rs.next()) {
-                datos[0] = String.valueOf(rs.getInt("id_telefono"));
-                datos[1] = rs.getString("num_telefono");
+                datos[0] = String.valueOf(rs.getInt(1));
+                datos[1] = rs.getString(2);
+                datos[2] = rs.getString(3);
                 modelo.addRow(datos);
             }
             paramTablaTelefonos.setModel(modelo);
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al mostrar los teléfonos: " + e.getMessage());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se mostraron los registros");
+            System.out.println(e);
         }
     }
 

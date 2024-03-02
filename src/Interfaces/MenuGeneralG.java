@@ -16,6 +16,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
     Cliente cliAggSelect, clienteToVinc;
     Empleado empToVinc, empAggSelect;
     Vehiculo vehiAggSelect;
+    String idTelfToDel;
 
     public MenuGeneralG() {
         initComponents();
@@ -30,6 +31,8 @@ public class MenuGeneralG extends javax.swing.JFrame {
         metodos.mostrarPieza(jTPiezaVis);
         metodos.mostrarClientes(jTCliElim);
         metodos.mostrarVehiculos(jTVehiculoElim);
+        metodos.mostrarEmpleados(jTEmpVis1);
+        metodos.mostrarTelefonoEmp(JTTelfEmpVis1);
         //Se oculta para vincular despues si se desa
         btnRegisNuevoVehi.setVisible(false);
 
@@ -52,7 +55,6 @@ public class MenuGeneralG extends javax.swing.JFrame {
                 // Reemplaza 'INDEX_DE_LA_PESTAÑA_DE_VISUALIZACION' con el índice de la pestaña donde se visualizan los clientes.
                 if (jTPEmpleado.getSelectedIndex() == 1) {
                     metodos.mostrarEmpleados(jTEmpVis);
-                    metodos.mostrarTelefonoEmp(JTTelfEmpVis);
                 }
             }
         });
@@ -192,26 +194,26 @@ public class MenuGeneralG extends javax.swing.JFrame {
         JTTelfEmpVis = new javax.swing.JTable();
         jPanel24 = new javax.swing.JPanel();
         jLabel34 = new javax.swing.JLabel();
-        txtNomEmpAgg1 = new javax.swing.JTextField();
+        txtNomEmpBus = new javax.swing.JTextField();
         jLabel37 = new javax.swing.JLabel();
-        txtSalarioAgg1 = new javax.swing.JTextField();
+        txtSalarioBus = new javax.swing.JTextField();
         jLabel38 = new javax.swing.JLabel();
-        txtCeduEmpAgg1 = new javax.swing.JTextField();
+        txtCeduEmpBus = new javax.swing.JTextField();
         jLabel39 = new javax.swing.JLabel();
-        jDCFechaContratoEmpAgg1 = new com.toedter.calendar.JDateChooser();
+        jDCFechaContratoEmpBus = new com.toedter.calendar.JDateChooser();
         jLabel40 = new javax.swing.JLabel();
         jScrollPane19 = new javax.swing.JScrollPane();
-        jTADirEmpAgg1 = new javax.swing.JTextArea();
+        jTADirEmpBus = new javax.swing.JTextArea();
         btnBuscEmp = new javax.swing.JButton();
         jLabel41 = new javax.swing.JLabel();
         txtIDEmpBusc = new javax.swing.JTextField();
         btnActEmp = new javax.swing.JButton();
+        btnLimpDatosEmp = new javax.swing.JButton();
         jPanel25 = new javax.swing.JPanel();
         jLabel42 = new javax.swing.JLabel();
         txtNumTelfEmpAgg2 = new javax.swing.JTextField();
         jLabel43 = new javax.swing.JLabel();
         txtIDEmpAggTelf1 = new javax.swing.JTextField();
-        btnActTelfEmp = new javax.swing.JButton();
         jPanel20 = new javax.swing.JPanel();
         jPanel26 = new javax.swing.JPanel();
         jLabel44 = new javax.swing.JLabel();
@@ -229,6 +231,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
         jLabel49 = new javax.swing.JLabel();
         txtIDEmpBusc1 = new javax.swing.JTextField();
         btnEliminarEmp = new javax.swing.JButton();
+        btnLimpDatosEmp1 = new javax.swing.JButton();
         jScrollPane21 = new javax.swing.JScrollPane();
         jTEmpVis1 = new javax.swing.JTable();
         jPanel27 = new javax.swing.JPanel();
@@ -1410,6 +1413,11 @@ public class MenuGeneralG extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        jTEmpVis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTEmpVisMouseClicked(evt);
+            }
+        });
         jScrollPane17.setViewportView(jTEmpVis);
 
         JTTelfEmpVis.setModel(new javax.swing.table.DefaultTableModel(
@@ -1431,29 +1439,57 @@ public class MenuGeneralG extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        JTTelfEmpVis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JTTelfEmpVisMouseClicked(evt);
+            }
+        });
         jScrollPane18.setViewportView(JTTelfEmpVis);
 
         jPanel24.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos del empleado"));
 
         jLabel34.setText("Nombres y apellidos:");
 
+        txtNomEmpBus.setEditable(false);
+
         jLabel37.setText("Salario:");
 
+        txtSalarioBus.setEditable(false);
+
         jLabel38.setText("Número de cédula:");
+
+        txtCeduEmpBus.setEditable(false);
 
         jLabel39.setText("Fecha de contrato:");
 
         jLabel40.setText("Dirección de domicillio:");
 
-        jTADirEmpAgg1.setColumns(20);
-        jTADirEmpAgg1.setRows(5);
-        jScrollPane19.setViewportView(jTADirEmpAgg1);
+        jTADirEmpBus.setColumns(20);
+        jTADirEmpBus.setRows(5);
+        jScrollPane19.setViewportView(jTADirEmpBus);
 
         btnBuscEmp.setText("Buscar empleado");
+        btnBuscEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscEmpActionPerformed(evt);
+            }
+        });
 
         jLabel41.setText("Ingrese el número de cédula del empleado a buscar:");
 
         btnActEmp.setText("Actualizar datos del empleado");
+        btnActEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActEmpActionPerformed(evt);
+            }
+        });
+
+        btnLimpDatosEmp.setText("Limpiar datos");
+        btnLimpDatosEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpDatosEmpActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
         jPanel24.setLayout(jPanel24Layout);
@@ -1463,38 +1499,38 @@ public class MenuGeneralG extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel24Layout.createSequentialGroup()
+                        .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtIDEmpBusc, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                        .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jDCFechaContratoEmpBus, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
+                            .addGroup(jPanel24Layout.createSequentialGroup()
+                                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel24Layout.createSequentialGroup()
+                                        .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtSalarioBus, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel24Layout.createSequentialGroup()
+                                        .addGap(21, 21, 21)
+                                        .addComponent(btnBuscEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(20, 20, 20))
+                    .addGroup(jPanel24Layout.createSequentialGroup()
                         .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel34, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel40, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNomEmpAgg1)
-                            .addComponent(txtCeduEmpAgg1)
-                            .addComponent(jScrollPane19, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)))
-                    .addGroup(jPanel24Layout.createSequentialGroup()
-                        .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtIDEmpBusc, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jDCFechaContratoEmpAgg1, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
-                    .addGroup(jPanel24Layout.createSequentialGroup()
-                        .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel24Layout.createSequentialGroup()
-                                .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtSalarioAgg1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel24Layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(btnBuscEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(20, 20, 20))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel24Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnActEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(197, 197, 197))
+                            .addComponent(btnActEmp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtNomEmpBus)
+                            .addComponent(txtCeduEmpBus)
+                            .addComponent(jScrollPane19, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLimpDatosEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel24Layout.setVerticalGroup(
             jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1504,26 +1540,28 @@ public class MenuGeneralG extends javax.swing.JFrame {
                     .addComponent(jLabel41)
                     .addComponent(txtIDEmpBusc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscEmp))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel34)
-                    .addComponent(txtNomEmpAgg1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNomEmpBus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel37)
-                    .addComponent(txtSalarioAgg1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSalarioBus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel38)
-                        .addComponent(txtCeduEmpAgg1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtCeduEmpBus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel39, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel40)
                     .addComponent(jScrollPane19, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDCFechaContratoEmpAgg1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btnActEmp)
-                .addGap(14, 14, 14))
+                    .addComponent(jDCFechaContratoEmpBus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnActEmp)
+                    .addComponent(btnLimpDatosEmp))
+                .addGap(20, 20, 20))
         );
 
         jPanel25.setBorder(javax.swing.BorderFactory.createTitledBorder("Actualizar telefono al empleado"));
@@ -1532,24 +1570,17 @@ public class MenuGeneralG extends javax.swing.JFrame {
 
         jLabel43.setText("Cédula del empleado seleccionado");
 
-        btnActTelfEmp.setText("Actualizar teléfono del empleado");
-
         javax.swing.GroupLayout jPanel25Layout = new javax.swing.GroupLayout(jPanel25);
         jPanel25.setLayout(jPanel25Layout);
         jPanel25Layout.setHorizontalGroup(
             jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel25Layout.createSequentialGroup()
-                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel25Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtIDEmpAggTelf1, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
-                            .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNumTelfEmpAgg2)))
-                    .addGroup(jPanel25Layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(btnActTelfEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtIDEmpAggTelf1, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
+                    .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNumTelfEmpAgg2))
                 .addContainerGap(58, Short.MAX_VALUE))
         );
         jPanel25Layout.setVerticalGroup(
@@ -1559,13 +1590,11 @@ public class MenuGeneralG extends javax.swing.JFrame {
                 .addComponent(jLabel43)
                 .addGap(10, 10, 10)
                 .addComponent(txtIDEmpAggTelf1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel42)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtNumTelfEmpAgg2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnActTelfEmp)
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addComponent(jLabel42)
+                .addGap(18, 18, 18)
+                .addComponent(txtNumTelfEmpAgg2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
@@ -1580,24 +1609,31 @@ public class MenuGeneralG extends javax.swing.JFrame {
                     .addGroup(jPanel19Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane17, javax.swing.GroupLayout.PREFERRED_SIZE, 1040, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane18, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel19Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel19Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane18, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         jPanel19Layout.setVerticalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel19Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel25, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane18, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane17, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26))
+                    .addGroup(jPanel19Layout.createSequentialGroup()
+                        .addComponent(jPanel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane17, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26))
+                    .addGroup(jPanel19Layout.createSequentialGroup()
+                        .addComponent(jPanel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane18, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         jTPEmpleado.addTab("Visualizar y Actualizar", jPanel19);
@@ -1619,10 +1655,27 @@ public class MenuGeneralG extends javax.swing.JFrame {
         jScrollPane20.setViewportView(jTADirEmpAgg2);
 
         btnElimEmp.setText("Buscar empleado");
+        btnElimEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnElimEmpActionPerformed(evt);
+            }
+        });
 
         jLabel49.setText("Ingrese el número de cédula del empleado a eliminar:");
 
         btnEliminarEmp.setText("Eliminar empleado");
+        btnEliminarEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarEmpActionPerformed(evt);
+            }
+        });
+
+        btnLimpDatosEmp1.setText("Limpiar datos");
+        btnLimpDatosEmp1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpDatosEmp1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel26Layout = new javax.swing.GroupLayout(jPanel26);
         jPanel26.setLayout(jPanel26Layout);
@@ -1663,7 +1716,9 @@ public class MenuGeneralG extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel26Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnEliminarEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(238, 238, 238))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnLimpDatosEmp1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(107, 107, 107))
         );
         jPanel26Layout.setVerticalGroup(
             jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1691,7 +1746,9 @@ public class MenuGeneralG extends javax.swing.JFrame {
                     .addComponent(jScrollPane20, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jDCFechaContratoEmpAgg2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btnEliminarEmp)
+                .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEliminarEmp)
+                    .addComponent(btnLimpDatosEmp1))
                 .addGap(19, 19, 19))
         );
 
@@ -1715,6 +1772,11 @@ public class MenuGeneralG extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        jTEmpVis1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTEmpVis1MouseClicked(evt);
+            }
+        });
         jScrollPane21.setViewportView(jTEmpVis1);
 
         jPanel27.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos de contacto del empleado"));
@@ -1724,6 +1786,11 @@ public class MenuGeneralG extends javax.swing.JFrame {
         jLabel51.setText("ID del empleado seleccionado:");
 
         btnElimTelfEmp.setText("Eliminar teléfono del empleado");
+        btnElimTelfEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnElimTelfEmpActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel27Layout = new javax.swing.GroupLayout(jPanel27);
         jPanel27.setLayout(jPanel27Layout);
@@ -1776,6 +1843,11 @@ public class MenuGeneralG extends javax.swing.JFrame {
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+        });
+        JTTelfEmpVis1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JTTelfEmpVis1MouseClicked(evt);
             }
         });
         jScrollPane22.setViewportView(JTTelfEmpVis1);
@@ -2712,6 +2784,124 @@ public class MenuGeneralG extends javax.swing.JFrame {
         metodos.mostrarTelefonoEmp(JTTelfEmpAgg);
     }//GEN-LAST:event_btnAddNuevoTelfEmpActionPerformed
 
+    private void btnBuscEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscEmpActionPerformed
+        metodos.mostrarEmpleadoPorNroCedula(jTEmpVis, txtIDEmpBusc.getText());
+        metodos.mostrarTelefonosEmpleado(JTTelfEmpVis, txtIDEmpBusc.getText());
+    }//GEN-LAST:event_btnBuscEmpActionPerformed
+
+    private void jTEmpVisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTEmpVisMouseClicked
+        int filaSeleccionada = jTEmpVis.getSelectedRow();
+        if (filaSeleccionada >= 0) {
+            String cedulaEmp = jTEmpVis.getValueAt(filaSeleccionada, 0).toString();
+            metodoSQL metodos = new metodoSQL();
+            empAggSelect = metodos.obtenerEmpleadoPorCedula(cedulaEmp);
+            txtIDEmpBusc.setText(cedulaEmp);
+            txtNomEmpBus.setText(empAggSelect.getNombre());
+            txtCeduEmpBus.setText(empAggSelect.getCedula());
+            jTADirEmpBus.setText(empAggSelect.getDireccion());
+            txtSalarioBus.setText(String.valueOf(empAggSelect.getSalario()));
+            jDCFechaContratoEmpBus.setDate(empAggSelect.getFechaContrato());
+        }
+    }//GEN-LAST:event_jTEmpVisMouseClicked
+
+    private void btnLimpDatosEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpDatosEmpActionPerformed
+        txtIDEmpBusc.setText("");
+        metodos.mostrarEmpleados(jTEmpVis);
+        metodos.mostrarTelefonoEmp(JTTelfEmpVis);
+        limpiarDatosEmpBus();
+        txtIDEmpAggTelf1.setText("");
+        txtNumTelfEmpAgg2.setText("");
+    }//GEN-LAST:event_btnLimpDatosEmpActionPerformed
+
+    private void btnActEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActEmpActionPerformed
+        metodos.actualizarDireccionEmpleado(empAggSelect.getCedula(), jTADirEmpBus.getText());
+        limpiarDatosEmpBus();
+    }//GEN-LAST:event_btnActEmpActionPerformed
+
+    private void JTTelfEmpVisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTTelfEmpVisMouseClicked
+        int filaSeleccionada = JTTelfEmpVis.getSelectedRow();
+        if (filaSeleccionada >= 0) {
+            String numTelf = JTTelfEmpVis.getValueAt(filaSeleccionada, 1).toString();
+            String numCedu = JTTelfEmpVis.getValueAt(filaSeleccionada, 2).toString();
+            txtIDEmpAggTelf1.setText(numCedu);
+            txtNumTelfEmpAgg2.setText(numTelf);
+        }
+    }//GEN-LAST:event_JTTelfEmpVisMouseClicked
+
+    private void jTEmpVis1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTEmpVis1MouseClicked
+        int filaSeleccionada = jTEmpVis1.getSelectedRow();
+        if (filaSeleccionada >= 0) {
+            String cedulaEmp = jTEmpVis1.getValueAt(filaSeleccionada, 0).toString();
+            metodoSQL metodos = new metodoSQL();
+            empAggSelect = metodos.obtenerEmpleadoPorCedula(cedulaEmp);
+            txtIDEmpBusc1.setText(cedulaEmp);
+            txtNomEmpAgg2.setText(empAggSelect.getNombre());
+            txtCeduEmpAgg2.setText(empAggSelect.getCedula());
+            jTADirEmpAgg2.setText(empAggSelect.getDireccion());
+            txtSalarioAgg2.setText(String.valueOf(empAggSelect.getSalario()));
+            jDCFechaContratoEmpAgg2.setDate(empAggSelect.getFechaContrato());
+            txtIDEmpAggTelf2.setText(cedulaEmp);
+        }
+    }//GEN-LAST:event_jTEmpVis1MouseClicked
+
+    private void btnElimEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElimEmpActionPerformed
+        metodos.mostrarEmpleadoPorNroCedula(jTEmpVis1, txtIDEmpBusc1.getText());
+        txtIDEmpAggTelf2.setText(txtIDEmpBusc1.getText());
+        metodos.mostrarTelefonosEmpleado(JTTelfEmpVis1, txtIDEmpBusc1.getText());
+    }//GEN-LAST:event_btnElimEmpActionPerformed
+
+    private void btnEliminarEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarEmpActionPerformed
+        // Mostrar un cuadro de diálogo de confirmación antes de eliminar
+        int confirmacion = JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar al empleado?\nTen en cuenta que eliminara sus datos de telefono.", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+
+        // Verificar si el usuario seleccionó "Sí" (YES_OPTION)
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            // Si el usuario confirma, proceder a eliminar el cliente
+            metodos.eliminarEmpleado(empAggSelect.getCedula());
+            metodos.mostrarEmpleados(jTEmpVis1);
+            limpiarDatosEmpElim();
+        } else {
+            // Si el usuario no confirma, no hacer nada (o realizar alguna otra acción deseada)
+            JOptionPane.showMessageDialog(null, "Eliminación cancelada.");
+        }
+    }//GEN-LAST:event_btnEliminarEmpActionPerformed
+
+    private void JTTelfEmpVis1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTTelfEmpVis1MouseClicked
+        int filaSeleccionada = JTTelfEmpVis1.getSelectedRow();
+        if (filaSeleccionada >= 0) {
+            String numTelf = JTTelfEmpVis1.getValueAt(filaSeleccionada, 1).toString();
+            String numCedu = JTTelfEmpVis1.getValueAt(filaSeleccionada, 2).toString();
+            idTelfToDel = JTTelfEmpVis1.getValueAt(filaSeleccionada, 0).toString();
+            txtIDEmpAggTelf2.setText(numCedu);
+            txtNumTelfEmpAgg3.setText(numTelf);
+        }
+    }//GEN-LAST:event_JTTelfEmpVis1MouseClicked
+
+    private void btnElimTelfEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElimTelfEmpActionPerformed
+        // Mostrar un cuadro de diálogo de confirmación antes de eliminar
+        int confirmacion = JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar al telefono del empleado?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+
+        // Verificar si el usuario seleccionó "Sí" (YES_OPTION)
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            // Si el usuario confirma, proceder a eliminar el cliente
+            metodos.eliminarTelefonoEmpleado(Integer.valueOf(idTelfToDel), txtNumTelfEmpAgg3.getText());
+            metodos.mostrarTelefonoEmp(JTTelfEmpVis1);
+            txtIDEmpAggTelf2.setText("");
+            txtNumTelfEmpAgg3.setText("");
+        } else {
+            // Si el usuario no confirma, no hacer nada (o realizar alguna otra acción deseada)
+            JOptionPane.showMessageDialog(null, "Eliminación cancelada.");
+        }
+    }//GEN-LAST:event_btnElimTelfEmpActionPerformed
+
+    private void btnLimpDatosEmp1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpDatosEmp1ActionPerformed
+        metodos.mostrarEmpleados(jTEmpVis1);
+        metodos.mostrarTelefonoEmp(JTTelfEmpVis1);
+        txtIDEmpAggTelf2.setText("");
+        txtNumTelfEmpAgg3.setText("");
+        limpiarDatosEmpElim();
+    }//GEN-LAST:event_btnLimpDatosEmp1ActionPerformed
+
     public void limpiarDatosClienteAgg() {
         txtCeduCliAgg.setText("");
         txtNomClienteAgg.setText("");
@@ -2762,6 +2952,24 @@ public class MenuGeneralG extends javax.swing.JFrame {
         txtNumTelfEmpAgg.setText("");
     }
 
+    public void limpiarDatosEmpBus() {
+        txtIDEmpBusc.setText("");
+        txtNomEmpBus.setText("");
+        txtCeduEmpBus.setText("");
+        jTADirEmpBus.setText("");
+        txtSalarioBus.setText("");
+        jDCFechaContratoEmpBus.setDate(null);
+    }
+
+    public void limpiarDatosEmpElim() {
+        txtIDEmpBusc1.setText("");
+        txtNomEmpAgg2.setText("");
+        txtCeduEmpAgg2.setText("");
+        jTADirEmpAgg2.setText("");
+        txtSalarioAgg2.setText("");
+        jDCFechaContratoEmpAgg2.setDate(null);
+    }
+
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -2802,7 +3010,6 @@ public class MenuGeneralG extends javax.swing.JFrame {
     private javax.swing.JButton btnActEmp;
     private javax.swing.JButton btnActPieza;
     private javax.swing.JButton btnActPieza1;
-    private javax.swing.JButton btnActTelfEmp;
     private javax.swing.JButton btnActualizarDatosCli;
     private javax.swing.JButton btnAddNuevoTelfEmp;
     private javax.swing.JButton btnAddTelfEmp;
@@ -2828,14 +3035,16 @@ public class MenuGeneralG extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminarCli;
     private javax.swing.JButton btnEliminarEmp;
     private javax.swing.JButton btnLimpDatos;
+    private javax.swing.JButton btnLimpDatosEmp;
+    private javax.swing.JButton btnLimpDatosEmp1;
     private javax.swing.JButton btnRegisNuevoVehi;
     private javax.swing.JButton btnVincNuevoVehiculo;
     private com.toedter.calendar.JDateChooser jDCFechaCompraBus;
     private com.toedter.calendar.JDateChooser jDCFechaCompraDel;
     private com.toedter.calendar.JDateChooser jDCFechaCompraVehiAgg;
     private com.toedter.calendar.JDateChooser jDCFechaContratoEmpAgg;
-    private com.toedter.calendar.JDateChooser jDCFechaContratoEmpAgg1;
     private com.toedter.calendar.JDateChooser jDCFechaContratoEmpAgg2;
+    private com.toedter.calendar.JDateChooser jDCFechaContratoEmpBus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2969,8 +3178,8 @@ public class MenuGeneralG extends javax.swing.JFrame {
     private javax.swing.JTextArea jTADirCliAgg;
     private javax.swing.JTextArea jTADirCliBus;
     private javax.swing.JTextArea jTADirEmpAgg;
-    private javax.swing.JTextArea jTADirEmpAgg1;
     private javax.swing.JTextArea jTADirEmpAgg2;
+    private javax.swing.JTextArea jTADirEmpBus;
     private javax.swing.JTextArea jTAObserReparaAgg;
     private javax.swing.JTextArea jTAObserReparaAgg1;
     private javax.swing.JTextArea jTAObserReparaAgg2;
@@ -2999,8 +3208,8 @@ public class MenuGeneralG extends javax.swing.JFrame {
     private javax.swing.JTextField txtApelliCliAgg;
     private javax.swing.JTextField txtCeduCliAgg;
     private javax.swing.JTextField txtCeduEmpAgg;
-    private javax.swing.JTextField txtCeduEmpAgg1;
     private javax.swing.JTextField txtCeduEmpAgg2;
+    private javax.swing.JTextField txtCeduEmpBus;
     private javax.swing.JTextField txtCeduVehiToAdd;
     private javax.swing.JTextField txtCedulaCliElim;
     private javax.swing.JTextField txtCedulaClieBus;
@@ -3027,8 +3236,8 @@ public class MenuGeneralG extends javax.swing.JFrame {
     private javax.swing.JTextField txtNomCliElim;
     private javax.swing.JTextField txtNomClienteAgg;
     private javax.swing.JTextField txtNomEmpAgg;
-    private javax.swing.JTextField txtNomEmpAgg1;
     private javax.swing.JTextField txtNomEmpAgg2;
+    private javax.swing.JTextField txtNomEmpBus;
     private javax.swing.JTextField txtNumMatrReparaAgg;
     private javax.swing.JTextField txtNumMatrReparaAgg1;
     private javax.swing.JTextField txtNumMatrReparaAgg2;
@@ -3043,8 +3252,8 @@ public class MenuGeneralG extends javax.swing.JFrame {
     private javax.swing.JTextField txtPrecioRepaAgg1;
     private javax.swing.JTextField txtPrecioRepaAgg2;
     private javax.swing.JTextField txtSalarioAgg;
-    private javax.swing.JTextField txtSalarioAgg1;
     private javax.swing.JTextField txtSalarioAgg2;
+    private javax.swing.JTextField txtSalarioBus;
     private javax.swing.JTextField txtTipoRepaAgg;
     private javax.swing.JTextField txtTipoRepaAgg1;
     private javax.swing.JTextField txtTipoRepaAgg2;
