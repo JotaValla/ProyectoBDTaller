@@ -431,7 +431,7 @@
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
-                        <Component class="javax.swing.JTable" name="jTVehiculoAGG">
+                        <Component class="javax.swing.JTable" name="jTTelfAdd">
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                               <Table columnCount="3" rowCount="4">
@@ -442,7 +442,7 @@
                             </Property>
                           </Properties>
                           <Events>
-                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTVehiculoAGGMouseClicked"/>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTTelfAddMouseClicked"/>
                           </Events>
                         </Component>
                       </SubComponents>
@@ -713,7 +713,7 @@
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="txtApeCliBus" max="32767" attributes="0"/>
                                       </Group>
-                                      <Component id="btnMostrarActCli" pref="230" max="32767" attributes="0"/>
+                                      <Component id="btnActualizarDatosCli" pref="230" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
@@ -735,7 +735,7 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                                       <Component id="jScrollPane7" alignment="0" min="-2" pref="36" max="-2" attributes="0"/>
-                                      <Component id="btnMostrarActCli" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnActualizarDatosCli" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="56" max="32767" attributes="0"/>
                               </Group>
@@ -773,10 +773,13 @@
                             </Component>
                           </SubComponents>
                         </Container>
-                        <Component class="javax.swing.JButton" name="btnMostrarActCli">
+                        <Component class="javax.swing.JButton" name="btnActualizarDatosCli">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Actualizar datos"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnActualizarDatosCliActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel13">
                           <Properties>
@@ -1290,17 +1293,17 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jTabbedPane3" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jTPEmpleado" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jTabbedPane3" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jTPEmpleado" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Container class="javax.swing.JTabbedPane" name="jTabbedPane3">
+            <Container class="javax.swing.JTabbedPane" name="jTPEmpleado">
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
               <SubComponents>
@@ -1319,7 +1322,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jPanel21" max="32767" attributes="0"/>
+                                  <Component id="jPDatosEmpAgg" max="32767" attributes="0"/>
                                   <Component id="jScrollPane14" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
@@ -1336,7 +1339,7 @@
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jPanel21" max="32767" attributes="0"/>
+                                  <Component id="jPDatosEmpAgg" max="32767" attributes="0"/>
                                   <Component id="jPanel22" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -1369,10 +1372,13 @@
                               </Table>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTEmpAggMouseClicked"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>
-                    <Container class="javax.swing.JPanel" name="jPanel21">
+                    <Container class="javax.swing.JPanel" name="jPDatosEmpAgg">
                       <Properties>
                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -1405,7 +1411,7 @@
                                           </Group>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jDCFechaContratoEmpAgg" max="32767" attributes="0"/>
+                                              <Component id="jDCFechaContratoEmpAgg" pref="262" max="32767" attributes="0"/>
                                               <Component id="txtSalarioAgg" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
@@ -1413,10 +1419,12 @@
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace pref="356" max="32767" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="267" max="-2" attributes="0"/>
                                   <Component id="btnAggEmp" min="-2" pref="352" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="292" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="btnAddTelfEmp" min="-2" pref="232" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1445,7 +1453,10 @@
                                       <Component id="jScrollPane15" min="-2" pref="34" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="btnAggEmp" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="btnAggEmp" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnAddTelfEmp" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                                   <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -1504,6 +1515,17 @@
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Agregar empleado"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAggEmpActionPerformed"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="btnAddTelfEmp">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Agregar nuevo tel&#xe9;fono"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddTelfEmpActionPerformed"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -1547,12 +1569,15 @@
                                               <Component id="jLabel36" min="-2" pref="231" max="-2" attributes="0"/>
                                               <Component id="txtIDEmpAggTelf" pref="318" max="32767" attributes="0"/>
                                               <Component id="jLabel35" alignment="0" min="-2" pref="259" max="-2" attributes="0"/>
-                                              <Component id="txtNumTelfEmpAgg1" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="txtNumTelfEmpAgg" alignment="0" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                                          <Component id="btnAggTelfEmp" min="-2" pref="254" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="btnAggTelfEmp" pref="254" max="32767" attributes="0"/>
+                                              <Component id="btnAddNuevoTelfEmp" max="32767" attributes="0"/>
+                                          </Group>
                                       </Group>
                                   </Group>
                                   <EmptySpace pref="37" max="32767" attributes="0"/>
@@ -1569,10 +1594,12 @@
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="jLabel35" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="txtNumTelfEmpAgg1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtNumTelfEmpAgg" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="btnAggTelfEmp" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="39" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="btnAddNuevoTelfEmp" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="9" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1583,7 +1610,7 @@
                             <Property name="text" type="java.lang.String" value="Ingrese el n&#xfa;mero de tel&#xe9;fono del empleado:"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="txtNumTelfEmpAgg1">
+                        <Component class="javax.swing.JTextField" name="txtNumTelfEmpAgg">
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel36">
                           <Properties>
@@ -1591,11 +1618,25 @@
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JTextField" name="txtIDEmpAggTelf">
+                          <Properties>
+                            <Property name="editable" type="boolean" value="false"/>
+                          </Properties>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnAggTelfEmp">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Agregar tel&#xe9;fono al empleado"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAggTelfEmpActionPerformed"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="btnAddNuevoTelfEmp">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Agregar otro tel&#xe9;fono al empleado"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddNuevoTelfEmpActionPerformed"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>

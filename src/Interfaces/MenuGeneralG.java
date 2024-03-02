@@ -1,6 +1,7 @@
 package Interfaces;
 
 import Clases.Cliente;
+import Clases.Empleado;
 import Clases.Vehiculo;
 import ConexionBD.metodoSQL;
 import java.util.Date;
@@ -9,12 +10,13 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class MenuGeneralG extends javax.swing.JFrame {
-    
+
     Login login;
     metodoSQL metodos;
     Cliente cliAggSelect, clienteToVinc;
+    Empleado empToVinc, empAggSelect;
     Vehiculo vehiAggSelect;
-    
+
     public MenuGeneralG() {
         initComponents();
         setLocationRelativeTo(this);
@@ -33,8 +35,8 @@ public class MenuGeneralG extends javax.swing.JFrame {
 
         //Para que no de errores
         jTCliAgg.setEnabled(false);
-        jTVehiculoAGG.setEnabled(false);
-        
+        jTTelfAdd.setEnabled(false);
+
         jTPClienteVehiculo.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
                 // Reemplaza 'INDEX_DE_LA_PESTAÑA_DE_VISUALIZACION' con el índice de la pestaña donde se visualizan los clientes.
@@ -44,8 +46,18 @@ public class MenuGeneralG extends javax.swing.JFrame {
                 }
             }
         });
+
+        jTPEmpleado.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                // Reemplaza 'INDEX_DE_LA_PESTAÑA_DE_VISUALIZACION' con el índice de la pestaña donde se visualizan los clientes.
+                if (jTPEmpleado.getSelectedIndex() == 1) {
+                    metodos.mostrarEmpleados(jTEmpVis);
+                    metodos.mostrarTelefonoEmp(JTTelfEmpVis);
+                }
+            }
+        });
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -81,7 +93,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
         txtCeduVehiToAdd = new javax.swing.JTextField();
         btnRegisNuevoVehi = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTVehiculoAGG = new javax.swing.JTable();
+        jTTelfAdd = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTRegistroG = new javax.swing.JTable();
@@ -102,7 +114,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jScrollPane7 = new javax.swing.JScrollPane();
         jTADirCliBus = new javax.swing.JTextArea();
-        btnMostrarActCli = new javax.swing.JButton();
+        btnActualizarDatosCli = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         txtNomCliBus = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
@@ -146,11 +158,11 @@ public class MenuGeneralG extends javax.swing.JFrame {
         txtApeCliElim = new javax.swing.JTextField();
         btnEliminarCli = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jTabbedPane3 = new javax.swing.JTabbedPane();
+        jTPEmpleado = new javax.swing.JTabbedPane();
         jPanel18 = new javax.swing.JPanel();
         jScrollPane14 = new javax.swing.JScrollPane();
         jTEmpAgg = new javax.swing.JTable();
-        jPanel21 = new javax.swing.JPanel();
+        jPDatosEmpAgg = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
         txtNomEmpAgg = new javax.swing.JTextField();
         jLabel30 = new javax.swing.JLabel();
@@ -163,14 +175,16 @@ public class MenuGeneralG extends javax.swing.JFrame {
         jScrollPane15 = new javax.swing.JScrollPane();
         jTADirEmpAgg = new javax.swing.JTextArea();
         btnAggEmp = new javax.swing.JButton();
+        btnAddTelfEmp = new javax.swing.JButton();
         jScrollPane16 = new javax.swing.JScrollPane();
         JTTelfEmpAgg = new javax.swing.JTable();
         jPanel22 = new javax.swing.JPanel();
         jLabel35 = new javax.swing.JLabel();
-        txtNumTelfEmpAgg1 = new javax.swing.JTextField();
+        txtNumTelfEmpAgg = new javax.swing.JTextField();
         jLabel36 = new javax.swing.JLabel();
         txtIDEmpAggTelf = new javax.swing.JTextField();
         btnAggTelfEmp = new javax.swing.JButton();
+        btnAddNuevoTelfEmp = new javax.swing.JButton();
         jPanel19 = new javax.swing.JPanel();
         jScrollPane17 = new javax.swing.JScrollPane();
         jTEmpVis = new javax.swing.JTable();
@@ -506,7 +520,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTVehiculoAGG.setModel(new javax.swing.table.DefaultTableModel(
+        jTTelfAdd.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -525,12 +539,12 @@ public class MenuGeneralG extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jTVehiculoAGG.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTTelfAdd.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTVehiculoAGGMouseClicked(evt);
+                jTTelfAddMouseClicked(evt);
             }
         });
-        jScrollPane3.setViewportView(jTVehiculoAGG);
+        jScrollPane3.setViewportView(jTTelfAdd);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Tabla de registros del cliente con sus vehiculos"));
 
@@ -689,7 +703,12 @@ public class MenuGeneralG extends javax.swing.JFrame {
         jTADirCliBus.setRows(5);
         jScrollPane7.setViewportView(jTADirCliBus);
 
-        btnMostrarActCli.setText("Actualizar datos");
+        btnActualizarDatosCli.setText("Actualizar datos");
+        btnActualizarDatosCli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarDatosCliActionPerformed(evt);
+            }
+        });
 
         jLabel13.setText("Nombres:");
 
@@ -724,7 +743,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
                         .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtApeCliBus))
-                    .addComponent(btnMostrarActCli, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE))
+                    .addComponent(btnActualizarDatosCli, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
@@ -742,7 +761,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel12)
                     .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnMostrarActCli))
+                    .addComponent(btnActualizarDatosCli))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1162,9 +1181,14 @@ public class MenuGeneralG extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        jTEmpAgg.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTEmpAggMouseClicked(evt);
+            }
+        });
         jScrollPane14.setViewportView(jTEmpAgg);
 
-        jPanel21.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos del empleado"));
+        jPDatosEmpAgg.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos del empleado"));
 
         jLabel29.setText("Ingrese los nombres y apellidos del empleado:");
 
@@ -1181,60 +1205,76 @@ public class MenuGeneralG extends javax.swing.JFrame {
         jScrollPane15.setViewportView(jTADirEmpAgg);
 
         btnAggEmp.setText("Agregar empleado");
+        btnAggEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAggEmpActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
-        jPanel21.setLayout(jPanel21Layout);
-        jPanel21Layout.setHorizontalGroup(
-            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel21Layout.createSequentialGroup()
+        btnAddTelfEmp.setText("Agregar nuevo teléfono");
+        btnAddTelfEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddTelfEmpActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPDatosEmpAggLayout = new javax.swing.GroupLayout(jPDatosEmpAgg);
+        jPDatosEmpAgg.setLayout(jPDatosEmpAggLayout);
+        jPDatosEmpAggLayout.setHorizontalGroup(
+            jPDatosEmpAggLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPDatosEmpAggLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPDatosEmpAggLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel21Layout.createSequentialGroup()
-                        .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPDatosEmpAggLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPDatosEmpAggLayout.createSequentialGroup()
+                        .addGroup(jPDatosEmpAggLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtNomEmpAgg)
                             .addComponent(txtCeduEmpAgg, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPDatosEmpAggLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel30, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
                             .addComponent(jLabel32, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jDCFechaContratoEmpAgg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPDatosEmpAggLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jDCFechaContratoEmpAgg, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
                             .addComponent(txtSalarioAgg)))
                     .addComponent(jScrollPane15))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel21Layout.createSequentialGroup()
-                .addContainerGap(356, Short.MAX_VALUE)
+            .addGroup(jPDatosEmpAggLayout.createSequentialGroup()
+                .addGap(267, 267, 267)
                 .addComponent(btnAggEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(292, 292, 292))
+                .addGap(18, 18, 18)
+                .addComponent(btnAddTelfEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel21Layout.setVerticalGroup(
-            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel21Layout.createSequentialGroup()
+        jPDatosEmpAggLayout.setVerticalGroup(
+            jPDatosEmpAggLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPDatosEmpAggLayout.createSequentialGroup()
                 .addGap(11, 11, 11)
-                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPDatosEmpAggLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel29)
                     .addComponent(txtNomEmpAgg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel30)
                     .addComponent(txtSalarioAgg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPDatosEmpAggLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPDatosEmpAggLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel31)
                         .addComponent(txtCeduEmpAgg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel32))
                     .addComponent(jDCFechaContratoEmpAgg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPDatosEmpAggLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel33)
                     .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnAggEmp)
+                .addGroup(jPDatosEmpAggLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAggEmp)
+                    .addComponent(btnAddTelfEmp))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1265,7 +1305,21 @@ public class MenuGeneralG extends javax.swing.JFrame {
 
         jLabel36.setText("Cédula del empleado seleccionado:");
 
+        txtIDEmpAggTelf.setEditable(false);
+
         btnAggTelfEmp.setText("Agregar teléfono al empleado");
+        btnAggTelfEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAggTelfEmpActionPerformed(evt);
+            }
+        });
+
+        btnAddNuevoTelfEmp.setText("Agregar otro teléfono al empleado");
+        btnAddNuevoTelfEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddNuevoTelfEmpActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
         jPanel22.setLayout(jPanel22Layout);
@@ -1279,10 +1333,12 @@ public class MenuGeneralG extends javax.swing.JFrame {
                             .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtIDEmpAggTelf, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
                             .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNumTelfEmpAgg1)))
+                            .addComponent(txtNumTelfEmpAgg)))
                     .addGroup(jPanel22Layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(btnAggTelfEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(45, 45, 45)
+                        .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnAggTelfEmp, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+                            .addComponent(btnAddNuevoTelfEmp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         jPanel22Layout.setVerticalGroup(
@@ -1295,10 +1351,12 @@ public class MenuGeneralG extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel35)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtNumTelfEmpAgg1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNumTelfEmpAgg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnAggTelfEmp)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAddNuevoTelfEmp)
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
@@ -1308,7 +1366,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
             .addGroup(jPanel18Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPDatosEmpAgg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane14))
                 .addGap(31, 31, 31)
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -1321,7 +1379,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPDatosEmpAgg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -1330,7 +1388,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
                 .addGap(57, 57, 57))
         );
 
-        jTabbedPane3.addTab("Agregar", jPanel18);
+        jTPEmpleado.addTab("Agregar", jPanel18);
 
         jTEmpVis.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1542,7 +1600,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
                 .addGap(26, 26, 26))
         );
 
-        jTabbedPane3.addTab("Visualizar y Actualizar", jPanel19);
+        jTPEmpleado.addTab("Visualizar y Actualizar", jPanel19);
 
         jPanel26.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos del empleado"));
 
@@ -1754,17 +1812,17 @@ public class MenuGeneralG extends javax.swing.JFrame {
                 .addGap(26, 26, 26))
         );
 
-        jTabbedPane3.addTab("Eliminar", jPanel20);
+        jTPEmpleado.addTab("Eliminar", jPanel20);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane3)
+            .addComponent(jTPEmpleado)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane3)
+            .addComponent(jTPEmpleado)
         );
 
         jTabbedPane1.addTab("Empleados", jPanel2);
@@ -2411,10 +2469,10 @@ public class MenuGeneralG extends javax.swing.JFrame {
         Date fechaCompra = jDCFechaCompraVehiAgg.getDate();
         Vehiculo vehiculo = new Vehiculo(matricula, modelo, fechaCompra);
         metodos.registrarVehiculo(vehiculo);
-        metodos.mostrarVehiculos(jTVehiculoAGG);
+        metodos.mostrarVehiculos(jTTelfAdd);
         metodos.registrarEnRegistro(clienteToVinc.getCedula(), matricula);
         metodos.mostrarRegistro(jTRegistroG);
-        jTVehiculoAGG.setEnabled(true);
+        jTTelfAdd.setEnabled(true);
         limpiarDatosVehiAgg();
         jPCliAggDatos.setVisible(true);
     }//GEN-LAST:event_btnAggVehiculoActionPerformed
@@ -2454,14 +2512,14 @@ public class MenuGeneralG extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTCliAggMouseClicked
 
-    private void jTVehiculoAGGMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTVehiculoAGGMouseClicked
-        int filaSeleccionada = jTVehiculoAGG.getSelectedRow();
+    private void jTTelfAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTTelfAddMouseClicked
+        int filaSeleccionada = jTTelfAdd.getSelectedRow();
         if (filaSeleccionada >= 0) {
-            String matricula = jTVehiculoAGG.getValueAt(filaSeleccionada, 0).toString();
+            String matricula = jTTelfAdd.getValueAt(filaSeleccionada, 0).toString();
             metodoSQL metodos = new metodoSQL();
             vehiAggSelect = metodos.setearDatosVehiculo(matricula);
         }
-    }//GEN-LAST:event_jTVehiculoAGGMouseClicked
+    }//GEN-LAST:event_jTTelfAddMouseClicked
 
     private void btnCancelarCliAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarCliAddActionPerformed
         // TODO add your handling code here:
@@ -2483,7 +2541,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
         Date fechaCompra = jDCFechaCompraVehiAgg.getDate();
         Vehiculo vehiculo = new Vehiculo(matricula, modelo, fechaCompra);
         metodos.registrarVehiculo(vehiculo);
-        metodos.mostrarVehiculos(jTVehiculoAGG);
+        metodos.mostrarVehiculos(jTTelfAdd);
         metodos.registrarEnRegistro(cliAggSelect.getCedula(), matricula);
         metodos.mostrarRegistro(jTRegistroG);
         limpiarDatosVehiAgg();
@@ -2600,28 +2658,81 @@ public class MenuGeneralG extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Eliminación cancelada.");
         }
     }//GEN-LAST:event_btnElimVehiculoActionPerformed
-    
+
+    private void btnActualizarDatosCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarDatosCliActionPerformed
+        metodos.actualizarDireccionCliente(cliAggSelect.getCedula(), jTADirCliBus.getText());
+    }//GEN-LAST:event_btnActualizarDatosCliActionPerformed
+
+    private void btnAggEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAggEmpActionPerformed
+        String cedula = txtCeduEmpAgg.getText();
+        String nombre = txtNomEmpAgg.getText();
+        Double salario = Double.valueOf(txtSalarioAgg.getText());
+        String direccion = jTADirEmpAgg.getText();
+        Date fechaContrato = jDCFechaContratoEmpAgg.getDate();
+        Empleado empleado = new Empleado(cedula, nombre, direccion, salario, fechaContrato);
+        metodos.registrarEmpleado(empleado);
+        empToVinc = metodos.obtenerEmpleadoPorCedula(cedula);
+        metodos.mostrarEmpleados(jTEmpAgg);
+        jTEmpAgg.setEnabled(true);
+        txtIDEmpAggTelf.setText(cedula);
+        limpiarDatosEmpAgg();
+        jPDatosEmpAgg.setVisible(false);
+        btnAggTelfEmp.setVisible(false);
+    }//GEN-LAST:event_btnAggEmpActionPerformed
+
+    private void btnAddTelfEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTelfEmpActionPerformed
+        metodos.mostrarEmpleados(jTEmpAgg);
+        metodos.mostrarTelefonoEmp(JTTelfEmpAgg);
+        btnAggTelfEmp.setVisible(false);
+        jPDatosEmpAgg.setVisible(false);
+
+    }//GEN-LAST:event_btnAddTelfEmpActionPerformed
+
+    private void btnAggTelfEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAggTelfEmpActionPerformed
+        metodos.agregarTelefonoEmpleado(txtNumTelfEmpAgg.getText(), empToVinc.getCedula());
+        limpiarDatosTelfAdd();
+        jPDatosEmpAgg.setVisible(true);
+    }//GEN-LAST:event_btnAggTelfEmpActionPerformed
+
+    private void jTEmpAggMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTEmpAggMouseClicked
+        int filaSeleccionada = jTEmpAgg.getSelectedRow();
+        if (filaSeleccionada >= 0) {
+            String cedulaEmp = jTEmpAgg.getValueAt(filaSeleccionada, 0).toString();
+            metodoSQL metodos = new metodoSQL();
+            empAggSelect = metodos.obtenerEmpleadoPorCedula(cedulaEmp);
+            txtIDEmpAggTelf.setText(cedulaEmp);
+        }
+    }//GEN-LAST:event_jTEmpAggMouseClicked
+
+    private void btnAddNuevoTelfEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNuevoTelfEmpActionPerformed
+        metodos.agregarTelefonoEmpleado(txtNumTelfEmpAgg.getText(), empAggSelect.getCedula());
+        limpiarDatosTelfAdd();
+        jPDatosEmpAgg.setVisible(true);
+        btnAggTelfEmp.setVisible(true);
+        metodos.mostrarTelefonoEmp(JTTelfEmpAgg);
+    }//GEN-LAST:event_btnAddNuevoTelfEmpActionPerformed
+
     public void limpiarDatosClienteAgg() {
         txtCeduCliAgg.setText("");
         txtNomClienteAgg.setText("");
         txtApelliCliAgg.setText("");
         jTADirCliAgg.setText("");
     }
-    
+
     public void limpiarDatosVehiAgg() {
         txtNumMatriculaAgg.setText("");
         jDCFechaCompraVehiAgg.setDate(null);
         txtModeloAgg.setText("");
         txtCeduVehiToAdd.setText("");
     }
-    
+
     public void limpiarDatosClienteBus() {
         txtCedulaClieBus.setText("");
         txtNomCliBus.setText("");
         txtApeCliBus.setText("");
         jTADirCliBus.setText("");
     }
-    
+
     public void limpiarDatosClienteElim() {
         txtCedulaCliElim.setText("");
         txtNomCliElim.setText("");
@@ -2629,14 +2740,28 @@ public class MenuGeneralG extends javax.swing.JFrame {
         jTaDirCliElim.setText("");
         txtFiltroNomCliDel.setText("");
     }
-    
+
     public void limpiarDatosVehiElim() {
         txtFiltNumMatriculaElim.setText("");
         txtMatVehiElim.setText("");
         jDCFechaCompraDel.setDate(null);
         txtModeloVehículoElim.setText("");
     }
-    
+
+    public void limpiarDatosEmpAgg() {
+        txtCeduEmpAgg.setText("");
+        txtNomEmpAgg.setText("");
+        txtSalarioAgg.setText("");
+        jTADirEmpAgg.setText("");
+        jDCFechaContratoEmpAgg.setDate(null);
+    }
+
+    public void limpiarDatosTelfAdd() {
+        txtIDEmpAggTelf.setText("");
+        txtIDEmpAggTelf.setText("");
+        txtNumTelfEmpAgg.setText("");
+    }
+
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -2678,6 +2803,9 @@ public class MenuGeneralG extends javax.swing.JFrame {
     private javax.swing.JButton btnActPieza;
     private javax.swing.JButton btnActPieza1;
     private javax.swing.JButton btnActTelfEmp;
+    private javax.swing.JButton btnActualizarDatosCli;
+    private javax.swing.JButton btnAddNuevoTelfEmp;
+    private javax.swing.JButton btnAddTelfEmp;
     private javax.swing.JButton btnAggCliente;
     private javax.swing.JButton btnAggEmp;
     private javax.swing.JButton btnAggPieza;
@@ -2700,7 +2828,6 @@ public class MenuGeneralG extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminarCli;
     private javax.swing.JButton btnEliminarEmp;
     private javax.swing.JButton btnLimpDatos;
-    private javax.swing.JButton btnMostrarActCli;
     private javax.swing.JButton btnRegisNuevoVehi;
     private javax.swing.JButton btnVincNuevoVehiculo;
     private com.toedter.calendar.JDateChooser jDCFechaCompraBus;
@@ -2781,6 +2908,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPCliAggDatos;
+    private javax.swing.JPanel jPDatosEmpAgg;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -2791,7 +2919,6 @@ public class MenuGeneralG extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
-    private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel22;
     private javax.swing.JPanel jPanel24;
     private javax.swing.JPanel jPanel25;
@@ -2854,17 +2981,17 @@ public class MenuGeneralG extends javax.swing.JFrame {
     private javax.swing.JTable jTEmpVis;
     private javax.swing.JTable jTEmpVis1;
     private javax.swing.JTabbedPane jTPClienteVehiculo;
+    private javax.swing.JTabbedPane jTPEmpleado;
     private javax.swing.JTable jTPiezaVis;
     private javax.swing.JTable jTRegistroG;
     private javax.swing.JTable jTReparaAgg;
     private javax.swing.JTable jTReparaAgg2;
     private javax.swing.JTable jTReparaVis;
-    private javax.swing.JTable jTVehiculoAGG;
+    private javax.swing.JTable jTTelfAdd;
     private javax.swing.JTable jTVehiculoBus;
     private javax.swing.JTable jTVehiculoElim;
     private javax.swing.JTextArea jTaDirCliElim;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTabbedPane jTabbedPane6;
     private javax.swing.JLabel lblcliente;
     private javax.swing.JTextField txtApeCliBus;
@@ -2906,7 +3033,7 @@ public class MenuGeneralG extends javax.swing.JFrame {
     private javax.swing.JTextField txtNumMatrReparaAgg1;
     private javax.swing.JTextField txtNumMatrReparaAgg2;
     private javax.swing.JTextField txtNumMatriculaAgg;
-    private javax.swing.JTextField txtNumTelfEmpAgg1;
+    private javax.swing.JTextField txtNumTelfEmpAgg;
     private javax.swing.JTextField txtNumTelfEmpAgg2;
     private javax.swing.JTextField txtNumTelfEmpAgg3;
     private javax.swing.JTextField txtPiezaAgg;
