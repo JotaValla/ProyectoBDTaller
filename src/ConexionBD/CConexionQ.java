@@ -18,31 +18,10 @@ public class CConexionQ extends CConexionPadre {
     Connection conectar = null;
     String usuario = "sa";
     String contrasenia = "P@ssw0rd";
-    String bdG = "TALLERG8_GYE";
+    String bdG = "TALLERG8_V2_QUITO";
     String ip = "localhost";
     String puerto = "1433";
     String servernameG = "JOTA";
-
-    public Connection establecerConexion1() throws SQLException {
-        try {
-            // Cargar el controlador JDBC
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-
-            // Establecer la conexión
-            String url = "jdbc:sqlserver://26.237.113.83:1433;database=TALLERG8_QUITO;"
-                    + "encrypt=false";
-            String usuario = "sa";
-            String contraseña = "P@ssw0rd";
-
-            Connection con = DriverManager.getConnection(url, usuario, contraseña);
-            JOptionPane.showMessageDialog(null, "Acceso correcto a la base de datos");
-            return con;
-        } catch (ClassNotFoundException | SQLException ex) {
-            // Muestra mensaje de error en la consola (considera usar logs)
-            System.err.println("No se pudo establecer la conexión: " + ex.getMessage());
-            return null;
-        }
-    }
 
     @Override
     Connection establecerConexion() {
@@ -51,13 +30,12 @@ public class CConexionQ extends CConexionPadre {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 
             // Establecer la conexión
-            String url = "jdbc:sqlserver://26.237.113.83:1433;database=TALLERG8_QUITO;"
+            String url = "jdbc:sqlserver://26.237.113.83:1433;database=TALLERG8_V2_QUITO;"
                     + "encrypt=false";
             String usuario = "sa";
             String contraseña = "P@ssw0rd";
 
             Connection con = DriverManager.getConnection(url, usuario, contraseña);
-            JOptionPane.showMessageDialog(null, "Acceso correcto a la base de datos");
             return con;
         } catch (ClassNotFoundException | SQLException ex) {
             // Muestra mensaje de error en la consola (considera usar logs)

@@ -5,8 +5,8 @@ import Clases.Empleado;
 import Clases.Pieza;
 import Clases.Reparacion;
 import Clases.Vehiculo;
-import ConexionBD.CConexionG;
 import ConexionBD.CConexionPadre;
+import ConexionBD.CConexionQ;
 import ConexionBD.metodoSQL;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -24,27 +24,27 @@ public class MenuGeneralQ extends javax.swing.JFrame {
     String idTelfToDel;
     Reparacion repToVinc, repAggSelect;
     int idRepara, idPieza;
-    CConexionPadre conexionG;
+    CConexionPadre conexionQ;
     String localizacion = "Quito";
 
     public MenuGeneralQ() {
         initComponents();
         setLocationRelativeTo(this);
-        conexionG = new CConexionG();
+        conexionQ = new CConexionQ();
         clienteToVinc = new Cliente();
         metodos = new metodoSQL();
-        metodos.mostrarClientes(jTCliBus, conexionG, localizacion);
-        metodos.mostrarVehiculos(jTVehiculoBus);
-        metodos.mostrarEmpleados(jTEmpVis);
-        metodos.mostrarTelefonoEmp(JTTelfEmpVis);
-        metodos.mostrarReparaciones(jTReparaVis);
-        metodos.mostrarPieza(jTPiezaVis);
-        metodos.mostrarClientes(jTCliElim, conexionG, localizacion);
-        metodos.mostrarVehiculos(jTVehiculoElim);
-        metodos.mostrarEmpleados(jTEmpVis1);
-        metodos.mostrarTelefonoEmp(JTTelfEmpVis1);
-        metodos.mostrarReparaciones(jTReparaAgg2);
-        metodos.mostrarPieza(JTTelfEmpAgg3);
+        metodos.mostrarClientes(jTCliBus, conexionQ, localizacion);
+        metodos.mostrarVehiculos(jTVehiculoBus, conexionQ, localizacion);
+        metodos.mostrarEmpleados(jTEmpVis, conexionQ, localizacion);
+        metodos.mostrarTelefonoEmp(JTTelfEmpVis, conexionQ, localizacion);
+        metodos.mostrarReparaciones(jTReparaVis, conexionQ, localizacion);
+        metodos.mostrarPieza(jTPiezaVis, conexionQ, localizacion);
+        metodos.mostrarClientes(jTCliElim, conexionQ, localizacion);
+        metodos.mostrarVehiculos(jTVehiculoElim, conexionQ, localizacion);
+        metodos.mostrarEmpleados(jTEmpVis1, conexionQ, localizacion);
+        metodos.mostrarTelefonoEmp(JTTelfEmpVis1, conexionQ, localizacion);
+        metodos.mostrarReparaciones(jTReparaAgg2, conexionQ, localizacion);
+        metodos.mostrarPieza(JTTelfEmpAgg3, conexionQ, localizacion);
         //Se oculta para vincular despues si se desa
         btnRegisNuevoVehi.setVisible(false);
         btnAddNuewPieza.setVisible(false);
@@ -57,8 +57,8 @@ public class MenuGeneralQ extends javax.swing.JFrame {
             public void stateChanged(ChangeEvent e) {
                 // Reemplaza 'INDEX_DE_LA_PESTAÑA_DE_VISUALIZACION' con el índice de la pestaña donde se visualizan los clientes.
                 if (jTPClienteVehiculo.getSelectedIndex() == 1) {
-                    metodos.mostrarClientes(jTCliBus, conexionG, localizacion);
-                    metodos.mostrarVehiculos(jTVehiculoBus);
+                    metodos.mostrarClientes(jTCliBus, conexionQ, localizacion);
+                    metodos.mostrarVehiculos(jTVehiculoBus, conexionQ, localizacion);
                 }
             }
         });
@@ -67,7 +67,7 @@ public class MenuGeneralQ extends javax.swing.JFrame {
             public void stateChanged(ChangeEvent e) {
                 // Reemplaza 'INDEX_DE_LA_PESTAÑA_DE_VISUALIZACION' con el índice de la pestaña donde se visualizan los clientes.
                 if (jTPEmpleado.getSelectedIndex() == 1) {
-                    metodos.mostrarEmpleados(jTEmpVis);
+                    metodos.mostrarEmpleados(jTEmpVis, conexionQ, localizacion);
                 }
             }
         });
@@ -2644,10 +2644,10 @@ public class MenuGeneralQ extends javax.swing.JFrame {
         String matricula = txtNumMatriculaAgg.getText();
         Date fechaCompra = jDCFechaCompraVehiAgg.getDate();
         Vehiculo vehiculo = new Vehiculo(matricula, modelo, fechaCompra);
-        metodos.registrarVehiculo(vehiculo);
-        metodos.mostrarVehiculos(jTTelfAdd);
-        metodos.registrarEnRegistro(clienteToVinc.getCedula(), matricula);
-        metodos.mostrarRegistro(jTRegistroG);
+        metodos.registrarVehiculo(vehiculo, conexionQ, localizacion);
+        metodos.mostrarVehiculos(jTTelfAdd, conexionQ, localizacion);
+        metodos.registrarEnRegistro(clienteToVinc.getCedula(), matricula, conexionQ, localizacion);
+        metodos.mostrarRegistro(jTRegistroG, conexionQ, localizacion);
         jTTelfAdd.setEnabled(true);
         limpiarDatosVehiAgg();
         jPCliAggDatos.setVisible(true);
@@ -2658,7 +2658,7 @@ public class MenuGeneralQ extends javax.swing.JFrame {
         if (filaSeleccionada >= 0) {
             String cedulaCli = jTCliAgg.getValueAt(filaSeleccionada, 0).toString();
             metodoSQL metodos = new metodoSQL();
-            cliAggSelect = metodos.setearDatosCliente(cedulaCli);
+            cliAggSelect = metodos.setearDatosCliente(cedulaCli, conexionQ, localizacion);
             txtCeduVehiToAdd.setText(cedulaCli);
         }
     }//GEN-LAST:event_txtModeloAggActionPerformed
@@ -2669,9 +2669,9 @@ public class MenuGeneralQ extends javax.swing.JFrame {
         String apellido = txtApelliCliAgg.getText();
         String direccion = jTADirCliAgg.getText();
         Cliente cliente = new Cliente(cedula, nombre, apellido, direccion);
-        metodos.registrarCliente(cliente);
-        clienteToVinc = metodos.setearDatosCliente(cedula);
-        metodos.mostrarClientes(jTCliAgg, conexionG, localizacion);
+        metodos.registrarCliente(cliente, conexionQ, localizacion);
+        clienteToVinc = metodos.setearDatosCliente(cedula, conexionQ, localizacion);
+        metodos.mostrarClientes(jTCliAgg, conexionQ, localizacion);
         jTCliAgg.setEnabled(true);
         txtCeduVehiToAdd.setText(cedula);
         limpiarDatosClienteAgg();
@@ -2683,7 +2683,7 @@ public class MenuGeneralQ extends javax.swing.JFrame {
         if (filaSeleccionada >= 0) {
             String cedulaCli = jTCliAgg.getValueAt(filaSeleccionada, 0).toString();
             metodoSQL metodos = new metodoSQL();
-            cliAggSelect = metodos.setearDatosCliente(cedulaCli);
+            cliAggSelect = metodos.setearDatosCliente(cedulaCli, conexionQ, localizacion);
             txtCeduVehiToAdd.setText(cedulaCli);
         }
     }//GEN-LAST:event_jTCliAggMouseClicked
@@ -2693,7 +2693,7 @@ public class MenuGeneralQ extends javax.swing.JFrame {
         if (filaSeleccionada >= 0) {
             String matricula = jTTelfAdd.getValueAt(filaSeleccionada, 0).toString();
             metodoSQL metodos = new metodoSQL();
-            vehiAggSelect = metodos.setearDatosVehiculo(matricula);
+            vehiAggSelect = metodos.setearDatosVehiculo(matricula, conexionQ, localizacion);
         }
     }//GEN-LAST:event_jTTelfAddMouseClicked
 
@@ -2705,8 +2705,8 @@ public class MenuGeneralQ extends javax.swing.JFrame {
         jPCliAggDatos.setVisible(false);
         btnAggVehiculo.setVisible(false);
         btnRegisNuevoVehi.setVisible(true);
-        metodos.mostrarClientes(jTCliAgg, conexionG, localizacion);
-        metodos.mostrarRegistro(jTRegistroG);
+        metodos.mostrarClientes(jTCliAgg, conexionQ, localizacion);
+        metodos.mostrarRegistro(jTRegistroG, conexionQ, localizacion);
         jTCliAgg.setEnabled(true);
         btnAggVehiculo.setVisible(true);
     }//GEN-LAST:event_btnVincNuevoVehiculoActionPerformed
@@ -2716,17 +2716,17 @@ public class MenuGeneralQ extends javax.swing.JFrame {
         String matricula = txtNumMatriculaAgg.getText();
         Date fechaCompra = jDCFechaCompraVehiAgg.getDate();
         Vehiculo vehiculo = new Vehiculo(matricula, modelo, fechaCompra);
-        metodos.registrarVehiculo(vehiculo);
-        metodos.mostrarVehiculos(jTTelfAdd);
-        metodos.registrarEnRegistro(cliAggSelect.getCedula(), matricula);
-        metodos.mostrarRegistro(jTRegistroG);
+        metodos.registrarVehiculo(vehiculo, conexionQ, localizacion);
+        metodos.mostrarVehiculos(jTTelfAdd, conexionQ, localizacion);
+        metodos.registrarEnRegistro(cliAggSelect.getCedula(), matricula, conexionQ, localizacion);
+        metodos.mostrarRegistro(jTRegistroG, conexionQ, localizacion);
         limpiarDatosVehiAgg();
         jPCliAggDatos.setVisible(true);
         btnRegisNuevoVehi.setVisible(false);
     }//GEN-LAST:event_btnRegisNuevoVehiActionPerformed
 
     private void btnBuscarCliEspcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCliEspcActionPerformed
-        metodos.mostrarClientesPorNroCedula(jTCliBus, txtFiltroCeduCli.getText(), conexionG);
+        metodos.mostrarClientesPorNroCedula(jTCliBus, txtFiltroCeduCli.getText(), conexionQ, localizacion);
     }//GEN-LAST:event_btnBuscarCliEspcActionPerformed
 
     private void jTCliBusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTCliBusMouseClicked
@@ -2734,7 +2734,7 @@ public class MenuGeneralQ extends javax.swing.JFrame {
         if (filaSeleccionada >= 0) {
             String cedulaCli = jTCliBus.getValueAt(filaSeleccionada, 0).toString();
             metodoSQL metodos = new metodoSQL();
-            cliAggSelect = metodos.setearDatosCliente(cedulaCli);
+            cliAggSelect = metodos.setearDatosCliente(cedulaCli, conexionQ, localizacion);
             txtCedulaClieBus.setText(cliAggSelect.getCedula());
             txtNomCliBus.setText(cliAggSelect.getNombre());
             txtApeCliBus.setText(cliAggSelect.getApellido());
@@ -2743,7 +2743,7 @@ public class MenuGeneralQ extends javax.swing.JFrame {
     }//GEN-LAST:event_jTCliBusMouseClicked
 
     private void btnBuscarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarVehiculoActionPerformed
-        metodos.mostrarVehiculoPorMatricula(jTVehiculoBus, txtFiltNumMatricula.getText());
+        metodos.mostrarVehiculoPorMatricula(jTVehiculoBus, txtFiltNumMatricula.getText(), conexionQ, localizacion);
     }//GEN-LAST:event_btnBuscarVehiculoActionPerformed
 
     private void jTVehiculoBusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTVehiculoBusMouseClicked
@@ -2751,7 +2751,7 @@ public class MenuGeneralQ extends javax.swing.JFrame {
         if (filaSeleccionada >= 0) {
             String matricula = jTVehiculoBus.getValueAt(filaSeleccionada, 0).toString();
             metodoSQL metodos = new metodoSQL();
-            vehiAggSelect = metodos.setearDatosVehiculo(matricula);
+            vehiAggSelect = metodos.setearDatosVehiculo(matricula, conexionQ, localizacion);
             txtMatVehiBus.setText(vehiAggSelect.getMatricula());
             jDCFechaCompraBus.setDate(vehiAggSelect.getFechaCompra());
             txtModelVehiBus.setText(vehiAggSelect.getModelo());
@@ -2766,12 +2766,12 @@ public class MenuGeneralQ extends javax.swing.JFrame {
         txtNomCliBus.setText("");
         txtApeCliBus.setText("");
         jTADirCliBus.setText("");
-        metodos.mostrarClientes(jTCliBus, conexionG, localizacion);
-        metodos.mostrarVehiculos(jTVehiculoBus);
+        metodos.mostrarClientes(jTCliBus, conexionQ, localizacion);
+        metodos.mostrarVehiculos(jTVehiculoBus, conexionQ, localizacion);
     }//GEN-LAST:event_btnLimpDatosActionPerformed
 
     private void btnBuscarCliDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCliDelActionPerformed
-        metodos.mostrarClientesPorNroCedula(jTCliElim, txtFiltroNomCliDel.getText(), conexionG);
+        metodos.mostrarClientesPorNroCedula(jTCliElim, txtFiltroNomCliDel.getText(), conexionQ, localizacion);
     }//GEN-LAST:event_btnBuscarCliDelActionPerformed
 
     private void jTCliElimMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTCliElimMouseClicked
@@ -2779,7 +2779,7 @@ public class MenuGeneralQ extends javax.swing.JFrame {
         if (filaSeleccionada >= 0) {
             String cedulaCli = jTCliElim.getValueAt(filaSeleccionada, 0).toString();
             metodoSQL metodos = new metodoSQL();
-            cliAggSelect = metodos.setearDatosCliente(cedulaCli);
+            cliAggSelect = metodos.setearDatosCliente(cedulaCli, conexionQ, localizacion);
             txtCedulaCliElim.setText(cliAggSelect.getCedula());
             txtNomCliElim.setText(cliAggSelect.getNombre());
             txtApeCliElim.setText(cliAggSelect.getApellido());
@@ -2794,8 +2794,8 @@ public class MenuGeneralQ extends javax.swing.JFrame {
         // Verificar si el usuario seleccionó "Sí" (YES_OPTION)
         if (confirmacion == JOptionPane.YES_OPTION) {
             // Si el usuario confirma, proceder a eliminar el cliente
-            metodos.eliminarCliente(cliAggSelect.getCedula());
-            metodos.mostrarClientes(jTCliElim, conexionG, localizacion);
+            metodos.eliminarCliente(cliAggSelect.getCedula(), conexionQ, localizacion);
+            metodos.mostrarClientes(jTCliElim, conexionQ, localizacion);
             limpiarDatosClienteElim();
         } else {
             // Si el usuario no confirma, no hacer nada (o realizar alguna otra acción deseada)
@@ -2804,7 +2804,7 @@ public class MenuGeneralQ extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarCliActionPerformed
 
     private void btnBuscarVehiculoDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarVehiculoDelActionPerformed
-        metodos.mostrarVehiculoPorMatricula(jTVehiculoBus, txtFiltNumMatriculaElim.getText());
+        metodos.mostrarVehiculoPorMatricula(jTVehiculoBus, txtFiltNumMatriculaElim.getText(), conexionQ, localizacion);
     }//GEN-LAST:event_btnBuscarVehiculoDelActionPerformed
 
     private void jTVehiculoElimMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTVehiculoElimMouseClicked
@@ -2812,7 +2812,7 @@ public class MenuGeneralQ extends javax.swing.JFrame {
         if (filaSeleccionada >= 0) {
             String matricula = jTVehiculoElim.getValueAt(filaSeleccionada, 0).toString();
             metodoSQL metodos = new metodoSQL();
-            vehiAggSelect = metodos.setearDatosVehiculo(matricula);
+            vehiAggSelect = metodos.setearDatosVehiculo(matricula, conexionQ, localizacion);
             txtMatVehiElim.setText(vehiAggSelect.getMatricula());
             jDCFechaCompraDel.setDate(vehiAggSelect.getFechaCompra());
             txtModeloVehículoElim.setText(vehiAggSelect.getModelo());
@@ -2826,8 +2826,8 @@ public class MenuGeneralQ extends javax.swing.JFrame {
         // Verificar si el usuario seleccionó "Sí" (YES_OPTION)
         if (confirmacion == JOptionPane.YES_OPTION) {
             // Si el usuario confirma, proceder a eliminar el cliente
-            metodos.eliminarVehiculo(vehiAggSelect.getMatricula());
-            metodos.mostrarVehiculos(jTVehiculoElim);
+            metodos.eliminarVehiculo(vehiAggSelect.getMatricula(), conexionQ, localizacion);
+            metodos.mostrarVehiculos(jTVehiculoElim, conexionQ, localizacion);
             limpiarDatosVehiElim();
         } else {
             // Si el usuario no confirma, no hacer nada (o realizar alguna otra acción deseada)
@@ -2836,7 +2836,7 @@ public class MenuGeneralQ extends javax.swing.JFrame {
     }//GEN-LAST:event_btnElimVehiculoActionPerformed
 
     private void btnActualizarDatosCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarDatosCliActionPerformed
-        metodos.actualizarDireccionCliente(cliAggSelect.getCedula(), jTADirCliBus.getText());
+        metodos.actualizarDireccionCliente(cliAggSelect.getCedula(), jTADirCliBus.getText(), conexionQ, localizacion);
     }//GEN-LAST:event_btnActualizarDatosCliActionPerformed
 
     private void btnAggEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAggEmpActionPerformed
@@ -2846,9 +2846,9 @@ public class MenuGeneralQ extends javax.swing.JFrame {
         String direccion = jTADirEmpAgg.getText();
         Date fechaContrato = jDCFechaContratoEmpAgg.getDate();
         Empleado empleado = new Empleado(cedula, nombre, direccion, salario, fechaContrato);
-        metodos.registrarEmpleado(empleado);
-        empToVinc = metodos.obtenerEmpleadoPorCedula(cedula);
-        metodos.mostrarEmpleados(jTEmpAgg);
+        metodos.registrarEmpleado(empleado, conexionQ, localizacion);
+        empToVinc = metodos.obtenerEmpleadoPorCedula(cedula, conexionQ, localizacion);
+        metodos.mostrarEmpleados(jTEmpAgg, conexionQ, localizacion);
         jTEmpAgg.setEnabled(true);
         txtIDEmpAggTelf.setText(cedula);
         limpiarDatosEmpAgg();
@@ -2857,15 +2857,15 @@ public class MenuGeneralQ extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAggEmpActionPerformed
 
     private void btnAddTelfEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTelfEmpActionPerformed
-        metodos.mostrarEmpleados(jTEmpAgg);
-        metodos.mostrarTelefonoEmp(JTTelfEmpAgg);
+        metodos.mostrarEmpleados(jTEmpAgg, conexionQ, localizacion);
+        metodos.mostrarTelefonoEmp(JTTelfEmpAgg, conexionQ, localizacion);
         btnAggTelfEmp.setVisible(false);
         jPDatosEmpAgg.setVisible(false);
 
     }//GEN-LAST:event_btnAddTelfEmpActionPerformed
 
     private void btnAggTelfEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAggTelfEmpActionPerformed
-        metodos.agregarTelefonoEmpleado(txtNumTelfEmpAgg.getText(), empToVinc.getCedula());
+        metodos.agregarTelefonoEmpleado(txtNumTelfEmpAgg.getText(), empToVinc.getCedula(), conexionQ, localizacion);
         limpiarDatosTelfAdd();
         jPDatosEmpAgg.setVisible(true);
     }//GEN-LAST:event_btnAggTelfEmpActionPerformed
@@ -2875,22 +2875,22 @@ public class MenuGeneralQ extends javax.swing.JFrame {
         if (filaSeleccionada >= 0) {
             String cedulaEmp = jTEmpAgg.getValueAt(filaSeleccionada, 0).toString();
             metodoSQL metodos = new metodoSQL();
-            empAggSelect = metodos.obtenerEmpleadoPorCedula(cedulaEmp);
+            empAggSelect = metodos.obtenerEmpleadoPorCedula(cedulaEmp, conexionQ, localizacion);
             txtIDEmpAggTelf.setText(cedulaEmp);
         }
     }//GEN-LAST:event_jTEmpAggMouseClicked
 
     private void btnAddNuevoTelfEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNuevoTelfEmpActionPerformed
-        metodos.agregarTelefonoEmpleado(txtNumTelfEmpAgg.getText(), empAggSelect.getCedula());
+        metodos.agregarTelefonoEmpleado(txtNumTelfEmpAgg.getText(), empAggSelect.getCedula(), conexionQ, localizacion);
         limpiarDatosTelfAdd();
         jPDatosEmpAgg.setVisible(true);
         btnAggTelfEmp.setVisible(true);
-        metodos.mostrarTelefonoEmp(JTTelfEmpAgg);
+        metodos.mostrarTelefonoEmp(JTTelfEmpAgg, conexionQ, localizacion);
     }//GEN-LAST:event_btnAddNuevoTelfEmpActionPerformed
 
     private void btnBuscEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscEmpActionPerformed
-        metodos.mostrarEmpleadoPorNroCedula(jTEmpVis, txtIDEmpBusc.getText());
-        metodos.mostrarTelefonosEmpleado(JTTelfEmpVis, txtIDEmpBusc.getText());
+        metodos.mostrarEmpleadoPorNroCedula(jTEmpVis, txtIDEmpBusc.getText(), conexionQ, localizacion);
+        metodos.mostrarTelefonosEmpleado(JTTelfEmpVis, txtIDEmpBusc.getText(), conexionQ, localizacion);
     }//GEN-LAST:event_btnBuscEmpActionPerformed
 
     private void jTEmpVisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTEmpVisMouseClicked
@@ -2898,7 +2898,7 @@ public class MenuGeneralQ extends javax.swing.JFrame {
         if (filaSeleccionada >= 0) {
             String cedulaEmp = jTEmpVis.getValueAt(filaSeleccionada, 0).toString();
             metodoSQL metodos = new metodoSQL();
-            empAggSelect = metodos.obtenerEmpleadoPorCedula(cedulaEmp);
+            empAggSelect = metodos.obtenerEmpleadoPorCedula(cedulaEmp, conexionQ, localizacion);
             txtIDEmpBusc.setText(cedulaEmp);
             txtNomEmpBus.setText(empAggSelect.getNombre());
             txtCeduEmpBus.setText(empAggSelect.getCedula());
@@ -2910,15 +2910,15 @@ public class MenuGeneralQ extends javax.swing.JFrame {
 
     private void btnLimpDatosEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpDatosEmpActionPerformed
         txtIDEmpBusc.setText("");
-        metodos.mostrarEmpleados(jTEmpVis);
-        metodos.mostrarTelefonoEmp(JTTelfEmpVis);
+        metodos.mostrarEmpleados(jTEmpVis, conexionQ, localizacion);
+        metodos.mostrarTelefonoEmp(JTTelfEmpVis, conexionQ, localizacion);
         limpiarDatosEmpBus();
         txtIDEmpAggTelf1.setText("");
         txtNumTelfEmpAgg2.setText("");
     }//GEN-LAST:event_btnLimpDatosEmpActionPerformed
 
     private void btnActEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActEmpActionPerformed
-        metodos.actualizarDireccionEmpleado(empAggSelect.getCedula(), jTADirEmpBus.getText());
+        metodos.actualizarDireccionEmpleado(empAggSelect.getCedula(), jTADirEmpBus.getText(), conexionQ, localizacion);
         limpiarDatosEmpBus();
     }//GEN-LAST:event_btnActEmpActionPerformed
 
@@ -2937,7 +2937,7 @@ public class MenuGeneralQ extends javax.swing.JFrame {
         if (filaSeleccionada >= 0) {
             String cedulaEmp = jTEmpVis1.getValueAt(filaSeleccionada, 0).toString();
             metodoSQL metodos = new metodoSQL();
-            empAggSelect = metodos.obtenerEmpleadoPorCedula(cedulaEmp);
+            empAggSelect = metodos.obtenerEmpleadoPorCedula(cedulaEmp, conexionQ, localizacion);
             txtIDEmpBusc1.setText(cedulaEmp);
             txtNomEmpAgg2.setText(empAggSelect.getNombre());
             txtCeduEmpAgg2.setText(empAggSelect.getCedula());
@@ -2949,9 +2949,9 @@ public class MenuGeneralQ extends javax.swing.JFrame {
     }//GEN-LAST:event_jTEmpVis1MouseClicked
 
     private void btnElimEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElimEmpActionPerformed
-        metodos.mostrarEmpleadoPorNroCedula(jTEmpVis1, txtIDEmpBusc1.getText());
+        metodos.mostrarEmpleadoPorNroCedula(jTEmpVis1, txtIDEmpBusc1.getText(), conexionQ, localizacion);
         txtIDEmpAggTelf2.setText(txtIDEmpBusc1.getText());
-        metodos.mostrarTelefonosEmpleado(JTTelfEmpVis1, txtIDEmpBusc1.getText());
+        metodos.mostrarTelefonosEmpleado(JTTelfEmpVis1, txtIDEmpBusc1.getText(), conexionQ, localizacion);
     }//GEN-LAST:event_btnElimEmpActionPerformed
 
     private void btnEliminarEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarEmpActionPerformed
@@ -2961,8 +2961,8 @@ public class MenuGeneralQ extends javax.swing.JFrame {
         // Verificar si el usuario seleccionó "Sí" (YES_OPTION)
         if (confirmacion == JOptionPane.YES_OPTION) {
             // Si el usuario confirma, proceder a eliminar el cliente
-            metodos.eliminarEmpleado(empAggSelect.getCedula());
-            metodos.mostrarEmpleados(jTEmpVis1);
+            metodos.eliminarEmpleado(empAggSelect.getCedula(), conexionQ, localizacion);
+            metodos.mostrarEmpleados(jTEmpVis1, conexionQ, localizacion);
             limpiarDatosEmpElim();
         } else {
             // Si el usuario no confirma, no hacer nada (o realizar alguna otra acción deseada)
@@ -2988,8 +2988,8 @@ public class MenuGeneralQ extends javax.swing.JFrame {
         // Verificar si el usuario seleccionó "Sí" (YES_OPTION)
         if (confirmacion == JOptionPane.YES_OPTION) {
             // Si el usuario confirma, proceder a eliminar el cliente
-            metodos.eliminarTelefonoEmpleado(Integer.valueOf(idTelfToDel), txtNumTelfEmpAgg3.getText());
-            metodos.mostrarTelefonoEmp(JTTelfEmpVis1);
+            metodos.eliminarTelefonoEmpleado(Integer.valueOf(idTelfToDel), txtNumTelfEmpAgg3.getText(), conexionQ, localizacion);
+            metodos.mostrarTelefonoEmp(JTTelfEmpVis1, conexionQ, localizacion);
             txtIDEmpAggTelf2.setText("");
             txtNumTelfEmpAgg3.setText("");
         } else {
@@ -2999,8 +2999,8 @@ public class MenuGeneralQ extends javax.swing.JFrame {
     }//GEN-LAST:event_btnElimTelfEmpActionPerformed
 
     private void btnLimpDatosEmp1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpDatosEmp1ActionPerformed
-        metodos.mostrarEmpleados(jTEmpVis1);
-        metodos.mostrarTelefonoEmp(JTTelfEmpVis1);
+        metodos.mostrarEmpleados(jTEmpVis1, conexionQ, localizacion);
+        metodos.mostrarTelefonoEmp(JTTelfEmpVis1, conexionQ, localizacion);
         txtIDEmpAggTelf2.setText("");
         txtNumTelfEmpAgg3.setText("");
         limpiarDatosEmpElim();
@@ -3013,20 +3013,20 @@ public class MenuGeneralQ extends javax.swing.JFrame {
         int idReparacion = metodos.generarIdReparacion();
         BigDecimal precio = BigDecimal.valueOf(Double.parseDouble(txtPrecioRepaAgg.getText()));
         Reparacion reparacion = new Reparacion(idReparacion, tipoReparacion, observaciones, precio, matricula);
-        metodos.agregarReparacion(reparacion);
+        metodos.agregarReparacion(reparacion, conexionQ, localizacion);
         // Mostrar un cuadro de diálogo de confirmación antes de eliminar
         int confirmacion = JOptionPane.showConfirmDialog(null, "¿Deseas agregar una pieza a la reparacion?", "Agregar pieza", JOptionPane.YES_NO_OPTION);
 
         // Verificar si el usuario seleccionó "Sí" (YES_OPTION)
         if (confirmacion == JOptionPane.YES_OPTION) {
-            repToVinc = metodos.obtenerReparacionPorId(idReparacion);
-            metodos.mostrarReparaciones(jTReparaAgg);
+            repToVinc = metodos.obtenerReparacionPorId(idReparacion, conexionQ, localizacion);
+            metodos.mostrarReparaciones(jTReparaAgg, conexionQ, localizacion);
             jTReparaAgg.setEnabled(true);
             txtIDRePiezaAgg.setText(String.valueOf(idReparacion));
             limpiarDatosRepAgg();
             jPRepara.setVisible(false);
         } else {
-            metodos.mostrarReparaciones(jTReparaAgg);
+            metodos.mostrarReparaciones(jTReparaAgg, conexionQ, localizacion);
             limpiarDatosRepAgg();
         }
 
@@ -3038,7 +3038,7 @@ public class MenuGeneralQ extends javax.swing.JFrame {
             String idtoRepara = jTReparaAgg.getValueAt(filaSeleccionada, 0).toString();
             idRepara = Integer.parseInt(idtoRepara);
             metodoSQL metodos = new metodoSQL();
-            repAggSelect = metodos.obtenerReparacionPorId(idRepara);
+            repAggSelect = metodos.obtenerReparacionPorId(idRepara, conexionQ, localizacion);
             txtIDRePiezaAgg.setText(String.valueOf(repAggSelect.getIdReparacion()));
         }
     }//GEN-LAST:event_jTReparaAggMouseClicked
@@ -3048,8 +3048,8 @@ public class MenuGeneralQ extends javax.swing.JFrame {
         String nomPieza = txtPiezaAgg.getText();
         int idReparacion = repToVinc.getIdReparacion();
         Pieza pieza = new Pieza(idPieza, idReparacion, nomPieza);
-        metodos.agregarPieza(pieza);
-        metodos.mostrarPieza(JTTelfEmpAgg1);
+        metodos.agregarPieza(pieza, conexionQ, localizacion);
+        metodos.mostrarPieza(JTTelfEmpAgg1, conexionQ, localizacion);
         txtIDRePiezaAgg.setText("");
         txtPiezaAgg.setText("");
         jPRepara.setVisible(true);
@@ -3060,15 +3060,15 @@ public class MenuGeneralQ extends javax.swing.JFrame {
         jPRepara.setVisible(false);
         btnAggPieza.setVisible(false);
         btnAddNuewPieza.setVisible(true);
-        metodos.mostrarReparaciones(jTReparaAgg);
+        metodos.mostrarReparaciones(jTReparaAgg, conexionQ, localizacion);
     }//GEN-LAST:event_btnAddPiezaToExistRepActionPerformed
 
     private void btnAddNuewPiezaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNuewPiezaActionPerformed
         int idPieza = metodos.generarIdReparacion();
         String nomPieza = txtPiezaAgg.getText();
         Pieza pieza = new Pieza(idPieza, idRepara, nomPieza);
-        metodos.agregarPieza(pieza);
-        metodos.mostrarPieza(JTTelfEmpAgg1);
+        metodos.agregarPieza(pieza, conexionQ, localizacion);
+        metodos.mostrarPieza(JTTelfEmpAgg1, conexionQ, localizacion);
         txtIDRePiezaAgg.setText("");
         txtPiezaAgg.setText("");
         jPRepara.setVisible(true);
@@ -3083,7 +3083,7 @@ public class MenuGeneralQ extends javax.swing.JFrame {
             String idtoRepara = jTReparaVis.getValueAt(filaSeleccionada, 0).toString();
             idRepara = Integer.parseInt(idtoRepara);
             metodoSQL metodos = new metodoSQL();
-            repAggSelect = metodos.obtenerReparacionPorId(idRepara);
+            repAggSelect = metodos.obtenerReparacionPorId(idRepara, conexionQ, localizacion);
             txtIDRePiezaAgg1.setText(String.valueOf(repAggSelect.getIdReparacion()));
             txtTipoRepaAgg1.setText(repAggSelect.getTipoReparacion());
             txtPrecioRepaAgg1.setText(repAggSelect.getPrecioReparacion().toString());
@@ -3094,13 +3094,13 @@ public class MenuGeneralQ extends javax.swing.JFrame {
     }//GEN-LAST:event_jTReparaVisMouseClicked
 
     private void btnBuscRepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscRepActionPerformed
-        metodos.mostrarReparacionesPorId(jTReparaVis, Integer.parseInt(txtIDRepBus.getText()));
-        metodos.mostrarPiezaPorId(jTPiezaVis, Integer.parseInt(txtIDRepBus.getText()));
+        metodos.mostrarReparacionesPorId(jTReparaVis, Integer.parseInt(txtIDRepBus.getText()), conexionQ, localizacion);
+        metodos.mostrarPiezaPorId(jTPiezaVis, Integer.parseInt(txtIDRepBus.getText()), conexionQ, localizacion);
     }//GEN-LAST:event_btnBuscRepActionPerformed
 
     private void btnLimpiarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarDatosActionPerformed
-        metodos.mostrarReparaciones(jTReparaVis);
-        metodos.mostrarPieza(jTPiezaVis);
+        metodos.mostrarReparaciones(jTReparaVis, conexionQ, localizacion);
+        metodos.mostrarPieza(jTPiezaVis, conexionQ, localizacion);
         limpiarDatosRepBus();
     }//GEN-LAST:event_btnLimpiarDatosActionPerformed
 
@@ -3113,9 +3113,9 @@ public class MenuGeneralQ extends javax.swing.JFrame {
     }//GEN-LAST:event_jTPiezaVisMouseClicked
 
     private void btnAggRepara1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAggRepara1ActionPerformed
-        metodos.actualizarObservacionesReparacion(Integer.parseInt(txtIDRepBus.getText()), jTAObserReparaAgg1.getText());
-        metodos.mostrarReparaciones(jTReparaVis);
-        metodos.mostrarPieza(jTPiezaVis);
+        metodos.actualizarObservacionesReparacion(Integer.parseInt(txtIDRepBus.getText()), jTAObserReparaAgg1.getText(), conexionQ, localizacion);
+        metodos.mostrarReparaciones(jTReparaVis, conexionQ, localizacion);
+        metodos.mostrarPieza(jTPiezaVis, conexionQ, localizacion);
         limpiarDatosRepBus();
     }//GEN-LAST:event_btnAggRepara1ActionPerformed
 
@@ -3125,7 +3125,7 @@ public class MenuGeneralQ extends javax.swing.JFrame {
             String idtoRepara = jTReparaAgg2.getValueAt(filaSeleccionada, 0).toString();
             idRepara = Integer.parseInt(idtoRepara);
             metodoSQL metodos = new metodoSQL();
-            repAggSelect = metodos.obtenerReparacionPorId(idRepara);
+            repAggSelect = metodos.obtenerReparacionPorId(idRepara, conexionQ, localizacion);
             txtIDRePiezaAgg2.setText(String.valueOf(repAggSelect.getIdReparacion()));
             txtTipoRepaAgg2.setText(repAggSelect.getTipoReparacion());
             txtPrecioRepaAgg2.setText(repAggSelect.getPrecioReparacion().toString());
@@ -3136,8 +3136,8 @@ public class MenuGeneralQ extends javax.swing.JFrame {
     }//GEN-LAST:event_jTReparaAgg2MouseClicked
 
     private void btnBuscDelReparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscDelReparaActionPerformed
-        metodos.mostrarReparacionesPorId(jTReparaAgg2, Integer.parseInt(txtIDRepBus1.getText()));
-        metodos.mostrarPiezaPorId(JTTelfEmpAgg3, Integer.parseInt(txtIDRepBus1.getText()));
+        metodos.mostrarReparacionesPorId(jTReparaAgg2, Integer.parseInt(txtIDRepBus1.getText()), conexionQ, localizacion);
+        metodos.mostrarPiezaPorId(JTTelfEmpAgg3, Integer.parseInt(txtIDRepBus1.getText()),conexionQ, localizacion);
     }//GEN-LAST:event_btnBuscDelReparaActionPerformed
 
     private void btnElimReparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElimReparaActionPerformed
@@ -3147,8 +3147,8 @@ public class MenuGeneralQ extends javax.swing.JFrame {
         // Verificar si el usuario seleccionó "Sí" (YES_OPTION)
         if (confirmacion == JOptionPane.YES_OPTION) {
             // Si el usuario confirma, proceder a eliminar el cliente
-            metodos.eliminarReparacion(idRepara);
-            metodos.mostrarReparaciones(jTReparaAgg2);
+            metodos.eliminarReparacion(idRepara, conexionQ, localizacion);
+            metodos.mostrarReparaciones(jTReparaAgg2, conexionQ, localizacion);
         } else {
             // Si el usuario no confirma, no hacer nada (o realizar alguna otra acción deseada)
             JOptionPane.showMessageDialog(null, "Eliminación cancelada.");
@@ -3171,8 +3171,8 @@ public class MenuGeneralQ extends javax.swing.JFrame {
         // Verificar si el usuario seleccionó "Sí" (YES_OPTION)
         if (confirmacion == JOptionPane.YES_OPTION) {
             // Si el usuario confirma, proceder a eliminar el cliente
-            metodos.eliminarPieza(idPieza);
-            metodos.mostrarPieza(JTTelfEmpAgg3);
+            metodos.eliminarPieza(idPieza, conexionQ, localizacion);
+            metodos.mostrarPieza(JTTelfEmpAgg3, conexionQ, localizacion);
         } else {
             // Si el usuario no confirma, no hacer nada (o realizar alguna otra acción deseada)
             JOptionPane.showMessageDialog(null, "Eliminación cancelada.");
@@ -3285,6 +3285,8 @@ public class MenuGeneralQ extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MenuGeneralQ.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
