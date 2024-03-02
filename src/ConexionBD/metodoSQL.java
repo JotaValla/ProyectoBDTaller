@@ -1,7 +1,10 @@
 package ConexionBD;
 
 import Clases.Cliente;
+import Clases.Vehiculo;
 import java.sql.CallableStatement;
+import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -203,6 +206,35 @@ public class metodoSQL {
         }
     }
 
+    public void mostrarRegistro(JTable paramTabPieza) {
+        CConexion objetoConexion = new CConexion();
+        DefaultTableModel modelo = new DefaultTableModel();
+        String sql = "";
+
+        modelo.addColumn("Cédula");
+        modelo.addColumn("Matrícula");
+
+        paramTabPieza.setModel(modelo);
+        sql = "select cedula_cliente, matricula from Registro_Guayaquil;";
+        String[] datos = new String[4];
+        Statement st;
+
+        try {
+            st = objetoConexion.establecerConexionG().createStatement();
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                datos[0] = rs.getString(1);
+                datos[1] = rs.getString(2);
+                modelo.addRow(datos);
+            }
+            paramTabPieza.setModel(modelo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se mostraron los registros");
+            System.out.println(e);
+        }
+    }
+
     public void registrarCliente(Cliente cliente) {
         CConexion objetoConexion = new CConexion();
 
@@ -219,9 +251,97 @@ public class metodoSQL {
             cs.setInt(5, 2); // Asumiendo que el id_taller siempre será 2 para Cliente_Guayaquil
             // Ejecutar la consulta
             cs.execute();
-            JOptionPane.showMessageDialog(null, "Cliente registrado con éxito");
+            JOptionPane.showMessageDialog(null, "Cliente registrado con éxito, ahora registra su vehiculo.");
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al registrar el cliente: " + e.getMessage());
+        }
+    }
+
+    public void registrarVehiculo(Vehiculo vehiculo) {
+        CConexion objetoConexion = new CConexion();
+
+        // La consulta SQL para insertar un nuevo cliente
+        String sql = "Insert into Vehiculo_Guayaquil(matricula, fecha_compra, modelo, id_taller) VALUES (?, ?, ?, ?)";
+
+        try {
+            CallableStatement cs = objetoConexion.establecerConexionG().prepareCall(sql);
+            // Establecer los valores de cada parámetro basado en las propiedades del objeto cliente
+            cs.setString(1, vehiculo.getMatricula());
+
+            // Convertir java.util.Date a java.sql.Date
+            java.sql.Date fechaCompraSql = new java.sql.Date(vehiculo.getFechaCompra().getTime());
+
+            cs.setDate(2, fechaCompraSql);
+            cs.setString(3, vehiculo.getModelo());
+            cs.setInt(4, 2); // Asumiendo que el id_taller siempre será 2 para Cliente_Guayaquil
+            // Ejecutar la consulta
+            cs.execute();
+            JOptionPane.showMessageDialog(null, "Vehiculo registrado con éxito");
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al registrar el cliente: " + e.getMessage());
+        }
+    }
+
+    public Cliente setearDatosCliente(String cedula) {
+        CConexion objetoConexion = new CConexion();
+        Cliente cliente = new Cliente();
+
+        String sqlCliente = "SELECT * FROM Cliente_Guayaquil WHERE cedula_cliente = ?";
+
+        try {
+            PreparedStatement psCliente = objetoConexion.establecerConexionG().prepareStatement(sqlCliente);
+            psCliente.setString(1, cedula);
+            ResultSet rsCliente = psCliente.executeQuery();
+            cliente.setCedula(cedula);
+            if (rsCliente.next()) {
+                // Llena los datos del cliente con los valores obtenidos de la consulta principal
+                cliente.setNombre(rsCliente.getString("nombre_cliente"));
+                cliente.setApellido(rsCliente.getString("apellido_cliente"));
+                cliente.setDireccion(rsCliente.getString("direccion_cliente"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+            JOptionPane.showMessageDialog(null, "Error al obtener los datos del cliente");
+        }
+
+        return cliente;
+    }
+
+    public Vehiculo setearDatosVehiculo(String matricula) {
+        CConexion objetoConexion = new CConexion();
+        Vehiculo vehi = new Vehiculo();
+
+        String sqlCliente = "SELECT * FROM Vehiculo_Guayaquil WHERE matricula = ?";
+
+        try {
+            PreparedStatement psCliente = objetoConexion.establecerConexionG().prepareStatement(sqlCliente);
+            psCliente.setString(1, matricula);
+            ResultSet rsCliente = psCliente.executeQuery();
+            if (rsCliente.next()) {
+                // Llena los datos del vehiculo con los valores obtenidos de la consulta principal
+                vehi.setModelo(rsCliente.getString("modelo"));
+                vehi.setFechaCompra(rsCliente.getDate("fecha_compra"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+            JOptionPane.showMessageDialog(null, "Error al obtener los datos del cliente");
+        }
+
+        return vehi;
+    }
+
+    public void registrarEnRegistro(String cedulaCliente, String matriculaVehiculo) {
+        CConexion objetoConexion = new CConexion();
+        String sql = "INSERT INTO Registro_Guayaquil (cedula_cliente, matricula) VALUES (?, ?)";
+
+        try {
+            PreparedStatement ps = objetoConexion.establecerConexionG().prepareStatement(sql);
+            ps.setString(1, cedulaCliente);
+            ps.setString(2, matriculaVehiculo);
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Cliente y Vehículo registrados correctamente.");
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al registrar en Registro_Guayaquil: " + e.getMessage());
         }
     }
 

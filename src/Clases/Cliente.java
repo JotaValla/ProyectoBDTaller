@@ -1,9 +1,7 @@
-
 package Clases;
 
-
 public class Cliente {
-    
+
     private String Cedula, Nombre, Apellido, Direccion;
 
     public Cliente(String Cedula, String Nombre, String Apellido, String Direccion) {
@@ -11,6 +9,9 @@ public class Cliente {
         this.Nombre = Nombre;
         this.Apellido = Apellido;
         this.Direccion = Direccion;
+    }
+
+    public Cliente() {
     }
 
     public String getCedula() {
@@ -44,7 +45,5 @@ public class Cliente {
     public void setDireccion(String Direccion) {
         this.Direccion = Direccion;
     }
-    
-    
-    
+
 }
