@@ -514,20 +514,27 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jPanel10" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="jPanel12" max="32767" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="btnLimpDatos" min="-2" pref="158" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jLabel9" min="-2" pref="326" max="-2" attributes="0"/>
                                           <Component id="jScrollPane5" min="-2" pref="724" max="-2" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="txtFiltroNomCli" min="-2" pref="326" max="-2" attributes="0"/>
+                                              <Component id="txtFiltroCeduCli" min="-2" pref="326" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                               <Component id="btnBuscarCliEspc" min="-2" pref="214" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" attributes="0">
+                                              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="jLabel10" alignment="0" min="-2" pref="315" max="-2" attributes="0"/>
                                                   <Component id="txtFiltNumMatricula" alignment="0" min="-2" pref="302" max="-2" attributes="0"/>
@@ -535,16 +542,14 @@
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
                                               <Component id="btnBuscarVehiculo" min="-2" pref="198" max="-2" attributes="0"/>
                                           </Group>
-                                          <Component id="jScrollPane6" alignment="0" min="-2" pref="647" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="jScrollPane6" min="-2" pref="647" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
                                   </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="jPanel10" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jPanel12" max="32767" attributes="0"/>
-                                  </Group>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -554,38 +559,41 @@
                               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                                      <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="txtFiltNumMatricula" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btnBuscarVehiculo" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="jScrollPane6" min="-2" pref="259" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
                                       <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="txtFiltroNomCli" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txtFiltroCeduCli" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="btnBuscarCliEspc" alignment="3" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                       <Component id="jScrollPane5" min="-2" pref="259" max="-2" attributes="0"/>
                                   </Group>
+                              </Group>
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                                      <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <Component id="txtFiltNumMatricula" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="btnBuscarVehiculo" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="32767" attributes="0"/>
-                                          </Group>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jPanel12" max="32767" attributes="0"/>
+                                          <Component id="jPanel10" max="32767" attributes="0"/>
                                       </Group>
-                                      <Component id="jScrollPane6" min="-2" pref="259" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                                      <Component id="btnLimpDatos" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jPanel12" max="32767" attributes="0"/>
-                                  <Component id="jPanel10" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="127" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -609,6 +617,9 @@
                               </Table>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTCliBusMouseClicked"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -629,6 +640,9 @@
                               </Table>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTVehiculoBusMouseClicked"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -637,12 +651,15 @@
                         <Property name="text" type="java.lang.String" value="Ingrese el n&#xfa;mero de c&#xe9;dula del cliente a buscar:"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="txtFiltroNomCli">
+                    <Component class="javax.swing.JTextField" name="txtFiltroCeduCli">
                     </Component>
                     <Component class="javax.swing.JButton" name="btnBuscarCliEspc">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Buscar cliente"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarCliEspcActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel10">
                       <Properties>
@@ -655,6 +672,9 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Buscar veh&#xed;culo"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarVehiculoActionPerformed"/>
+                      </Events>
                     </Component>
                     <Container class="javax.swing.JPanel" name="jPanel10">
                       <Properties>
@@ -729,6 +749,9 @@
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JTextField" name="txtCedulaClieBus">
+                          <Properties>
+                            <Property name="editable" type="boolean" value="false"/>
+                          </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel12">
                           <Properties>
@@ -742,7 +765,7 @@
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                           <SubComponents>
-                            <Component class="javax.swing.JTextArea" name="jTextArea1">
+                            <Component class="javax.swing.JTextArea" name="jTADirCliBus">
                               <Properties>
                                 <Property name="columns" type="int" value="20"/>
                                 <Property name="rows" type="int" value="5"/>
@@ -761,6 +784,9 @@
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JTextField" name="txtNomCliBus">
+                          <Properties>
+                            <Property name="editable" type="boolean" value="false"/>
+                          </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel14">
                           <Properties>
@@ -768,6 +794,9 @@
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JTextField" name="txtApeCliBus">
+                          <Properties>
+                            <Property name="editable" type="boolean" value="false"/>
+                          </Properties>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -789,7 +818,7 @@
                                       <Group type="102" attributes="0">
                                           <Component id="jLabel16" min="-2" pref="132" max="-2" attributes="0"/>
                                           <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="txtNumMatriActu" min="-2" pref="292" max="-2" attributes="0"/>
+                                          <Component id="txtModelVehiBus" min="-2" pref="292" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
@@ -798,17 +827,12 @@
                                           </Group>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="1" attributes="0">
-                                              <Component id="txtNomApeCliAct2" min="-2" pref="292" max="-2" attributes="0"/>
+                                              <Component id="txtMatVehiBus" min="-2" pref="292" max="-2" attributes="0"/>
                                               <Component id="jDCFechaCompraBus" min="-2" pref="293" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="btnMostrarActVehi" max="32767" attributes="0"/>
-                                      <Component id="btnActualizarVehi" max="32767" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
+                                  <EmptySpace pref="54" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -818,8 +842,7 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtNomApeCliAct2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="btnMostrarActVehi" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtMatVehiBus" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" attributes="0">
@@ -827,18 +850,15 @@
                                       <Component id="jDCFechaCompraBus" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="txtNumMatriActu" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="btnActualizarVehi" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace max="32767" attributes="0"/>
-                                      </Group>
                                       <Group type="102" attributes="0">
                                           <EmptySpace pref="15" max="32767" attributes="0"/>
                                           <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                          <Component id="txtModelVehiBus" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -848,27 +868,23 @@
                       <SubComponents>
                         <Component class="javax.swing.JLabel" name="jLabel15">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="Veh&#xed;culo seleccionado:"/>
+                            <Property name="text" type="java.lang.String" value="Matricula:"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="txtNomApeCliAct2">
+                        <Component class="javax.swing.JTextField" name="txtMatVehiBus">
+                          <Properties>
+                            <Property name="editable" type="boolean" value="false"/>
+                          </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel16">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="Matricula del veh&#xed;culo:"/>
+                            <Property name="text" type="java.lang.String" value="Modelo:"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JButton" name="btnMostrarActVehi">
+                        <Component class="javax.swing.JTextField" name="txtModelVehiBus">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="Actualizar datos"/>
+                            <Property name="editable" type="boolean" value="false"/>
                           </Properties>
-                        </Component>
-                        <Component class="javax.swing.JButton" name="btnActualizarVehi">
-                          <Properties>
-                            <Property name="text" type="java.lang.String" value="Actualizar"/>
-                          </Properties>
-                        </Component>
-                        <Component class="javax.swing.JTextField" name="txtNumMatriActu">
                         </Component>
                         <Component class="com.toedter.calendar.JDateChooser" name="jDCFechaCompraBus">
                         </Component>
@@ -879,6 +895,14 @@
                         </Component>
                       </SubComponents>
                     </Container>
+                    <Component class="javax.swing.JButton" name="btnLimpDatos">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Limpiar datos"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLimpDatosActionPerformed"/>
+                      </Events>
+                    </Component>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="jPanel13">
@@ -900,7 +924,7 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jScrollPane9" alignment="0" min="-2" pref="724" max="-2" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="txtFiltroNomCli1" min="-2" pref="352" max="-2" attributes="0"/>
+                                              <Component id="txtFiltroNomCliDel" min="-2" pref="352" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
                                               <Component id="btnBuscarCliDel" min="-2" pref="214" max="-2" attributes="0"/>
                                           </Group>
@@ -914,23 +938,16 @@
                                   </Group>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jPanel17" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel18" alignment="0" min="-2" pref="315" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel18" alignment="0" min="-2" pref="315" max="-2" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="txtFiltNumMatricula1" min="-2" pref="302" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                                              <Component id="btnBuscarVehiculoDel" min="-2" pref="198" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
+                                      <Component id="txtFiltNumMatriculaElim" min="-2" pref="302" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                                      <Component id="btnBuscarVehiculoDel" min="-2" pref="198" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jScrollPane10" alignment="0" pref="647" max="32767" attributes="0"/>
-                                      <Component id="jPanel17" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="jScrollPane10" alignment="0" min="-2" pref="647" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                              <EmptySpace pref="32" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -943,23 +960,24 @@
                                       <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="txtFiltroNomCli1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txtFiltroNomCliDel" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="btnBuscarCliDel" alignment="3" max="32767" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                                      <Component id="jScrollPane9" min="-2" pref="255" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="txtFiltNumMatricula1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txtFiltNumMatriculaElim" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="btnBuscarVehiculoDel" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                                      <Component id="jScrollPane10" min="-2" pref="230" max="-2" attributes="0"/>
                                   </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jScrollPane9" pref="255" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane10" pref="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -974,15 +992,18 @@
                   <SubComponents>
                     <Component class="javax.swing.JLabel" name="jLabel17">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Ingrese el n&#xfa;mero de c&#xe9;dula del cliente a buscar:"/>
+                        <Property name="text" type="java.lang.String" value="Ingrese el n&#xfa;mero de c&#xe9;dula del cliente a eliminar:"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="txtFiltroNomCli1">
+                    <Component class="javax.swing.JTextField" name="txtFiltroNomCliDel">
                     </Component>
                     <Component class="javax.swing.JButton" name="btnBuscarCliDel">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Buscar cliente"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarCliDelActionPerformed"/>
+                      </Events>
                     </Component>
                     <Container class="javax.swing.JScrollPane" name="jScrollPane9">
                       <AuxValues>
@@ -1002,6 +1023,9 @@
                               </Table>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTCliElimMouseClicked"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -1010,7 +1034,7 @@
                         <Property name="text" type="java.lang.String" value="Ingresa el n&#xfa;mero de matricula del veh&#xed;culo a eliminar:"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="txtFiltNumMatricula1">
+                    <Component class="javax.swing.JTextField" name="txtFiltNumMatriculaElim">
                     </Component>
                     <Container class="javax.swing.JScrollPane" name="jScrollPane10">
                       <AuxValues>
@@ -1019,7 +1043,7 @@
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
-                        <Component class="javax.swing.JTable" name="jTVehiculoBus1">
+                        <Component class="javax.swing.JTable" name="jTVehiculoElim">
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                               <Table columnCount="3" rowCount="4">
@@ -1029,6 +1053,9 @@
                               </Table>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTVehiculoElimMouseClicked"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -1036,6 +1063,9 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Buscar veh&#xed;culo"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarVehiculoDelActionPerformed"/>
+                      </Events>
                     </Component>
                     <Container class="javax.swing.JPanel" name="jPanel17">
                       <Properties>
@@ -1058,12 +1088,12 @@
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="txtNomApeCliAct6" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txtModeloVehículo" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txtMatVehiElim" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txtModeloVehículoElim" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jDCFechaCompraDel" pref="292" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="btnElimVehiculo" max="32767" attributes="0"/>
+                                  <Component id="btnElimVehiculo" pref="170" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -1074,13 +1104,13 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jLabel25" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtNomApeCliAct6" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtMatVehiElim" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="btnElimVehiculo" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jLabel26" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtModeloVehículo" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtModeloVehículoElim" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -1098,7 +1128,7 @@
                             <Property name="text" type="java.lang.String" value="Veh&#xed;culo seleccionado:"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="txtNomApeCliAct6">
+                        <Component class="javax.swing.JTextField" name="txtMatVehiElim">
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel26">
                           <Properties>
@@ -1109,8 +1139,11 @@
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Eliminar veh&#xed;culo"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnElimVehiculoActionPerformed"/>
+                          </Events>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="txtModeloVeh&#xed;culo">
+                        <Component class="javax.swing.JTextField" name="txtModeloVeh&#xed;culoElim">
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel27">
                           <Properties>
@@ -1139,11 +1172,11 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jLabel20" min="-2" pref="61" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="txtCedulaClieBus1" min="-2" pref="143" max="-2" attributes="0"/>
+                                          <Component id="txtCedulaCliElim" min="-2" pref="143" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Component id="jLabel22" min="-2" pref="75" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                                          <Component id="txtNomCliBus1" min="-2" pref="165" max="-2" attributes="0"/>
+                                          <Component id="txtNomCliElim" min="-2" pref="165" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jLabel21" min="-2" pref="132" max="-2" attributes="0"/>
@@ -1156,7 +1189,7 @@
                                       <Group type="102" attributes="0">
                                           <Component id="jLabel72" min="-2" pref="69" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="txtApeCliBus1" max="32767" attributes="0"/>
+                                          <Component id="txtApeCliElim" max="32767" attributes="0"/>
                                       </Group>
                                       <Component id="btnEliminarCli" pref="223" max="32767" attributes="0"/>
                                   </Group>
@@ -1170,11 +1203,11 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jLabel20" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtCedulaClieBus1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtCedulaCliElim" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel22" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtNomCliBus1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtNomCliElim" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel72" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtApeCliBus1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtApeCliElim" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -1193,7 +1226,7 @@
                             <Property name="text" type="java.lang.String" value="Cedula:"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="txtCedulaClieBus1">
+                        <Component class="javax.swing.JTextField" name="txtCedulaCliElim">
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel21">
                           <Properties>
@@ -1207,7 +1240,7 @@
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                           <SubComponents>
-                            <Component class="javax.swing.JTextArea" name="jTextArea2">
+                            <Component class="javax.swing.JTextArea" name="jTaDirCliElim">
                               <Properties>
                                 <Property name="columns" type="int" value="20"/>
                                 <Property name="rows" type="int" value="5"/>
@@ -1220,19 +1253,22 @@
                             <Property name="text" type="java.lang.String" value="Nombres:"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="txtNomCliBus1">
+                        <Component class="javax.swing.JTextField" name="txtNomCliElim">
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel72">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Apellidos:"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="txtApeCliBus1">
+                        <Component class="javax.swing.JTextField" name="txtApeCliElim">
                         </Component>
                         <Component class="javax.swing.JButton" name="btnEliminarCli">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Eliminar cliente"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminarCliActionPerformed"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -1536,7 +1572,7 @@
                                   <Component id="txtNumTelfEmpAgg1" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="btnAggTelfEmp" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="37" max="32767" attributes="0"/>
+                                  <EmptySpace pref="39" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1870,7 +1906,7 @@
                                   <Component id="txtNumTelfEmpAgg2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="btnActTelfEmp" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="82" max="32767" attributes="0"/>
+                                  <EmptySpace pref="84" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -2020,7 +2056,7 @@
                                       <Component id="txtIDEmpBusc1" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="btnElimEmp" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="31" max="32767" attributes="0"/>
+                                  <EmptySpace pref="33" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jLabel44" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="txtNomEmpAgg2" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -2184,7 +2220,7 @@
                                   <Component id="txtNumTelfEmpAgg3" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="btnElimTelfEmp" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="82" max="32767" attributes="0"/>
+                                  <EmptySpace pref="84" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -2477,7 +2513,7 @@
                                   <Component id="txtPiezaAgg" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="btnAggPieza" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="37" max="32767" attributes="0"/>
+                                  <EmptySpace pref="39" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -2664,7 +2700,7 @@
                                       <Component id="txtIDRepBus" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="btnBuscRep" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="40" max="32767" attributes="0"/>
+                                  <EmptySpace pref="42" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jLabel54" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="txtTipoRepaAgg1" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -2815,7 +2851,7 @@
                                   <Component id="txtPiezaAgg1" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="btnActPieza" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="37" max="32767" attributes="0"/>
+                                  <EmptySpace pref="39" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -2980,7 +3016,7 @@
                                       <Component id="txtIDRepBus1" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="btnBuscDelRepara" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="40" max="32767" attributes="0"/>
+                                  <EmptySpace pref="42" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jLabel65" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="txtTipoRepaAgg2" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -3109,7 +3145,7 @@
                                   <Component id="txtPiezaAgg2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="btnActPieza1" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="37" max="32767" attributes="0"/>
+                                  <EmptySpace pref="39" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
